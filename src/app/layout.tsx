@@ -1,7 +1,8 @@
+import { TradingViewTickerTape } from '@/components/embeddings/tradingview/TradingViewTickerTape';
+import { Sidebar } from '@/components/sidebar/Sidebar';
+import Providers from '@/providers/Providers';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Providers from '@/providers/Providers';
-import { Sidebar } from '@/components/sidebar/Sidebar';
 import './globals.css';
 import './setup.ts';
 
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
+          <TradingViewTickerTape />
           <Sidebar>
             <div className='px-8'>{children}</div>
           </Sidebar>

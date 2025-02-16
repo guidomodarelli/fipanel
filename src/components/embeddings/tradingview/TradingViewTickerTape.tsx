@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect } from 'react';
 
 // Ticker Widget Editor: https://www.tradingview.com/widget-docs/widgets/tickers/ticker/
