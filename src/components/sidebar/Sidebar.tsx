@@ -1,5 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
-import AppSidebar from './AppSidebar';
+import { AppSidebar } from './AppSidebar';
 
 const SIDEBAR_TRIGGER_HEIGHT_DEFAULT = '1.75rem';
 const SIDEBAR_TRIGGER_PADDING_TOP = '0.5rem';
@@ -8,7 +8,7 @@ export const SIDEBAR_TRIGGER_HEIGHT = `${SIDEBAR_TRIGGER_HEIGHT_DEFAULT} - ${SID
 
 interface SidebarProps extends React.PropsWithChildren {}
 
-const Sidebar = ({ children }: SidebarProps) => {
+export const Sidebar = ({ children }: SidebarProps) => {
   return (
     <SidebarProvider defaultOpen={true}>
       <AppSidebar />
@@ -23,5 +23,3 @@ const Sidebar = ({ children }: SidebarProps) => {
     </SidebarProvider>
   );
 };
-
-export default Sidebar;

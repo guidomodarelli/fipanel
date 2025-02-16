@@ -83,7 +83,7 @@ const items: AppSidebarGroup[] = [
   },
 ];
 
-const AppSidebar = () => {
+export const AppSidebar = () => {
   const { open } = useSidebar();
 
   const renderGroup = (group: AppSidebarGroup) => {
@@ -129,5 +129,3 @@ const AppSidebar = () => {
     </Sidebar>
   );
 };
-
-export default AppSidebar;
