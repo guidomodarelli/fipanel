@@ -1,3 +1,4 @@
+'use client';
 import { HeroUIProvider } from '@heroui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
