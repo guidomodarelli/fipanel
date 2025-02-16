@@ -31,9 +31,9 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <TradingViewTickerTape />
-          <Sidebar>
-            <div className='px-8'>{children}</div>
-          </Sidebar>
+          <div className='px-8'>
+            <Sidebar>{children}</Sidebar>
+          </div>
         </Providers>
       </body>
     </html>
