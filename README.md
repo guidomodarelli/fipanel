@@ -30,7 +30,8 @@ pnpm dev
 ```
 
 Abre [http://localhost:3000](http://localhost:3000) con tu navegador para ver el
-resultado.
+resultado. El puerto puede variar, así que asegúrate de revisar la terminal para
+confirmar el puerto correcto.
 
 ## Problemas Conocidos
 
