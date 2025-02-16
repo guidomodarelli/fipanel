@@ -1,5 +1,5 @@
 export interface Money {
-  buy: number,
-  sell: number,
-  avg: number
+  buy: number;
+  sell: number;
+  avg: number;
 }
