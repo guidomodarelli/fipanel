@@ -47,3 +47,5 @@ export const scheme = z.object({
       message: `${SYMBOL_LABEL} debe ser mayor que ${SYMBOL_MIN_LENGTH} caracteres`,
     }),
 });
+
+export type InvestmentProjection = z.infer<typeof scheme>;

@@ -1,19 +1,18 @@
+import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { formatNumber } from '@/lib/number';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { scheme } from './scheme';
+import { InvestmentProjection, scheme } from './scheme';
 import { symbols } from './symbols';
-import { formatNumber } from '@/lib/number';
-import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 
 interface InvestmentProjectionFormProps {
-  onSubmit: (values: z.infer<typeof scheme>) => void;
+  onSubmit: (values: InvestmentProjection) => void;
 }
 
 const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onSubmit: onSubmitHandler }) => {
-  const form = useForm<z.infer<typeof scheme>>({
+  const form = useForm<InvestmentProjection>({
     resolver: zodResolver(scheme),
     defaultValues: {
       yearsOfInvestment: '' as unknown as number,
@@ -35,7 +34,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
     return text.slice(0, inputValue.length) === inputValue;
   };
 
-  function onSubmit(values: z.infer<typeof scheme>) {
+  function onSubmit(values: InvestmentProjection) {
     onSubmitHandler(values);
   }
 
