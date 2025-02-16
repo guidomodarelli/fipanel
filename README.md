@@ -5,11 +5,15 @@
 - [nvm](https://github.com/nvm-sh/nvm) (recomendado para gestionar la versión de
   Node.js). Puedes instalar nvm siguiendo las instrucciones en su
   [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
-- [pnpm](https://pnpm.io)
+- [pnpm](https://pnpm.io). Puedes instalar pnpm ejecutando el siguiente comando:
 
-Una vez instalado, necesitas ejecutar `nvm use` para usar la versión
-especificada en `.nvmrc` o `nvm install` en caso de que esa versión no esté
-instalada.
+  ```bash
+  npm install -g pnpm
+  ```
+
+Una vez instalado `nvm`, necesitas ejecutar `nvm use` en la raiz del proyecto
+para usar la versión especificada en `.nvmrc` o `nvm install` en caso de que esa
+versión no esté instalada.
 
 ### Instalación
 
