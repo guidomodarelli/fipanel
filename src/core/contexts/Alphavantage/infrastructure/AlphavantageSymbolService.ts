@@ -9,7 +9,7 @@ export class AlphavantageSymbolService implements SymbolService {
   async getPriceMonthly(symbol: string): Promise<SymbolPrice[]> {
     const response = await this.httpService.get<SymbolPriceMonthlyResponse>(
       `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
-        import.meta.env.VITE_API_KEY_ALPHAVANTAGE
+        process.env.VITE_API_KEY_ALPHAVANTAGE
       }`,
     );
 
