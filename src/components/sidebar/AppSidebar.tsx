@@ -1,4 +1,7 @@
+import { cn } from '@/lib/utils';
 import { ChartBarIncreasingIcon, FileChartColumnIncreasingIcon, FilterIcon, HomeIcon } from 'lucide-react';
+import Link from 'next/link';
+import { Logo } from '../logo/Logo';
 import {
   Sidebar,
   SidebarContent,
@@ -11,9 +14,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '../ui/sidebar';
-import Link from 'next/link';
-import { Logo } from '../logo/Logo';
-import { cn } from '@/lib/utils';
 
 interface AppSidebarBase {
   key: string;
@@ -58,7 +58,7 @@ const items: AppSidebarGroup[] = [
       {
         key: 'projection',
         label: 'Proyección de Inversiones',
-        link: '/projection',
+        link: '/projecciones',
         icon: () => <ChartBarIncreasingIcon />,
       },
     ],
