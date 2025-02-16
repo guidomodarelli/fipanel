@@ -1,6 +1,6 @@
-import './loader.css';
+import './lds-roller.css';
 
-export const Loader = () => {
+export const LdsLoader = () => {
   return (
     <div className='lds-roller'>
       <div></div>
