@@ -1,3 +1,4 @@
+'use client';
 import { SkeletonText } from '@/components/skeletons/SkeletonText';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {

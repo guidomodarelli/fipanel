@@ -1,3 +1,4 @@
+'use client';
 import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 import { AppSidebar } from './AppSidebar';
 
