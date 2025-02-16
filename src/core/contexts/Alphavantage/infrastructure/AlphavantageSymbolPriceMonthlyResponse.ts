@@ -13,7 +13,7 @@ export interface SymbolMonthlyTimeSeries {
   '5. volume': string;
 }
 
-export interface SymbolPriceMonthlyResponse {
+export interface AlphavantageSymbolPriceMonthlyResponse {
   'Meta Data': SymbolMetaData;
   'Monthly Time Series': Record<string, SymbolMonthlyTimeSeries>;
 }
