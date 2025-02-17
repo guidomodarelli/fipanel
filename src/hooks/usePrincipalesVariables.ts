@@ -1,11 +1,11 @@
-import { getPrincipalesVariables } from '@/app/setup';
-import { PrincipalesVariables } from '@/core/contexts/BCRA/domain/PrincipalesVariables';
+import { getPrimaryFinancialMetrics } from '@/app/setup';
+import { FinancialIndicators } from '@/core/contexts/Metrics/domain/FinancialIndicators';
 import { useQuery } from '@tanstack/react-query';
 
-export function usePrincipalesVariables() {
-  const { data: principalesVariables, isLoading } = useQuery<PrincipalesVariables>({
+export function usePrimaryFinancialMetrics() {
+  const { data: principalesVariables, isLoading } = useQuery<FinancialIndicators>({
     queryKey: ['principalesVariables'],
-    queryFn: getPrincipalesVariables,
+    queryFn: getPrimaryFinancialMetrics,
   });
 
   return {

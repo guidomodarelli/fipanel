@@ -10,11 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { usePrincipalesVariables } from '@/hooks/usePrincipalesVariables';
+import { usePrimaryFinancialMetrics } from '@/hooks/usePrincipalesVariables';
 import { formatDate } from '@/lib/date';
 
 const IPCCard = () => {
-  const { IPC_INTERANUAL, IPC_MENSUAL, IPC_REM } = usePrincipalesVariables();
+  const { IPC_INTERANUAL, IPC_MENSUAL, IPC_REM } = usePrimaryFinancialMetrics();
 
   return (
     <Card>

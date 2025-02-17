@@ -1,4 +1,4 @@
-export interface Variable {
+export interface VariableData {
   id: number;
   series_code: number;
   description: string;

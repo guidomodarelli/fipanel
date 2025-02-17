@@ -1,18 +1,18 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
-import { BCRA } from '../domain/BCRA';
-import { PrincipalesVariables } from '../domain/PrincipalesVariables';
-import { Variable } from '../domain/Variable';
-import { BCRAPrincipalesVariablesResponse } from './BCRAPrincipalesVariablesResponse';
+import { FinancialDataProvider } from '../domain/FinancialDataProvider';
+import { FinancialIndicators } from '../domain/FinancialIndicators';
+import { VariableData } from '../domain/VariableData';
+import { BCRAVariablesApiResponse } from './BCRAVariablesApiResponse';
 
 const TASA_POLITICA_MONETARIA = 6;
 const IPC_MENSUAL = 27;
 const IPC_INTERANUAL = 28;
 const IPC_REM = 29;
 
-export class HttpBCRA implements BCRA {
+export class BCRAFinancialDataProvider implements FinancialDataProvider {
   constructor(private readonly httpService: HttpService) {}
 
-  private responseToVariables(response: BCRAPrincipalesVariablesResponse): Variable[] {
+  private responseToVariables(response: BCRAVariablesApiResponse): VariableData[] {
     return response.results.map((variable) => {
       return {
         id: variable.idVariable,
@@ -20,12 +20,12 @@ export class HttpBCRA implements BCRA {
         description: variable.descripcion,
         date: variable.fecha,
         value: variable.valor,
-      };
+      } as VariableData;
     });
   }
 
-  async getPrincipalesVariables(): Promise<PrincipalesVariables> {
-    const response: BCRAPrincipalesVariablesResponse = await this.httpService.get(
+  async getPrimaryFinancialMetrics(): Promise<FinancialIndicators> {
+    const response: BCRAVariablesApiResponse = await this.httpService.get(
       'https://api.bcra.gob.ar/estadisticas/v2.0/PrincipalesVariables',
     );
     const variables = this.responseToVariables(response);

@@ -1,10 +1,10 @@
 'use client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { usePrincipalesVariables } from '@/hooks/usePrincipalesVariables';
+import { usePrimaryFinancialMetrics } from '@/hooks/usePrincipalesVariables';
 
 const TasaInteresCard = () => {
-  const { TASA_POLITICA_MONETARIA } = usePrincipalesVariables();
+  const { TASA_POLITICA_MONETARIA } = usePrimaryFinancialMetrics();
 
   return (
     <Card>
