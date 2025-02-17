@@ -1,5 +1,5 @@
-import DolarCard from '@/components/cards/dolar-card/DolarCard';
-import IPCCard from '@/components/cards/ipc-card/IPCCard';
+import DolarCard from '@/components/cards/DolarCard/DolarCard';
+import IPCCard from '@/components/cards/IPCCard/IPCCard';
 import TasaInteresCard from '@/components/cards/tasa-interes-card/TasaInteresCard';
 import { SIDEBAR_TRIGGER_HEIGHT } from '@/components/sidebar/Sidebar';
 
