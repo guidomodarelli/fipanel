@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 interface SymbolPriceMonthlyProps {
   symbol: string;
 }
+
 export const useSymbolPriceMonthly = ({ symbol }: SymbolPriceMonthlyProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['symbolPriceMonthly'],
@@ -11,7 +12,7 @@ export const useSymbolPriceMonthly = ({ symbol }: SymbolPriceMonthlyProps) => {
   });
 
   const isDecember = (date: Date) => {
-    return date.getMonth() === 12;
+    return date.getMonth() === 11;
   };
 
   const isLastYear = (date: Date) => {
