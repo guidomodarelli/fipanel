@@ -1,5 +1,5 @@
-import { DolarMap } from './DolarMap';
+import { DolarPriceMap } from './DolarMap';
 
-export interface Dolar {
-  getDolars(): Promise<DolarMap>;
+export interface DolarProvider {
+  getDolarPrices(): Promise<DolarPriceMap>;
 }

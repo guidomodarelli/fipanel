@@ -1,3 +1,3 @@
-import { Money } from './Money';
+import { FinancialValues } from './FinancialValues';
 
-export type DolarMap = Partial<Record<'oficial' | 'mep' | 'ccl' | 'blue', Money>>;
+export type DolarPriceMap = Partial<Record<'oficial' | 'mep' | 'ccl' | 'blue', FinancialValues>>;

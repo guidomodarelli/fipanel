@@ -1,5 +1,5 @@
-import { Dolar } from '../domain/Dolar';
+import { DolarProvider } from '../domain/Dolar';
 
-export const getDolarsUseCase = (dolarService: Dolar) => {
-  return () => dolarService.getDolars();
+export const getDolarsPricesUseCase = (dolarProvider: DolarProvider) => {
+  return () => dolarProvider.getDolarPrices();
 };

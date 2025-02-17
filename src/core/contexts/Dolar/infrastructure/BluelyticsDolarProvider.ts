@@ -1,13 +1,13 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
-import { Dolar } from '../domain/Dolar';
-import { DolarMap } from '../domain/DolarMap';
-import { Money } from '../domain/Money';
-import { MoneyHttpBluelyticsResponse } from './MoneyHttpBluelyticsResponse';
+import { DolarProvider } from '../domain/Dolar';
+import { DolarPriceMap } from '../domain/DolarMap';
+import { FinancialValues } from '../domain/FinancialValues';
+import { BluelyticsMoneyResponse } from './BluelyticsMoneyResponse';
 
-export class HttpBluelyticsDolar implements Dolar {
+export class BluelyticsDolarProvider implements DolarProvider {
   constructor(private readonly httpService: HttpService) {}
 
-  private responseToDolars(money: MoneyHttpBluelyticsResponse): Money {
+  private responseToDolars(money: BluelyticsMoneyResponse): FinancialValues {
     return {
       buy: money.value_buy,
       sell: money.value_sell,
@@ -15,7 +15,7 @@ export class HttpBluelyticsDolar implements Dolar {
     };
   }
 
-  async getDolars(): Promise<DolarMap> {
+  async getDolarPrices(): Promise<DolarPriceMap> {
     const response = await this.httpService.get('https://api.bluelytics.com.ar/v2/latest');
     return {
       oficial: this.responseToDolars(response.oficial),
