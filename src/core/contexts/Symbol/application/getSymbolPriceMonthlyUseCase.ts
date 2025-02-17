@@ -1,5 +1,5 @@
-import { SymbolService } from '../domain/SymbolService';
+import { SymbolProvider } from '../domain/SymbolProvider';
 
-export const getSymbolPriceMonthlyUseCase = (symbolProvider: SymbolService) => (symbol: string) => {
+export const getSymbolPriceMonthlyUseCase = (symbolProvider: SymbolProvider) => (symbol: string) => {
   return symbolProvider.getSymbolPriceMonthly(symbol);
 };

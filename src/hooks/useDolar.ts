@@ -1,5 +1,5 @@
 import { getDolars } from '@/app/setup';
-import { DolarPriceMap } from '@/core/contexts/Dolar/domain/DolarMap';
+import { DolarPriceMap } from '@/core/contexts/Dolar/domain/DolarPriceMap';
 import { useQuery } from '@tanstack/react-query';
 
 export function useDolar() {

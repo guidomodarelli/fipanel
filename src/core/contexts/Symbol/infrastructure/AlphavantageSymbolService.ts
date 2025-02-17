@@ -1,12 +1,12 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
-import { SymbolPrice } from '../domain/SymbolPrice';
-import { SymbolService } from '../domain/SymbolService';
+import { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
+import { SymbolProvider } from '../domain/SymbolProvider';
 import { AlphavantageSymbolPriceMonthlyResponse } from './AlphavantageSymbolPriceMonthlyResponse';
 
-export class AlphavantageSymbolService implements SymbolService {
+export class AlphavantageSymbolService implements SymbolProvider {
   constructor(private readonly httpService: HttpService) {}
 
-  async getSymbolPriceMonthly(symbol: string): Promise<SymbolPrice[]> {
+  async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     const response = await this.httpService.get<AlphavantageSymbolPriceMonthlyResponse>(
       `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
         process.env.VITE_API_KEY_ALPHAVANTAGE
@@ -24,6 +24,6 @@ export class AlphavantageSymbolService implements SymbolService {
         date: new Date(date),
       });
       return acc;
-    }, {} as SymbolPrice[]);
+    }, {} as SymbolPriceInfo[]);
   }
 }

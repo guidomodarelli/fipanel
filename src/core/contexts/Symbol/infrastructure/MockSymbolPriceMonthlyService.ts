@@ -1,19 +1,19 @@
 import { faker } from '@faker-js/faker';
-import { SymbolPrice } from '../domain/SymbolPrice';
-import { SymbolService } from '../domain/SymbolService';
+import { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
+import { SymbolProvider } from '../domain/SymbolProvider';
 
-export class MockSymbolPriceMonthlyService implements SymbolService {
-  getSymbolPriceMonthly(symbol: string): Promise<SymbolPrice[]> {
+export class MockSymbolPriceMonthlyService implements SymbolProvider {
+  getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     const mockData = this.getMockData();
 
     return Promise.resolve(mockData);
   }
 
-  private getMockData(): SymbolPrice[] {
+  private getMockData(): SymbolPriceInfo[] {
     const startYear = 1990;
     const currentDate = new Date();
     const endYear = currentDate.getFullYear();
-    const mockData: SymbolPrice[] = [];
+    const mockData: SymbolPriceInfo[] = [];
 
     for (let year = startYear; year <= endYear; year++) {
       for (let month = 0; month < 12; month++) {

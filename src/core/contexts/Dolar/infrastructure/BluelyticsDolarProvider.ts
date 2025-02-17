@@ -1,6 +1,6 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
-import { DolarProvider } from '../domain/Dolar';
-import { DolarPriceMap } from '../domain/DolarMap';
+import { DolarPriceMap } from '../domain/DolarPriceMap';
+import { DolarProvider } from '../domain/DolarProvider';
 import { FinancialValues } from '../domain/FinancialValues';
 import { BluelyticsMoneyResponse } from './BluelyticsMoneyResponse';
 

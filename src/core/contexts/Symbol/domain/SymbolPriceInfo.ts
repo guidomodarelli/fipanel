@@ -1,4 +1,4 @@
-export interface SymbolPrice {
+export interface SymbolPriceInfo {
   open: number;
   close: number;
   high: number;
