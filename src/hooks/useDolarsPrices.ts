@@ -1,11 +1,11 @@
-import { getDolars } from '@/app/setup';
+import { getDolarsPrices } from '@/app/setup';
 import { DolarPriceMap } from '@/core/contexts/Dolar/domain/DolarPriceMap';
 import { useQuery } from '@tanstack/react-query';
 
-export function useDolar() {
+export function useDolarsPrices() {
   const { data: dolars, isLoading } = useQuery<DolarPriceMap>({
     queryKey: ['dolars'],
-    queryFn: getDolars,
+    queryFn: getDolarsPrices,
   });
 
   return {

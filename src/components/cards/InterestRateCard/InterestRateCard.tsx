@@ -1,7 +1,7 @@
 'use client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { usePrimaryFinancialMetrics } from '@/hooks/usePrincipalesVariables';
+import { usePrimaryFinancialMetrics } from '@/hooks/usePrimaryFinancialMetrics';
 
 const InterestRateCard = async () => {
   const { TASA_POLITICA_MONETARIA } = usePrimaryFinancialMetrics();

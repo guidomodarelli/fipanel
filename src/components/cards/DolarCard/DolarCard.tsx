@@ -1,12 +1,12 @@
 'use client';
+import { SkeletonText } from '@/components/skeletons/SkeletonText';
+import { useDolarsPrices } from '@/hooks/useDolarsPrices';
+import { formatCurrency } from '@/lib/number';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table';
-import { formatCurrency } from '@/lib/number';
-import { useDolar } from '@/hooks/useDolar';
-import { SkeletonText } from '@/components/skeletons/SkeletonText';
 
 const DolarCard = () => {
-  const { isLoading, oficial, mep, ccl, blue } = useDolar();
+  const { isLoading, oficial, mep, ccl, blue } = useDolarsPrices();
 
   return (
     <Card>

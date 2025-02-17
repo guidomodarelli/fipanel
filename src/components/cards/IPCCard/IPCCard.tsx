@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { usePrimaryFinancialMetrics } from '@/hooks/usePrincipalesVariables';
+import { usePrimaryFinancialMetrics } from '@/hooks/usePrimaryFinancialMetrics';
 import { formatDate } from '@/lib/date';
 
 const IPCCard = () => {

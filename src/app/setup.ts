@@ -16,5 +16,5 @@ const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
 const symbolService: SymbolProvider = new MockSymbolProvider();
 
 export const getPrimaryFinancialMetrics = getPrimaryFinancialMetricsUseCase(bcraService);
-export const getDolars = getDolarsPricesUseCase(dolarService);
+export const getDolarsPrices = getDolarsPricesUseCase(dolarService);
 export const getSymbolPriceMonthly = getSymbolPriceMonthlyUseCase(symbolService);
