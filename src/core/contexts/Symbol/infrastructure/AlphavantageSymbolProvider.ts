@@ -1,7 +1,7 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
 import { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import { SymbolProvider } from '../domain/SymbolProvider';
-import { AlphaVantageSymbolMonthlyPriceResponse } from './AlphavantageSymbolPriceMonthlyResponse';
+import { AlphaVantageSymbolMonthlyPriceResponse } from './AlphaVantageSymbolMonthlyPriceResponse';
 
 export class AlphavantageSymbolProvider implements SymbolProvider {
   constructor(private readonly httpService: HttpService) {}

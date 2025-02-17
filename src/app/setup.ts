@@ -8,7 +8,7 @@ import { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { AxiosHttpService } from '@/core/contexts/shared/http/infrastructure/AxiosHttpService';
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
-import { AlphavantageSymbolProvider } from '@/core/contexts/Symbol/infrastructure/AlphavantageSymbolService';
+import { AlphavantageSymbolProvider } from '@/core/contexts/Symbol/infrastructure/AlphavantageSymbolProvider';
 
 const httpService: HttpService = new AxiosHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
