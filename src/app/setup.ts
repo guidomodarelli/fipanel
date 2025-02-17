@@ -8,12 +8,12 @@ import { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { AxiosHttpService } from '@/core/contexts/shared/http/infrastructure/AxiosHttpService';
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
-import { AlphavantageSymbolService } from '@/core/contexts/Symbol/infrastructure/AlphavantageSymbolService';
+import { AlphavantageSymbolProvider } from '@/core/contexts/Symbol/infrastructure/AlphavantageSymbolService';
 
 const httpService: HttpService = new AxiosHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
-const symbolService: SymbolProvider = new AlphavantageSymbolService(httpService);
+const symbolService: SymbolProvider = new AlphavantageSymbolProvider(httpService);
 
 export const getPrimaryFinancialMetrics = getPrimaryFinancialMetricsUseCase(bcraService);
 export const getDolars = getDolarsPricesUseCase(dolarService);

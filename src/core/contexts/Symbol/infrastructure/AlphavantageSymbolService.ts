@@ -1,13 +1,13 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
 import { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import { SymbolProvider } from '../domain/SymbolProvider';
-import { AlphavantageSymbolPriceMonthlyResponse } from './AlphavantageSymbolPriceMonthlyResponse';
+import { AlphaVantageSymbolMonthlyPriceResponse } from './AlphavantageSymbolPriceMonthlyResponse';
 
-export class AlphavantageSymbolService implements SymbolProvider {
+export class AlphavantageSymbolProvider implements SymbolProvider {
   constructor(private readonly httpService: HttpService) {}
 
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
-    const response = await this.httpService.get<AlphavantageSymbolPriceMonthlyResponse>(
+    const response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
       `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
         process.env.VITE_API_KEY_ALPHAVANTAGE
       }`,
