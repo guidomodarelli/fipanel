@@ -19,6 +19,8 @@ export class AlphavantageSymbolService implements SymbolService {
       acc.push({
         open: parseFloat(symbolPriceResponse['1. open']),
         close: parseFloat(symbolPriceResponse['4. close']),
+        high: parseFloat(symbolPriceResponse['2. high']),
+        low: parseFloat(symbolPriceResponse['3. low']),
         date: new Date(date),
       });
       return acc;
