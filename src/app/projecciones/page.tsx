@@ -1,7 +1,7 @@
 'use client';
-import InvestmentProjectionForm from '@/components/form/investment-projection/InvestmentProjectionForm';
-import InvestmentProjectionTable from '@/components/form/investment-projection/InvestmentProjectionTable';
-import { InvestmentProjection } from '@/components/form/investment-projection/scheme';
+import InvestmentProjectionForm from '@/components/form/InvestmentProjection/InvestmentProjectionForm';
+import InvestmentProjectionTable from '@/components/form/InvestmentProjection/InvestmentProjectionTable';
+import { InvestmentProjection } from '@/components/form/InvestmentProjection/scheme';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import { useState } from 'react';
 
