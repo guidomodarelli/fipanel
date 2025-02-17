@@ -6,7 +6,7 @@ import { AlphavantageSymbolPriceMonthlyResponse } from './AlphavantageSymbolPric
 export class AlphavantageSymbolService implements SymbolService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getPriceMonthly(symbol: string): Promise<SymbolPrice[]> {
+  async getSymbolPriceMonthly(symbol: string): Promise<SymbolPrice[]> {
     const response = await this.httpService.get<AlphavantageSymbolPriceMonthlyResponse>(
       `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
         process.env.VITE_API_KEY_ALPHAVANTAGE

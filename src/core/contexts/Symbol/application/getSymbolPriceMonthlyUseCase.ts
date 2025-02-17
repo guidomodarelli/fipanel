@@ -1,5 +1,5 @@
 import { SymbolService } from '../domain/SymbolService';
 
 export const getSymbolPriceMonthlyUseCase = (symbolService: SymbolService) => (symbol: string) => {
-  return symbolService.getPriceMonthly(symbol);
+  return symbolService.getSymbolPriceMonthly(symbol);
 };
