@@ -5,12 +5,12 @@ import { getPrimaryFinancialMetricsUseCase } from '@/core/contexts/Metrics/appli
 import { FinancialDataProvider } from '@/core/contexts/Metrics/domain/FinancialDataProvider';
 import { BCRAFinancialDataProvider } from '@/core/contexts/Metrics/infrastructure/BCRAFinancialDataProvider';
 import { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
-import { AxiosHttpService } from '@/core/contexts/shared/http/infrastructure/AxiosHttpService';
+import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
 import { MockSymbolProvider } from '@/core/contexts/Symbol/infrastructure/MockSymbolProvider';
 
-const httpService: HttpService = new AxiosHttpService();
+const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
 const symbolService: SymbolProvider = new MockSymbolProvider();
