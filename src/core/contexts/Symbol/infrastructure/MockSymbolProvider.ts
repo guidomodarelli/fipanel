@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import { SymbolProvider } from '../domain/SymbolProvider';
 
-export class MockSymbolPriceMonthlyService implements SymbolProvider {
+export class MockSymbolProvider implements SymbolProvider {
   getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     const mockData = this.getMockData();
 

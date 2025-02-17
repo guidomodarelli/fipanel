@@ -1,4 +1,4 @@
-export interface FinhubSymbolServiceResponse {
+export interface FinhubSymbolProviderResponse {
   // Open price of the day
   o: number;
   // Previous close price

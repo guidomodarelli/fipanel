@@ -1,13 +1,13 @@
 import { HttpService } from '../../shared/http/domain/HttpService';
 import { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import { SymbolProvider } from '../domain/SymbolProvider';
-import { FinhubSymbolServiceResponse } from './FinhubSymbolServiceResponse';
+import { FinhubSymbolProviderResponse } from './FinhubSymbolProviderResponse';
 
-export class FinhubSymbolService implements SymbolProvider {
+export class FinhubSymbolProvider implements SymbolProvider {
   constructor(private readonly httpService: HttpService) {}
 
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
-    const response = await this.httpService.get<FinhubSymbolServiceResponse>(
+    const response = await this.httpService.get<FinhubSymbolProviderResponse>(
       `https://finnhub.io/api/v1/stock/candle?token=${process.env.FINNHUB_API_KEY}&symbol=${symbol}`,
     );
 
