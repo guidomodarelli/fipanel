@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { usePrimaryFinancialMetrics } from '@/hooks/usePrincipalesVariables';
 
-const TasaInteresCard = () => {
+const InterestRateCard = async () => {
   const { TASA_POLITICA_MONETARIA } = usePrimaryFinancialMetrics();
 
   return (
@@ -42,4 +42,4 @@ const TasaInteresCard = () => {
   );
 };
 
-export default TasaInteresCard;
+export default InterestRateCard;

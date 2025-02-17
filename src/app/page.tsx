@@ -1,6 +1,6 @@
 import DolarCard from '@/components/cards/DolarCard/DolarCard';
 import IPCCard from '@/components/cards/IPCCard/IPCCard';
-import TasaInteresCard from '@/components/cards/tasa-interes-card/TasaInteresCard';
+import InterestRateCard from '@/components/cards/InterestRateCard/InterestRateCard';
 import { SIDEBAR_TRIGGER_HEIGHT } from '@/components/sidebar/Sidebar';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <div className='flex gap-4 flex-col md:flex-row'>
         <IPCCard />
         <DolarCard />
-        <TasaInteresCard />
+        <InterestRateCard />
       </div>
     </div>
   );
