@@ -11,14 +11,14 @@ export class FinhubSymbolService implements SymbolService {
       `https://finnhub.io/api/v1/stock/candle?token=${process.env.FINNHUB_API_KEY}&symbol=${symbol}`,
     );
 
-    return {
-      open: response.o,
-      close: response.pc,
-      high: response.h,
-      low: response.l,
-      percentChange: response.dp,
-      change: response.d,
-      currentPrice: response.c,
-    };
+    return [
+      {
+        open: response.o,
+        close: response.pc,
+        high: response.h,
+        low: response.l,
+        date: new Date(response.t),
+      },
+    ];
   }
 }
