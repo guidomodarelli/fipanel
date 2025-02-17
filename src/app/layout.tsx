@@ -1,4 +1,4 @@
-import { TradingViewTickerTape } from '@/components/embeddings/tradingview/TradingViewTickerTape';
+import { TradingViewTickerTape } from '@/components/embeddings/TradingView/TradingViewTickerTape';
 import { Sidebar } from '@/components/sidebar/Sidebar';
 import Providers from '@/providers/Providers';
 import type { Metadata } from 'next';
