@@ -1,7 +1,7 @@
+import { formatCurrency } from '@/lib/number';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import React, { useCallback } from 'react';
-import { data, InvestmentProjectionData } from './data';
-import { formatCurrency } from '@/lib/number';
+import { InvestmentProjectionData } from './InvestmentProjectionData';
 
 interface InvestmentProjectionTableColumn {
   name: string;
@@ -17,7 +17,11 @@ export const columns: InvestmentProjectionTableColumn[] = [
   { name: 'AHORRADO + INVERTIDO', uid: 'i+s' },
 ];
 
-const InvestmentProjectionTable = () => {
+interface InvestmentProjectionTableProps {
+  data: InvestmentProjectionData[];
+}
+
+const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ data = [] }) => {
   const renderCell = useCallback((data: InvestmentProjectionData, columnKey: React.Key) => {
     const cellValue = data[columnKey as keyof InvestmentProjectionData];
 

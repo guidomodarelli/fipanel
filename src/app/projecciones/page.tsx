@@ -18,7 +18,7 @@ const Projection = () => {
   return (
     <div className='flex gap-8'>
       <InvestmentProjectionForm onSubmit={handleSubmit} />
-      <InvestmentProjectionTable />
+      <InvestmentProjectionTable data={[]} />
     </div>
   );
 };
