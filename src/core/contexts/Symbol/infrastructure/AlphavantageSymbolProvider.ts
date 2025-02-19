@@ -6,6 +6,10 @@ import { AlphaVantageSymbolMonthlyPriceResponse } from './AlphaVantageSymbolMont
 export class AlphavantageSymbolProvider implements SymbolProvider {
   constructor(private readonly httpService: HttpService) {}
 
+  getSymbolPriceDaily(symbol: string): Promise<SymbolPriceInfo[]> {
+    throw new Error('Method not implemented.');
+  }
+
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     const response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
       `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
