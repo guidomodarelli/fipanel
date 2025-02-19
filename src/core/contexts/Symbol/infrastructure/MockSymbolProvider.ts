@@ -50,12 +50,13 @@ export class MockSymbolProvider implements SymbolProvider {
         if (year === currentDate.getFullYear() && month > currentDate.getMonth()) {
           break;
         }
+        const lastDayOfMonth = new Date(year, month + 1, 0);
         mockData.push({
           open: parseFloat(faker.finance.amount({ min: 100, max: 200, dec: 2 })),
           close: parseFloat(faker.finance.amount({ min: 100, max: 200, dec: 2 })),
           high: parseFloat(faker.finance.amount({ min: 200, max: 300, dec: 2 })),
           low: parseFloat(faker.finance.amount({ min: 50, max: 100, dec: 2 })),
-          date: new Date(year, month, 1),
+          date: lastDayOfMonth,
         });
       }
     }
