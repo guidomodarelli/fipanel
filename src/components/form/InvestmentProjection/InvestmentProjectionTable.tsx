@@ -44,7 +44,12 @@ const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ d
   }, []);
 
   return (
-    <Table removeWrapper isHeaderSticky className='max-h-[25rem] overflow-y-auto'>
+    <Table
+      aria-label='Investment Projections'
+      removeWrapper
+      isHeaderSticky
+      className='max-h-[25rem] overflow-y-auto'
+    >
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
