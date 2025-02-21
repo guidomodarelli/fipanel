@@ -13,7 +13,11 @@ interface YearData {
   capitalInvertidoYAhorrado: number;
 }
 
-function calcularDatos(precios: number[], capitalInicial: number, inyeccionMensual: number): YearData[] {
+function analyzePriceVariations(
+  precios: number[],
+  capitalInicial: number,
+  inyeccionMensual: number,
+): YearData[] {
   const datos: YearData[] = [];
   let capitalInvertido = capitalInicial;
   let capitalAhorrado = capitalInicial;
