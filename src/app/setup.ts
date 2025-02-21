@@ -16,7 +16,7 @@ import { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
 import { MockSymbolProvider } from '@/core/contexts/Symbol/infrastructure/MockSymbolProvider';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
-export const logger: Logger = new ConsoleLogger();
+export const _logger: Logger = new ConsoleLogger();
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
