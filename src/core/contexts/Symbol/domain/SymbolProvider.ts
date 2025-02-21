@@ -1,6 +1,6 @@
 import { SymbolPriceInfo } from './SymbolPriceInfo';
 
 export interface SymbolProvider {
-  getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]>;
-  getSymbolPriceDaily(symbol: string): Promise<SymbolPriceInfo[]>;
+  getSymbolPriceMonthly(symbol: string, from: Date, to: Date): Promise<SymbolPriceInfo[]>;
+  getSymbolPriceDaily(symbol: string, from: Date, to: Date): Promise<SymbolPriceInfo[]>;
 }
