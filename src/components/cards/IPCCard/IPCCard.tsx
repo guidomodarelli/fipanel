@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { usePrimaryFinancialMetrics } from '@/hooks/usePrimaryFinancialMetrics';
-import { formatDate } from '@/lib/date';
+import { DateUtils } from '@/lib/date';
 
 const IPCCard = () => {
   const { IPC_INTERANUAL, IPC_MENSUAL, IPC_REM } = usePrimaryFinancialMetrics();
@@ -58,7 +58,7 @@ const IPCCard = () => {
           <TableFooter>
             <TableRow>
               <TableCell className='text-xs font-normal text-muted-foreground' colSpan={3}>
-                Última actualización: {IPC_REM ? formatDate(new Date(IPC_REM?.date)) : <SkeletonText />}
+                Última actualización: {IPC_REM ? DateUtils.format(new Date(IPC_REM?.date)) : <SkeletonText />}
               </TableCell>
             </TableRow>
           </TableFooter>

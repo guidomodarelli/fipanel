@@ -1,18 +1,11 @@
-export enum MONTH {
-  JANUARY = 0,
-  FEBRUARY = 1,
-  MARCH = 2,
-  APRIL = 3,
-  MAY = 4,
-  JUNE = 5,
-  JULY = 6,
-  AUGUST = 7,
-  SEPTEMBER = 8,
-  OCTOBER = 9,
-  NOVEMBER = 10,
-  DECEMBER = 11,
-}
+import { MONTH } from '@/core/contexts/shared/date/domain/types';
 
-export const formatDate = (date: Date) => {
-  return date.toLocaleDateString('es-AR', { day: 'numeric', month: 'numeric', year: 'numeric' });
-};
+export class DateUtils {
+  static isDecember(date: Date) {
+    return date.getMonth() === MONTH.DECEMBER;
+  }
+
+  static format(date: Date) {
+    return date.toLocaleDateString('es-AR', { day: 'numeric', month: 'numeric', year: 'numeric' });
+  }
+}
