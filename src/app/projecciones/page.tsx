@@ -8,35 +8,35 @@ interface YearData {
   year: number;
   price: number;
   varPercent: number;
-  capitalSoloInvertido: number;
+  capitalInvertido: number;
   capitalAhorrado: number;
-  capitalInvertidoAhorrado: number;
+  capitalInvertidoYAhorrado: number;
 }
 
 function calcularDatos(precios: number[], capitalInicial: number, inyeccionMensual: number): YearData[] {
   const datos: YearData[] = [];
-  let capitalSoloInvertido = capitalInicial;
+  let capitalInvertido = capitalInicial;
   let capitalAhorrado = capitalInicial;
-  let capitalInvertidoAhorrado = capitalInicial;
+  let capitalInvertidoYAhorrado = capitalInicial;
 
   for (let i = 0; i < precios.length; i++) {
     const year = 2000 + i;
     const varPercent = i === 0 ? 0 : (precios[i] - precios[i - 1]) / precios[i - 1];
 
-    capitalSoloInvertido = i === 0 ? capitalInicial : capitalSoloInvertido * (1 + varPercent);
+    capitalInvertido = i === 0 ? capitalInicial : capitalInvertido * (1 + varPercent);
 
     capitalAhorrado = i === 0 ? capitalInicial : capitalAhorrado + inyeccionMensual;
 
-    capitalInvertidoAhorrado =
-      i === 0 ? capitalInicial : (capitalInvertidoAhorrado + inyeccionMensual) * (1 + varPercent);
+    capitalInvertidoYAhorrado =
+      i === 0 ? capitalInicial : (capitalInvertidoYAhorrado + inyeccionMensual) * (1 + varPercent);
 
     datos.push({
       year,
       price: precios[i],
       varPercent: parseFloat((varPercent * 100).toFixed(2)),
-      capitalSoloInvertido: parseFloat(capitalSoloInvertido.toFixed(2)),
+      capitalInvertido: parseFloat(capitalInvertido.toFixed(2)),
       capitalAhorrado: parseFloat(capitalAhorrado.toFixed(2)),
-      capitalInvertidoAhorrado: parseFloat(capitalInvertidoAhorrado.toFixed(2)),
+      capitalInvertidoYAhorrado: parseFloat(capitalInvertidoYAhorrado.toFixed(2)),
     });
   }
 
