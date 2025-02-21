@@ -8,4 +8,8 @@ export class DateUtils {
   static format(date: Date) {
     return date.toLocaleDateString('es-AR', { day: 'numeric', month: 'numeric', year: 'numeric' });
   }
+
+  static isLastYear(date: Date) {
+    return date.getFullYear() === new Date().getFullYear() - 1;
+  }
 }
