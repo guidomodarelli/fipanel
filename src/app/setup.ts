@@ -8,12 +8,15 @@ import { Calendar } from '@/core/contexts/shared/date/domain/Calendar';
 import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsCalendar';
 import { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
+import { Logger } from '@/core/contexts/shared/logger/domain/Logger';
+import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 import { getSymbolPriceDailyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceDailyUseCase';
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
 import { MockSymbolProvider } from '@/core/contexts/Symbol/infrastructure/MockSymbolProvider';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
+export const logger: Logger = new ConsoleLogger();
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
