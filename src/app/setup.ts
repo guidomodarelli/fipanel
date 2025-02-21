@@ -4,6 +4,8 @@ import { BluelyticsDolarProvider } from '@/core/contexts/Dolar/infrastructure/Bl
 import { getPrimaryFinancialMetricsUseCase } from '@/core/contexts/Metrics/application/getPrimaryFinancialMetricsUseCase';
 import { FinancialDataProvider } from '@/core/contexts/Metrics/domain/FinancialDataProvider';
 import { BCRAFinancialDataProvider } from '@/core/contexts/Metrics/infrastructure/BCRAFinancialDataProvider';
+import { Calendar } from '@/core/contexts/shared/date/domain/Calendar';
+import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsCalendar';
 import { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
 import { getSymbolPriceDailyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceDailyUseCase';
@@ -11,6 +13,7 @@ import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application
 import { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
 import { MockSymbolProvider } from '@/core/contexts/Symbol/infrastructure/MockSymbolProvider';
 
+export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
