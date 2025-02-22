@@ -14,7 +14,8 @@ export const SidebarLayout = ({ children }: SidebarProps) => {
   return (
     <SidebarProvider defaultOpen={true}>
       <Sidebar />
-      <div className='flex flex-col min-h-screen grow'>
+      {/* https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter */}
+      <div className='flex flex-col min-h-screen grow [scrollbar-gutter:stable;]'>
         <TradingViewTickerTape />
         <main className='px-8 grow'>
           <div
