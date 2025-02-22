@@ -58,23 +58,24 @@ const Projection = () => {
   });
 
   const handleSubmit = (values: InvestmentProjection) => {
-    setSymbol(values.symbol);
     logger.debug('Investment projection for symbol:', values.symbol);
-    if (values.yearsOfInvestment) {
-      logger.debug('Investment projection for', values.yearsOfInvestment, 'years');
-      // set from and to dates using values.yearsOfInvestment
-      const today = new Date();
-      const from = new Date(today.getFullYear() - values.yearsOfInvestment, 0, 1);
-      setFrom(from);
-      setTo(today);
-    }
+    logger.debug('Investment projection for', values.yearsOfInvestment, 'years');
+    logger.debug('Investment projection with initial investment:', values.initialInvestment);
+    logger.debug('Investment projection with monthly injection:', values.monthlyInjection);
+    // set from and to dates using values.yearsOfInvestment
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const from = new Date(today.getFullYear() - values.yearsOfInvestment, 0, 1);
+    setSymbol(values.symbol);
+    setFrom(from);
+    setTo(today);
     setInitialInvestment(values.initialInvestment);
     setMonthlyInjection(values.monthlyInjection);
   };
 
   useEffect(() => {
     if (getAnnualPrices.length && initialInvestment && monthlyInjection) {
-      logger.debug('Investment projection updated for symbol:', symbol);
+      logger.debug('Analyzing price variations');
       const data = analyzePriceVariations(getAnnualPrices, initialInvestment, monthlyInjection);
       setData(data);
     }
