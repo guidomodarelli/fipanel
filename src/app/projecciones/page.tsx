@@ -20,9 +20,10 @@ function analyzePriceVariations(precios: number[], capitalInicial: number, inyec
   let capitalInvertido = capitalInicial;
   let capitalAhorrado = capitalInicial;
   let capitalInvertidoYAhorrado = capitalInicial;
+  const currentYear = new Date().getFullYear();
 
   for (let i = 0; i < precios.length; i++) {
-    const year = 2000 + i;
+    const year = currentYear - (precios.length - i - 1);
     const varPercent = i === 0 ? 0 : (precios[i] - precios[i - 1]) / precios[i - 1];
 
     capitalInvertido = i === 0 ? capitalInicial : capitalInvertido * (1 + varPercent);
@@ -46,14 +47,41 @@ function analyzePriceVariations(precios: number[], capitalInicial: number, inyec
 }
 
 const Projection = () => {
+  const logger = _logger.get('Projection');
   const [symbol, setSymbol] = useState('');
-  const { isLoading, getTheLastAnnualPrice } = useSymbolPriceMonthly({ symbol });
+  const [initialInvestment, setInitialInvestment] = useState(0);
+  const [monthlyInjection, setMonthlyInjection] = useState(0);
+  const [from, setFrom] = useState<Date>(new Date('1990-01-01'));
+  const [to, setTo] = useState<Date>(new Date());
+  const [data, setData] = useState<YearData[]>([]);
+  const { isLoading, getAnnualPrices } = useSymbolPriceMonthly({
+    symbol,
+    from,
+    to,
+  });
 
   const handleSubmit = (values: InvestmentProjection) => {
-    if (values.symbol) {
-      setSymbol(values.symbol);
+    setSymbol(values.symbol);
+    logger.debug('Investment projection for symbol:', values.symbol);
+    if (values.yearsOfInvestment) {
+      logger.debug('Investment projection for', values.yearsOfInvestment, 'years');
+      // set from and to dates using values.yearsOfInvestment
+      const today = new Date();
+      const from = new Date(today.getFullYear() - values.yearsOfInvestment, 0, 1);
+      setFrom(from);
+      setTo(today);
     }
+    setInitialInvestment(values.initialInvestment);
+    setMonthlyInjection(values.monthlyInjection);
   };
+
+  useEffect(() => {
+    if (getAnnualPrices.length && initialInvestment && monthlyInjection) {
+      logger.debug('Investment projection updated for symbol:', symbol);
+      const data = analyzePriceVariations(getAnnualPrices, initialInvestment, monthlyInjection);
+      setData(data);
+    }
+  }, [symbol, getAnnualPrices, initialInvestment, monthlyInjection]);
 
   return (
     <div className='flex gap-8'>
