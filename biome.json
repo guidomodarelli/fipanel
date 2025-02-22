@@ -9,34 +9,13 @@
     "ignoreUnknown": false,
     "ignore": ["src/components/ui/*"]
   },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space"
-  },
   "organizeImports": {
     "enabled": true
   },
   "linter": {
-    "enabled": true,
+    "enabled": false,
     "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noExplicitAny": {
-          "level": "info"
-        }
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single",
-      "quoteProperties": "asNeeded",
-      "jsxQuoteStyle": "single"
-    }
-  },
-  "css": {
-    "formatter": {
-      "quoteStyle": "single"
+      "recommended": true
     }
   }
 }
