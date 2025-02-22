@@ -1,10 +1,14 @@
 import type { HttpService } from '../../shared/http/domain/HttpService';
+import { Logger } from '../../shared/logger/domain/Logger';
 import type { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import type { SymbolProvider } from '../domain/SymbolProvider';
 import type { AlphaVantageSymbolMonthlyPriceResponse } from './AlphaVantageSymbolMonthlyPriceResponse';
 
 export class AlphavantageSymbolProvider implements SymbolProvider {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly logger: Logger,
+    private readonly httpService: HttpService,
+  ) {}
 
   getSymbolPriceDaily(symbol: string): Promise<SymbolPriceInfo[]> {
     throw new Error('Method not implemented.');
@@ -16,9 +20,12 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
 
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     let response: AlphaVantageSymbolMonthlyPriceResponse;
+    this.logger.debug('Getting monthly prices for symbol:', symbol);
     if (process.env.NODE_ENV === 'development') {
+      this.logger.debug('Using example response');
       response = await this.getExampleResponse();
     } else {
+      this.logger.debug('Using Alphavantage API');
       response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
         `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
           process.env.VITE_API_KEY_ALPHAVANTAGE
