@@ -89,7 +89,7 @@ const Projection = () => {
 
   return (
     <div className='flex gap-8'>
-      <InvestmentProjectionForm logger={logger.get(InvestmentProjectionForm.name)} onSubmit={handleSubmit} />
+      <InvestmentProjectionForm logger={logger.getLogger([InvestmentProjectionForm.name])} onSubmit={handleSubmit} />
       <InvestmentProjectionTable data={data} />
     </div>
   );

@@ -1,18 +1,18 @@
 import { Logger } from './Logger';
-import { NoopLogger } from './NoopLogger';
+import { Status } from './types';
 
 export type LoggerFactory = {
-  create: (context?: string[]) => Logger;
+  create: (context: string[], status: Status) => Logger;
 };
 
 export const LoggerFactory =
   (logger: LoggerFactory) =>
-  (initialContext: Function, status: 'enabled' | 'disabled'): Logger => {
+  (initialContext: Function, status: Status): Logger => {
     if (typeof initialContext !== 'function') {
       throw new Error('initialContext must be a function');
     }
-    if (status === 'enabled') {
-      return logger.create([initialContext.name]);
+    if (initialContext.name === '') {
+      throw new Error('initialContext must be a named function');
     }
-    return NoopLogger;
+    return logger.create([initialContext.name], status);
   };

@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import type { Logger } from '../domain/Logger';
 import { LoggerFactory } from '../domain/LoggerFactory';
+import { Status } from '../domain/types';
 
 const print =
   (context: string[]) =>
@@ -10,32 +11,45 @@ const print =
     console.log(`[${chalk.gray(timestamp)}] [${level}]${contextStr} ${message}`, ...args);
   };
 
-export const ConsoleLogger: LoggerFactory = {
-  create: (context: string[] = []) => ({
-    context,
+class ConsoleLogger implements Logger {
+  private context: string[];
+  private status: Status;
 
-    log(message: string, ...args: any[]): void {
-      print(context)(chalk.bold.white('LOG'), message, ...args);
-    },
+  constructor(context: string[], status: Status = 'enabled') {
+    this.context = context;
+    this.status = status;
+  }
 
-    debug(message: string, ...args: any[]): void {
-      print(context)(chalk.bold.cyan('DEBUG'), message, ...args);
-    },
+  log(message: string, ...args: any[]): void {
+    if (this.status === 'disabled') return;
+    print(this.context)(chalk.bold.white('LOG'), message, ...args);
+  }
 
-    info(message: string, ...args: any[]): void {
-      print(context)(chalk.bold.blue('INFO'), message, ...args);
-    },
+  debug(message: string, ...args: any[]): void {
+    if (this.status === 'disabled') return;
+    print(this.context)(chalk.bold.cyan('DEBUG'), message, ...args);
+  }
 
-    warn(message: string, ...args: any[]): void {
-      print(context)(chalk.bold.yellow('WARN'), message, ...args);
-    },
+  info(message: string, ...args: any[]): void {
+    if (this.status === 'disabled') return;
+    print(this.context)(chalk.bold.blue('INFO'), message, ...args);
+  }
 
-    error(message: string, ...args: any[]): void {
-      print(context)(chalk.bold.red('ERROR'), message, ...args);
-    },
+  warn(message: string, ...args: any[]): void {
+    if (this.status === 'disabled') return;
+    print(this.context)(chalk.bold.yellow('WARN'), message, ...args);
+  }
 
-    get(newContext: string): Logger {
-      return ConsoleLogger.create([...context, newContext]);
-    },
-  }),
+  error(message: string, ...args: any[]): void {
+    if (this.status === 'disabled') return;
+    print(this.context)(chalk.bold.red('ERROR'), message, ...args);
+  }
+
+  getLogger(newContext: string[], status: Status): Logger {
+    return new ConsoleLogger([...this.context, ...newContext], status);
+  }
+}
+
+export const ConsoleLoggerFactory: LoggerFactory = {
+  create: (context: string[] = [], status) => new ConsoleLogger(context, status),
 };
