@@ -10,13 +10,30 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
     throw new Error('Method not implemented.');
   }
 
-  async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
-    const response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
-        process.env.VITE_API_KEY_ALPHAVANTAGE
-      }`,
-    );
+  async getExampleResponse(): Promise<AlphaVantageSymbolMonthlyPriceResponse> {
+    return (await import('./AlphavantageExampleResponse')).default;
+  }
 
+  async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
+    let response: AlphaVantageSymbolMonthlyPriceResponse;
+    try {
+      response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
+          process.env.VITE_API_KEY_ALPHAVANTAGE
+        }`,
+      );
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        response = await this.getExampleResponse();
+      } else {
+        throw error;
+      }
+    }
+
+    return this.transformMonthlyTimeSeriesResponse(response);
+  }
+
+  private transformMonthlyTimeSeriesResponse(response: AlphaVantageSymbolMonthlyPriceResponse): SymbolPriceInfo[] {
     const monthlyTimeSeries = Object.entries(response['Monthly Time Series']);
 
     return monthlyTimeSeries.reduce((acc, [date, symbolPriceResponse]) => {
@@ -28,6 +45,6 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
         date: new Date(date),
       });
       return acc;
-    }, {} as SymbolPriceInfo[]);
+    }, [] as SymbolPriceInfo[]);
   }
 }
