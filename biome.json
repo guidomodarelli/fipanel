@@ -9,6 +9,15 @@
     "ignoreUnknown": false,
     "ignore": ["src/components/ui/*"]
   },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "bracketSpacing": true,
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "useEditorconfig": true,
+    "lineWidth": 120
+  },
   "organizeImports": {
     "enabled": true
   },
@@ -16,6 +25,27 @@
     "enabled": false,
     "rules": {
       "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "quoteProperties": "asNeeded",
+      "jsxQuoteStyle": "single"
+    }
+  },
+  "css": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "assists": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "sortJsxProps": "on",
+        "useSortedKeys": "on"
+      }
     }
   }
 }
