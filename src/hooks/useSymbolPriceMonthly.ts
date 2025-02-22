@@ -9,7 +9,11 @@ interface SymbolPriceMonthlyProps {
   to: Date;
 }
 
-export const useSymbolPriceMonthly = ({ symbol, from, to }: SymbolPriceMonthlyProps) => {
+export const useSymbolPriceMonthly = ({
+  symbol,
+  from,
+  to,
+}: SymbolPriceMonthlyProps) => {
   const { data: dataMonthly, isLoading: isLoadingMonthly } = useQuery({
     queryKey: ['symbolPriceMonthly'],
     queryFn: () => getSymbolPriceMonthly(symbol, from, to),
