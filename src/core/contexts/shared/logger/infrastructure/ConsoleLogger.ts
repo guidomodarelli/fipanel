@@ -6,7 +6,7 @@ const print =
   (context: string[]) =>
   (level: string, message: string, ...args: any[]) => {
     const timestamp = new Date().toLocaleTimeString();
-    const contextStr = context.length ? ` [${chalk.bold.gray(context.join(', '))}]` : '';
+    const contextStr = context.length ? ` [${chalk.bold.gray(context.join(' » '))}]` : '';
     console.log(`[${chalk.gray(timestamp)}] [${level}]${contextStr} ${message}`, ...args);
   };
 
