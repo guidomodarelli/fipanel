@@ -74,10 +74,17 @@ const Projection = () => {
   };
 
   useEffect(() => {
+    logger.debug('Symbol:', symbol);
+    logger.debug('Annual prices:', getAnnualPrices);
+    logger.debug('Initial investment:', initialInvestment);
+    logger.debug('Monthly injection:', monthlyInjection);
+    logger.debug('From:', from.toISOString());
+    logger.debug('To:', to.toISOString());
     if (getAnnualPrices.length && initialInvestment && monthlyInjection) {
       logger.debug('Analyzing price variations');
       const data = analyzePriceVariations(getAnnualPrices, initialInvestment, monthlyInjection);
       setData(data);
+      logger.debug('Projection data set:', data);
     }
   }, [symbol, getAnnualPrices, initialInvestment, monthlyInjection]);
 
