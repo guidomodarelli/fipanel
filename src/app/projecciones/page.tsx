@@ -44,7 +44,7 @@ function analyzePriceVariations(
 }
 
 const Projection = () => {
-  const logger = createLogger(Projection.name);
+  const logger = createLogger(Projection.name, false);
   const [symbol, setSymbol] = useState('');
   const [initialInvestment, setInitialInvestment] = useState(0);
   const [monthlyInjection, setMonthlyInjection] = useState(0);
