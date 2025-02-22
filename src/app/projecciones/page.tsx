@@ -1,8 +1,10 @@
 'use client';
 import InvestmentProjectionForm from '@/components/form/InvestmentProjection/InvestmentProjectionForm';
 import InvestmentProjectionTable from '@/components/form/InvestmentProjection/InvestmentProjectionTable';
-import { InvestmentProjection } from '@/components/form/InvestmentProjection/scheme';
+import type { InvestmentProjection } from '@/components/form/InvestmentProjection/scheme';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
+import { useEffect, useState } from 'react';
+import { _logger } from '../setup';
 
 interface YearData {
   year: number;
