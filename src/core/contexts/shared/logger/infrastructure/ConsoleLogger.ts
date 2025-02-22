@@ -8,7 +8,7 @@ export class ConsoleLogger implements Logger {
   }
 
   private print(level: string, message: string, ...args: any[]): void {
-    console.log(`[ ${level} ]${this.context ? ` [${this.context}]` : ''} ${message}`, ...args);
+    console.log(`[${level}]${this.context ? ` [${this.context}]` : ''} ${message}`, ...args);
   }
 
   log(message: string, ...args: any[]): void {
