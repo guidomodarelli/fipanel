@@ -34,6 +34,7 @@ type SidebarContext = {
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
   toggleSidebar: () => void;
+  isReady: boolean;
 };
 
 const SidebarContext = React.createContext<SidebarContext | null>(null);
@@ -78,6 +79,7 @@ const SidebarProvider = React.forwardRef<
   ) => {
     const isMobile = useIsMobile();
     const [openMobile, setOpenMobile] = React.useState(false);
+    const [isReady, setIsReady] = React.useState(false);
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
@@ -101,6 +103,7 @@ const SidebarProvider = React.forwardRef<
     React.useEffect(() => {
       const cookieState = getSidebarCookieState(defaultOpen);
       _setOpen(cookieState);
+      setIsReady(true);
     }, [defaultOpen]);
 
     // Helper to toggle the sidebar.
@@ -139,6 +142,7 @@ const SidebarProvider = React.forwardRef<
         openMobile,
         setOpenMobile,
         toggleSidebar,
+        isReady,
       }),
       [
         state,
@@ -148,8 +152,13 @@ const SidebarProvider = React.forwardRef<
         openMobile,
         setOpenMobile,
         toggleSidebar,
+        isReady,
       ],
     );
+
+    if (!isReady) {
+      return null;
+    }
 
     return (
       <SidebarContext.Provider value={contextValue}>
