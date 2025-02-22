@@ -7,6 +7,14 @@ import { useForm } from 'react-hook-form';
 import { type InvestmentProjection, scheme } from './scheme';
 import { symbols } from './symbols';
 
+const DEBUG = process.env.NODE_ENV === 'development';
+const DEBUG_VALUES = {
+  yearsOfInvestment: 10,
+  initialInvestment: 2_000,
+  monthlyInjection: 100,
+  symbol: 'IBM',
+} as const;
+
 interface InvestmentProjectionFormProps {
   onSubmit: (values: InvestmentProjection) => void;
 }
@@ -15,9 +23,10 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
   const form = useForm<InvestmentProjection>({
     resolver: zodResolver(scheme),
     defaultValues: {
-      yearsOfInvestment: '' as unknown as number,
-      initialInvestment: '' as unknown as number,
-      monthlyInjection: '' as unknown as number,
+      yearsOfInvestment: DEBUG ? DEBUG_VALUES.yearsOfInvestment : ('' as unknown as number),
+      initialInvestment: DEBUG ? DEBUG_VALUES.initialInvestment : ('' as unknown as number),
+      monthlyInjection: DEBUG ? DEBUG_VALUES.monthlyInjection : ('' as unknown as number),
+      symbol: DEBUG ? DEBUG_VALUES.symbol : '',
     },
   });
 
@@ -126,6 +135,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
                   className='max-w-sm'
                   defaultFilter={prefixFilter}
                   defaultItems={symbols}
+                  defaultSelectedKey={DEBUG ? DEBUG_VALUES.symbol : undefined}
                   label='Escoge un símbolo'
                   {...field}
                   errorMessage={fieldState.error?.message}
