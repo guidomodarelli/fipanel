@@ -18,7 +18,7 @@ export const ConsoleLogger = {
     },
 
     debug(message: string, ...args: any[]): void {
-      print(context)(chalk.bold.magenta('DEBUG'), message, ...args);
+      print(context)(chalk.bold.cyan('DEBUG'), message, ...args);
     },
 
     info(message: string, ...args: any[]): void {
