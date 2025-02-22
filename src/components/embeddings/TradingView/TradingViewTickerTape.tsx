@@ -1,6 +1,8 @@
 'use client';
 import React, { useEffect } from 'react';
 
+export const TICKER_TAPE_HEIGHT = 44;
+
 // Ticker Widget Editor: https://www.tradingview.com/widget-docs/widgets/tickers/ticker/
 export const TradingViewTickerTape = () => {
   const tradingviewTickerTapeRef = React.useRef<HTMLDivElement>(null);
@@ -104,7 +106,7 @@ export const TradingViewTickerTape = () => {
   }, []);
 
   return (
-    <div className='h-[44px]'>
+    <div className={`h-[${TICKER_TAPE_HEIGHT}px]`}>
       <div ref={tradingviewTickerTapeRef} />
     </div>
   );
