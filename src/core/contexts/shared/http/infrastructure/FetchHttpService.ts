@@ -1,4 +1,4 @@
-import { HttpService } from '../domain/HttpService';
+import type { HttpService } from '../domain/HttpService';
 
 export class FetchHttpService implements HttpService {
   async get(url: string): Promise<any> {

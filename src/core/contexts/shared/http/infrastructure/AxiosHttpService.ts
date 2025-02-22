@@ -1,4 +1,4 @@
-import { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
+import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import axios from 'axios';
 
 export class AxiosHttpService implements HttpService {

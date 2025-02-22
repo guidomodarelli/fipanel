@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { Calendar } from '../domain/Calendar';
-import { MONTH, UnitTypes } from '../domain/types';
+import type { Calendar } from '../domain/Calendar';
+import { MONTH, type UnitTypes } from '../domain/types';
 
 export class DayjsCalendar implements Calendar {
   private _date: Date;

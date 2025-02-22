@@ -1,4 +1,4 @@
-import { UnitTypes } from './types';
+import type { UnitTypes } from './types';
 
 export interface Calendar {
   date: Date;

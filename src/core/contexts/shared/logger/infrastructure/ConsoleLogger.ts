@@ -1,4 +1,4 @@
-import { Logger } from '../domain/Logger';
+import type { Logger } from '../domain/Logger';
 
 export class ConsoleLogger implements Logger {
   constructor(private _context?: string[]) {}

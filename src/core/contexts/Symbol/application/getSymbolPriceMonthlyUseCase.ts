@@ -1,14 +1,15 @@
-import { caljs } from "@/app/setup";
+import { caljs } from '@/app/setup';
 import { DateRangeError } from '../../shared/date/domain/DateRangeError';
 import { DateRangeLimitError } from '../../shared/date/domain/DateRangeLimitError';
-import { UnitTypes } from "../../shared/date/domain/types";
-import { SymbolProvider } from '../domain/SymbolProvider';
+import type { UnitTypes } from '../../shared/date/domain/types';
+import type { SymbolProvider } from '../domain/SymbolProvider';
 
 const YEARS_LIMIT = 25;
 const UNIT_TYPE: UnitTypes = 'years';
 
 export const getSymbolPriceMonthlyUseCase =
-  (symbolProvider: SymbolProvider) => (symbol: string, from: Date, to: Date) => {
+  (symbolProvider: SymbolProvider) =>
+  (symbol: string, from: Date, to: Date) => {
     if (from >= to) {
       throw new DateRangeError();
     }
