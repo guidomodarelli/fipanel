@@ -6,15 +6,20 @@ import { useCallback, useMemo } from 'react';
 
 interface SymbolPriceMonthlyProps {
   symbol: string;
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
 }
 
 export const useSymbolPriceMonthly = ({ symbol, from, to }: SymbolPriceMonthlyProps) => {
+  const fromYear = from?.getFullYear();
+  const toYear = to?.getFullYear();
+
   const { data: dataMonthly, isLoading: isLoadingMonthly } = useQuery({
-    queryKey: ['symbolPriceMonthly', symbol, from, to],
-    enabled: !!symbol && !!from && !!to,
-    queryFn: () => getSymbolPriceMonthly(symbol, from, to),
+    queryKey: ['symbolPriceMonthly', symbol, fromYear, toYear],
+    queryFn: () => {
+      if (!symbol || !from || !to) return [];
+      return getSymbolPriceMonthly(symbol, from, to);
+    },
   });
 
   const isDecember = (price: SymbolPriceInfo) => DateUtils.isDecember(price.date);

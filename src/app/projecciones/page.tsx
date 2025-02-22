@@ -48,8 +48,8 @@ const Projection = () => {
   const [symbol, setSymbol] = useState('');
   const [initialInvestment, setInitialInvestment] = useState(0);
   const [monthlyInjection, setMonthlyInjection] = useState(0);
-  const [from, setFrom] = useState<Date>(new Date('1990-01-01'));
-  const [to, setTo] = useState<Date>(new Date());
+  const [from, setFrom] = useState<Date | undefined>(undefined);
+  const [to, setTo] = useState<Date | undefined>(undefined);
   const [data, setData] = useState<InvestmentProjectionData[]>([]);
   const { isLoading, getAnnualPrices } = useSymbolPriceMonthly({
     symbol,
@@ -77,8 +77,8 @@ const Projection = () => {
     logger.debug('Annual prices:', getAnnualPrices);
     logger.debug('Initial investment:', initialInvestment);
     logger.debug('Monthly injection:', monthlyInjection);
-    logger.debug('From:', from.toISOString());
-    logger.debug('To:', to.toISOString());
+    logger.debug('From:', from?.toLocaleDateString());
+    logger.debug('To:', to?.toLocaleDateString());
     if (getAnnualPrices.length && initialInvestment && monthlyInjection) {
       logger.debug('Analyzing price variations');
       const data = analyzePriceVariations(getAnnualPrices, initialInvestment, monthlyInjection);
