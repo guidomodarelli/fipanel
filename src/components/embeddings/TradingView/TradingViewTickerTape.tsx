@@ -103,5 +103,9 @@ export const TradingViewTickerTape = () => {
     };
   }, []);
 
-  return <div ref={tradingviewTickerTapeRef} />;
+  return (
+    <div className='h-[44px]'>
+      <div ref={tradingviewTickerTapeRef} />
+    </div>
+  );
 };
