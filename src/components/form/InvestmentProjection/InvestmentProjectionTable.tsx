@@ -1,7 +1,15 @@
 import { formatCurrency } from '@/lib/number';
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
-import React, { useCallback } from 'react';
-import { InvestmentProjectionData } from './InvestmentProjectionData';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@heroui/react';
+import type React from 'react';
+import { useCallback } from 'react';
+import type { InvestmentProjectionData } from './InvestmentProjectionData';
 
 interface InvestmentProjectionTableColumn {
   name: string;
@@ -21,27 +29,32 @@ interface InvestmentProjectionTableProps {
   data: InvestmentProjectionData[];
 }
 
-const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ data = [] }) => {
-  const renderCell = useCallback((data: InvestmentProjectionData, columnKey: React.Key) => {
-    const cellValue = data[columnKey as keyof InvestmentProjectionData];
+const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({
+  data = [],
+}) => {
+  const renderCell = useCallback(
+    (data: InvestmentProjectionData, columnKey: React.Key) => {
+      const cellValue = data[columnKey as keyof InvestmentProjectionData];
 
-    switch (columnKey as InvestmentProjectionTableColumn['uid']) {
-      case 'year':
-        return data.year;
-      case 'price':
-        return '-';
-      case 'variation':
-        return '-';
-      case 'saved':
-        return formatCurrency(data.saved);
-      case 'invested':
-        return formatCurrency(data.invested);
-      case 'i+s':
-        return formatCurrency(data['I+S']);
-      default:
-        return cellValue;
-    }
-  }, []);
+      switch (columnKey as InvestmentProjectionTableColumn['uid']) {
+        case 'year':
+          return data.year;
+        case 'price':
+          return '-';
+        case 'variation':
+          return '-';
+        case 'saved':
+          return formatCurrency(data.saved);
+        case 'invested':
+          return formatCurrency(data.invested);
+        case 'i+s':
+          return formatCurrency(data['I+S']);
+        default:
+          return cellValue;
+      }
+    },
+    [],
+  );
 
   return (
     <Table
@@ -56,7 +69,9 @@ const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ d
       <TableBody items={data}>
         {(item) => (
           <TableRow key={item.key}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            {(columnKey) => (
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
+            )}
           </TableRow>
         )}
       </TableBody>

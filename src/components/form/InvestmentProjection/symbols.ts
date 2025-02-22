@@ -1,15 +1,17 @@
-import { AutocompleteItemType } from '@/typings/AutocompleteItemType';
+import type { AutocompleteItemType } from '@/typings/AutocompleteItemType';
 
 export const symbols: AutocompleteItemType[] = [
   {
     key: 'IBM',
     label: 'IBM',
-    description: 'IBM es una empresa multinacional de tecnología con sede en Armonk, Nueva York.',
+    description:
+      'IBM es una empresa multinacional de tecnología con sede en Armonk, Nueva York.',
   },
   {
     key: 'AAPL',
     label: 'AAPL',
-    description: 'Apple es una empresa multinacional de tecnología con sede en Cupertino, California.',
+    description:
+      'Apple es una empresa multinacional de tecnología con sede en Cupertino, California.',
   },
   {
     key: 'MSFT',
@@ -38,7 +40,8 @@ export const symbols: AutocompleteItemType[] = [
   {
     key: 'TSLA',
     label: 'TSLA',
-    description: 'Tesla, Inc. es una empresa multinacional de vehículos eléctricos y energía limpia.',
+    description:
+      'Tesla, Inc. es una empresa multinacional de vehículos eléctricos y energía limpia.',
   },
   {
     key: 'NFLX',

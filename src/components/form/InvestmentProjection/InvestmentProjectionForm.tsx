@@ -4,14 +4,16 @@ import { formatNumber } from '@/lib/number';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { InvestmentProjection, scheme } from './scheme';
+import { type InvestmentProjection, scheme } from './scheme';
 import { symbols } from './symbols';
 
 interface InvestmentProjectionFormProps {
   onSubmit: (values: InvestmentProjection) => void;
 }
 
-const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onSubmit: onSubmitHandler }) => {
+const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
+  onSubmit: onSubmitHandler,
+}) => {
   const form = useForm<InvestmentProjection>({
     resolver: zodResolver(scheme),
     defaultValues: {
@@ -28,10 +30,15 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
 
     // Normalize both strings so we can slice safely
     // take into account the ignorePunctuation option as well...
-    text = text.normalize('NFC').toLocaleLowerCase();
-    inputValue = inputValue.normalize('NFC').toLocaleLowerCase();
+    const normalizedText = text.normalize('NFC').toLocaleLowerCase();
+    const normalizaedInputValue = inputValue
+      .normalize('NFC')
+      .toLocaleLowerCase();
 
-    return text.slice(0, inputValue.length) === inputValue;
+    return (
+      normalizedText.slice(0, normalizaedInputValue.length) ===
+      normalizaedInputValue
+    );
   };
 
   function onSubmit(values: InvestmentProjection) {
@@ -40,8 +47,10 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
 
   const changeNumberHandler = (value: string) => {
     // Format the number value to remove the commas
-    const numberValue = Number(value.replace(/\./g, '').replace(/[^0-9,]/g, ''));
-    if (isNaN(numberValue)) {
+    const numberValue = Number(
+      value.replace(/\./g, '').replace(/[^0-9,]/g, ''),
+    );
+    if (Number.isNaN(numberValue)) {
       return undefined;
     }
     return numberValue;
@@ -49,7 +58,10 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 shrink-0 grow-0'>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='space-y-8 shrink-0 grow-0'
+      >
         <FormField
           control={form.control}
           name='yearsOfInvestment'
@@ -62,7 +74,9 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
                   labelPlacement='inside'
                   type='text'
                   {...field}
-                  onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
+                  onChange={(event) =>
+                    field.onChange(changeNumberHandler(event.target.value))
+                  }
                   value={field.value ? formatNumber(field.value) : ''}
                   isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
@@ -84,7 +98,9 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
                   type='text'
                   startContent={<DolarSignIcon />}
                   {...field}
-                  onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
+                  onChange={(event) =>
+                    field.onChange(changeNumberHandler(event.target.value))
+                  }
                   value={field.value ? formatNumber(field.value) : ''}
                   isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
@@ -106,7 +122,9 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
                   type='text'
                   startContent={<DolarSignIcon />}
                   {...field}
-                  onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
+                  onChange={(event) =>
+                    field.onChange(changeNumberHandler(event.target.value))
+                  }
                   value={field.value ? formatNumber(field.value) : ''}
                   isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
@@ -128,12 +146,18 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
                   defaultItems={symbols}
                   label='Escoge un símbolo'
                   {...field}
-                  onInputChange={(value) => field.onChange(value.length !== 0 ? value : undefined)}
+                  onInputChange={(value) =>
+                    field.onChange(value.length !== 0 ? value : undefined)
+                  }
                   value={field.value as unknown as string}
                   isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
                 >
-                  {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+                  {(item) => (
+                    <AutocompleteItem key={item.key}>
+                      {item.label}
+                    </AutocompleteItem>
+                  )}
                 </Autocomplete>
               </FormControl>
             </FormItem>
