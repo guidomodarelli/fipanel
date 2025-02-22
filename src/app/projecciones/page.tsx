@@ -5,7 +5,7 @@ import InvestmentProjectionTable from '@/components/form/InvestmentProjection/In
 import type { InvestmentProjection } from '@/components/form/InvestmentProjection/scheme';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import { useEffect, useState } from 'react';
-import { _logger } from '../setup';
+import { createLogger } from '../setup';
 
 function analyzePriceVariations(
   precios: number[],
@@ -44,7 +44,7 @@ function analyzePriceVariations(
 }
 
 const Projection = () => {
-  const logger = _logger.get('Projection');
+  const logger = createLogger(Projection.name);
   const [symbol, setSymbol] = useState('');
   const [initialInvestment, setInitialInvestment] = useState(0);
   const [monthlyInjection, setMonthlyInjection] = useState(0);
