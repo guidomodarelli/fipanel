@@ -1,37 +1,38 @@
 import type { Logger } from '../domain/Logger';
 
-export class ConsoleLogger implements Logger {
-  constructor(private _context?: string[]) {}
+const print =
+  (context: string[]) =>
+  (level: string, message: string, ...args: any[]) => {
+    const contextStr = context.length ? ` [${context.join(', ')}]` : '';
+    console.log(`[${level}]${contextStr} ${message}`, ...args);
+  };
 
-  private get context(): string {
-    return this._context?.join(', ') || '';
-  }
+export const ConsoleLogger = {
+  create: (context: string[] = []) => ({
+    context,
 
-  private print(level: string, message: string, ...args: any[]): void {
-    console.log(`[${level}]${this.context ? ` [${this.context}]` : ''} ${message}`, ...args);
-  }
+    log(message: string, ...args: any[]): void {
+      print(context)('LOG', message, ...args);
+    },
 
-  log(message: string, ...args: any[]): void {
-    this.print('LOG', message, ...args);
-  }
+    debug(message: string, ...args: any[]): void {
+      print(context)('DEBUG', message, ...args);
+    },
 
-  debug(message: string, ...args: any[]): void {
-    this.print('DEBUG', message, ...args);
-  }
+    info(message: string, ...args: any[]): void {
+      print(context)('INFO', message, ...args);
+    },
 
-  info(message: string, ...args: any[]): void {
-    this.print('INFO', message, ...args);
-  }
+    warn(message: string, ...args: any[]): void {
+      print(context)('WARN', message, ...args);
+    },
 
-  warn(message: string, ...args: any[]): void {
-    this.print('WARN', message, ...args);
-  }
+    error(message: string, ...args: any[]): void {
+      print(context)('ERROR', message, ...args);
+    },
 
-  error(message: string, ...args: any[]): void {
-    this.print('ERROR', message, ...args);
-  }
-
-  get(newContext: string): Logger {
-    return new ConsoleLogger([...(this._context || []), newContext]);
-  }
-}
+    get(newContext: string): Logger {
+      return ConsoleLogger.create([...context, newContext]);
+    },
+  }),
+} satisfies { create: (context?: string[]) => Logger };
