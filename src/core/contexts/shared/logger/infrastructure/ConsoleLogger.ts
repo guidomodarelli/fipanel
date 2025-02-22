@@ -7,24 +7,28 @@ export class ConsoleLogger implements Logger {
     return this._context?.join(', ') || '';
   }
 
+  private print(level: string, message: string, ...args: any[]): void {
+    console.log(`[ ${level} ]${this.context ? ` [${this.context}]` : ''} ${message}`, ...args);
+  }
+
   log(message: string, ...args: any[]): void {
-    console.log(`[${this.context}] ${message}`, ...args);
+    this.print('LOG', message, ...args);
   }
 
   debug(message: string, ...args: any[]): void {
-    console.debug(`[${this.context}] ${message}`, ...args);
+    this.print('DEBUG', message, ...args);
   }
 
   info(message: string, ...args: any[]): void {
-    console.info(`[${this.context}] ${message}`, ...args);
+    this.print('INFO', message, ...args);
   }
 
   warn(message: string, ...args: any[]): void {
-    console.warn(`[${this.context}] ${message}`, ...args);
+    this.print('WARN', message, ...args);
   }
 
   error(message: string, ...args: any[]): void {
-    console.error(`[${this.context}] ${message}`, ...args);
+    this.print('ERROR', message, ...args);
   }
 
   get(newContext: string): Logger {
