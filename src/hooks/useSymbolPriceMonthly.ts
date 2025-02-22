@@ -1,7 +1,6 @@
 import { getSymbolPriceMonthly } from '@/app/setup';
 import { DateUtils } from '@/lib/date';
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
 
 interface SymbolPriceMonthlyProps {
   symbol: string;
@@ -19,17 +18,17 @@ export const useSymbolPriceMonthly = ({
     queryFn: () => getSymbolPriceMonthly(symbol, from, to),
   });
 
-  const getAnnualPrices = useMemo(() => {
+  const getAnnualPrices = () => {
     return dataMonthly?.filter((price) => DateUtils.isDecember(price.date));
-  }, [dataMonthly]);
+  };
 
-  const getTheLastAnnualPrice = useMemo(() => {
-    return getAnnualPrices?.find((price) => DateUtils.isLastYear(price.date));
-  }, [getAnnualPrices]);
+  const getTheLastAnnualPrice = () => {
+    return getAnnualPrices()?.find((price) => DateUtils.isLastYear(price.date));
+  };
 
-  const getAnnualPriceArray = useMemo(() => {
-    return getAnnualPrices?.map((price) => price.close);
-  }, [dataMonthly]);
+  const getAnnualPriceArray = () => {
+    return getAnnualPrices()?.map((price) => price.close);
+  };
 
   return {
     dataMonthly,
