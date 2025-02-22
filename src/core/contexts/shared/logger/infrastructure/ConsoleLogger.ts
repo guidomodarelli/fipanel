@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import type { Logger } from '../domain/Logger';
+import { LoggerFactory } from '../domain/LoggerFactory';
 
 const print =
   (context: string[]) =>
@@ -9,7 +10,7 @@ const print =
     console.log(`[${chalk.gray(timestamp)}] [${level}]${contextStr} ${message}`, ...args);
   };
 
-export const ConsoleLogger = {
+export const ConsoleLogger: LoggerFactory = {
   create: (context: string[] = []) => ({
     context,
 
@@ -37,4 +38,4 @@ export const ConsoleLogger = {
       return ConsoleLogger.create([...context, newContext]);
     },
   }),
-} satisfies { create: (context?: string[]) => Logger };
+};

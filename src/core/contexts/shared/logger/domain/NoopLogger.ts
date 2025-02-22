@@ -1,4 +1,4 @@
-import type { Logger } from '../domain/Logger';
+import type { Logger } from './Logger';
 
 export const NoopLogger: Logger = {
   log: (message: string, ...args: any[]): void => {},
