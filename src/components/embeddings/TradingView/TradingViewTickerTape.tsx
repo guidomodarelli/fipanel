@@ -106,7 +106,7 @@ export const TradingViewTickerTape = () => {
   }, []);
 
   return (
-    <div className={`h-[${TICKER_TAPE_HEIGHT}px]`}>
+    <div style={{ height: TICKER_TAPE_HEIGHT }}>
       <div ref={tradingviewTickerTapeRef} />
     </div>
   );
