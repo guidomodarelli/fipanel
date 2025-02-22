@@ -13,10 +13,10 @@ import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsC
 import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
 import { LoggerFactory } from '@/core/contexts/shared/logger/domain/LoggerFactory';
-import { ConsoleLoggerFactory } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
+import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
-export const createLogger = LoggerFactory(ConsoleLoggerFactory);
+export const createLogger = LoggerFactory(new ConsoleLogger());
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);

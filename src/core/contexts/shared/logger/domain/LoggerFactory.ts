@@ -1,4 +1,5 @@
 import { Logger } from './Logger';
+import { LoggerDecorator } from './LoggerDecorator';
 import { Status } from './types';
 
 export type LoggerFactory = {
@@ -6,7 +7,7 @@ export type LoggerFactory = {
 };
 
 export const LoggerFactory =
-  (logger: LoggerFactory) =>
+  (logger: Logger) =>
   (initialContext: Function, status: Status): Logger => {
     if (typeof initialContext !== 'function') {
       throw new Error('initialContext must be a function');
@@ -14,5 +15,5 @@ export const LoggerFactory =
     if (initialContext.name === '') {
       throw new Error('initialContext must be a named function');
     }
-    return logger.create([initialContext.name], status);
+    return LoggerDecorator.create(logger.getLogger([initialContext.name]), status);
   };
