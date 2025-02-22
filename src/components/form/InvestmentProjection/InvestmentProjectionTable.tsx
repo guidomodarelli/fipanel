@@ -30,15 +30,15 @@ const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ d
       case 'year':
         return data.year;
       case 'price':
-        return '-';
+        return formatCurrency(data.price);
       case 'variation':
-        return '-';
+        return `${data.varPercent}%`;
       case 'saved':
         return formatCurrency(data.saved);
       case 'invested':
         return formatCurrency(data.invested);
       case 'i+s':
-        return formatCurrency(data['I+S']);
+        return formatCurrency(data.total);
       default:
         return cellValue;
     }
