@@ -47,6 +47,15 @@ function useSidebar() {
   return context;
 }
 
+// Add this helper function after the constants
+function getSidebarCookieState(defaultValue: boolean = true): boolean {
+  if (typeof window === 'undefined') return defaultValue;
+  const cookies = document.cookie.split(';');
+  const cookie = cookies.find(c => c.trim().startsWith(`${SIDEBAR_COOKIE_NAME}=`));
+  if (!cookie) return defaultValue;
+  return cookie.split('=')[1].trim() === 'true';
+}
+
 const SidebarProvider = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
@@ -88,6 +97,11 @@ const SidebarProvider = React.forwardRef<
       },
       [setOpenProp, open],
     );
+
+    React.useEffect(() => {
+      const cookieState = getSidebarCookieState(defaultOpen);
+      _setOpen(cookieState);
+    }, [defaultOpen]);
 
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
@@ -767,5 +781,6 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
-  useSidebar,
+  useSidebar
 };
+
