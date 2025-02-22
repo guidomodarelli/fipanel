@@ -8,8 +8,7 @@ const YEARS_LIMIT = 25;
 const UNIT_TYPE: UnitTypes = 'years';
 
 export const getSymbolPriceMonthlyUseCase =
-  (symbolProvider: SymbolProvider) =>
-  (symbol: string, from: Date, to: Date) => {
+  (symbolProvider: SymbolProvider) => (symbol: string, from: Date, to: Date) => {
     if (from >= to) {
       throw new DateRangeError();
     }

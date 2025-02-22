@@ -11,9 +11,7 @@ interface InvestmentProjectionFormProps {
   onSubmit: (values: InvestmentProjection) => void;
 }
 
-const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
-  onSubmit: onSubmitHandler,
-}) => {
+const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onSubmit: onSubmitHandler }) => {
   const form = useForm<InvestmentProjection>({
     resolver: zodResolver(scheme),
     defaultValues: {
@@ -31,14 +29,9 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
     // Normalize both strings so we can slice safely
     // take into account the ignorePunctuation option as well...
     const normalizedText = text.normalize('NFC').toLocaleLowerCase();
-    const normalizaedInputValue = inputValue
-      .normalize('NFC')
-      .toLocaleLowerCase();
+    const normalizaedInputValue = inputValue.normalize('NFC').toLocaleLowerCase();
 
-    return (
-      normalizedText.slice(0, normalizaedInputValue.length) ===
-      normalizaedInputValue
-    );
+    return normalizedText.slice(0, normalizaedInputValue.length) === normalizaedInputValue;
   };
 
   function onSubmit(values: InvestmentProjection) {
@@ -47,9 +40,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
 
   const changeNumberHandler = (value: string) => {
     // Format the number value to remove the commas
-    const numberValue = Number(
-      value.replace(/\./g, '').replace(/[^0-9,]/g, ''),
-    );
+    const numberValue = Number(value.replace(/\./g, '').replace(/[^0-9,]/g, ''));
     if (Number.isNaN(numberValue)) {
       return undefined;
     }
@@ -58,10 +49,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-8 shrink-0 grow-0'
-      >
+      <form className='space-y-8 shrink-0 grow-0' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name='yearsOfInvestment'
@@ -74,12 +62,10 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
                   labelPlacement='inside'
                   type='text'
                   {...field}
-                  onChange={(event) =>
-                    field.onChange(changeNumberHandler(event.target.value))
-                  }
-                  value={field.value ? formatNumber(field.value) : ''}
-                  isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
+                  isInvalid={!!fieldState.error}
+                  onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
+                  value={field.value ? formatNumber(field.value) : ''}
                 />
               </FormControl>
             </FormItem>
@@ -95,15 +81,13 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
                   className='max-w-sm'
                   label='Inversión inicial'
                   labelPlacement='inside'
-                  type='text'
                   startContent={<DolarSignIcon />}
+                  type='text'
                   {...field}
-                  onChange={(event) =>
-                    field.onChange(changeNumberHandler(event.target.value))
-                  }
-                  value={field.value ? formatNumber(field.value) : ''}
-                  isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
+                  isInvalid={!!fieldState.error}
+                  onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
+                  value={field.value ? formatNumber(field.value) : ''}
                 />
               </FormControl>
             </FormItem>
@@ -119,15 +103,13 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
                   className='max-w-sm'
                   label='Inyección Mensual'
                   labelPlacement='inside'
-                  type='text'
                   startContent={<DolarSignIcon />}
+                  type='text'
                   {...field}
-                  onChange={(event) =>
-                    field.onChange(changeNumberHandler(event.target.value))
-                  }
-                  value={field.value ? formatNumber(field.value) : ''}
-                  isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
+                  isInvalid={!!fieldState.error}
+                  onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
+                  value={field.value ? formatNumber(field.value) : ''}
                 />
               </FormControl>
             </FormItem>
@@ -146,24 +128,18 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({
                   defaultItems={symbols}
                   label='Escoge un símbolo'
                   {...field}
-                  onInputChange={(value) =>
-                    field.onChange(value.length !== 0 ? value : undefined)
-                  }
-                  value={field.value as unknown as string}
-                  isInvalid={!!fieldState.error}
                   errorMessage={fieldState.error?.message}
+                  isInvalid={!!fieldState.error}
+                  onInputChange={(value) => field.onChange(value.length !== 0 ? value : undefined)}
+                  value={field.value as unknown as string}
                 >
-                  {(item) => (
-                    <AutocompleteItem key={item.key}>
-                      {item.label}
-                    </AutocompleteItem>
-                  )}
+                  {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
                 </Autocomplete>
               </FormControl>
             </FormItem>
           )}
         />
-        <Button type='submit' className='mt-4' color='primary' variant='shadow'>
+        <Button className='mt-4' color='primary' type='submit' variant='shadow'>
           Calcular
         </Button>
       </form>

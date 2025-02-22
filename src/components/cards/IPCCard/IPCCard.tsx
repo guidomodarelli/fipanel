@@ -1,21 +1,7 @@
 'use client';
 import { SkeletonText } from '@/components/skeletons/SkeletonText';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { usePrimaryFinancialMetrics } from '@/hooks/usePrimaryFinancialMetrics';
 import { DateUtils } from '@/lib/date';
 
@@ -44,49 +30,23 @@ const IPCCard = () => {
               <TableCell>
                 Mensual <sup>(1)</sup>
               </TableCell>
-              <TableCell>
-                {IPC_MENSUAL !== undefined ? (
-                  <>{IPC_MENSUAL.value}%</>
-                ) : (
-                  <SkeletonText />
-                )}
-              </TableCell>
+              <TableCell>{IPC_MENSUAL !== undefined ? <>{IPC_MENSUAL.value}%</> : <SkeletonText />}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Interanual</TableCell>
-              <TableCell>
-                {IPC_INTERANUAL !== undefined ? (
-                  <>{IPC_INTERANUAL.value}%</>
-                ) : (
-                  <SkeletonText />
-                )}
-              </TableCell>
+              <TableCell>{IPC_INTERANUAL !== undefined ? <>{IPC_INTERANUAL.value}%</> : <SkeletonText />}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 REM <sup>(2)</sup>
               </TableCell>
-              <TableCell>
-                {IPC_REM !== undefined ? (
-                  <>{IPC_REM.value}%</>
-                ) : (
-                  <SkeletonText />
-                )}
-              </TableCell>
+              <TableCell>{IPC_REM !== undefined ? <>{IPC_REM.value}%</> : <SkeletonText />}</TableCell>
             </TableRow>
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell
-                className='text-xs font-normal text-muted-foreground'
-                colSpan={3}
-              >
-                Última actualización:{' '}
-                {IPC_REM ? (
-                  DateUtils.format(new Date(IPC_REM?.date))
-                ) : (
-                  <SkeletonText />
-                )}
+              <TableCell className='text-xs font-normal text-muted-foreground' colSpan={3}>
+                Última actualización: {IPC_REM ? DateUtils.format(new Date(IPC_REM?.date)) : <SkeletonText />}
               </TableCell>
             </TableRow>
           </TableFooter>

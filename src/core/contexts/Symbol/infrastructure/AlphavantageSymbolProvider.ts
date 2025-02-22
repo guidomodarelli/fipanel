@@ -11,12 +11,11 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
   }
 
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
-    const response =
-      await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
-          process.env.VITE_API_KEY_ALPHAVANTAGE
-        }`,
-      );
+    const response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
+      `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
+        process.env.VITE_API_KEY_ALPHAVANTAGE
+      }`,
+    );
 
     const monthlyTimeSeries = Object.entries(response['Monthly Time Series']);
 

@@ -12,9 +12,7 @@ const IPC_REM = 29;
 export class BCRAFinancialDataProvider implements FinancialDataProvider {
   constructor(private readonly httpService: HttpService) {}
 
-  private responseToVariables(
-    response: BCRAVariablesApiResponse,
-  ): VariableData[] {
+  private responseToVariables(response: BCRAVariablesApiResponse): VariableData[] {
     return response.results.map((variable) => {
       return {
         id: variable.idVariable,
@@ -32,13 +30,9 @@ export class BCRAFinancialDataProvider implements FinancialDataProvider {
     );
     const variables = this.responseToVariables(response);
     return {
-      TASA_POLITICA_MONETARIA: variables.find(
-        (variable) => variable.id === TASA_POLITICA_MONETARIA,
-      ),
+      TASA_POLITICA_MONETARIA: variables.find((variable) => variable.id === TASA_POLITICA_MONETARIA),
       IPC_MENSUAL: variables.find((variable) => variable.id === IPC_MENSUAL),
-      IPC_INTERANUAL: variables.find(
-        (variable) => variable.id === IPC_INTERANUAL,
-      ),
+      IPC_INTERANUAL: variables.find((variable) => variable.id === IPC_INTERANUAL),
       IPC_REM: variables.find((variable) => variable.id === IPC_REM),
     };
   }

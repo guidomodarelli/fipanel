@@ -1,12 +1,5 @@
 import { formatCurrency } from '@/lib/number';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from '@heroui/react';
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import type React from 'react';
 import { useCallback } from 'react';
 import type { InvestmentProjectionData } from './InvestmentProjectionData';
@@ -29,50 +22,36 @@ interface InvestmentProjectionTableProps {
   data: InvestmentProjectionData[];
 }
 
-const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({
-  data = [],
-}) => {
-  const renderCell = useCallback(
-    (data: InvestmentProjectionData, columnKey: React.Key) => {
-      const cellValue = data[columnKey as keyof InvestmentProjectionData];
+const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ data = [] }) => {
+  const renderCell = useCallback((data: InvestmentProjectionData, columnKey: React.Key) => {
+    const cellValue = data[columnKey as keyof InvestmentProjectionData];
 
-      switch (columnKey as InvestmentProjectionTableColumn['uid']) {
-        case 'year':
-          return data.year;
-        case 'price':
-          return '-';
-        case 'variation':
-          return '-';
-        case 'saved':
-          return formatCurrency(data.saved);
-        case 'invested':
-          return formatCurrency(data.invested);
-        case 'i+s':
-          return formatCurrency(data['I+S']);
-        default:
-          return cellValue;
-      }
-    },
-    [],
-  );
+    switch (columnKey as InvestmentProjectionTableColumn['uid']) {
+      case 'year':
+        return data.year;
+      case 'price':
+        return '-';
+      case 'variation':
+        return '-';
+      case 'saved':
+        return formatCurrency(data.saved);
+      case 'invested':
+        return formatCurrency(data.invested);
+      case 'i+s':
+        return formatCurrency(data['I+S']);
+      default:
+        return cellValue;
+    }
+  }, []);
 
   return (
-    <Table
-      aria-label='Investment Projections'
-      removeWrapper
-      isHeaderSticky
-      className='max-h-[25rem] overflow-y-auto'
-    >
+    <Table aria-label='Investment Projections' className='max-h-[25rem] overflow-y-auto' isHeaderSticky removeWrapper>
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
       <TableBody items={data}>
         {(item) => (
-          <TableRow key={item.key}>
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
-          </TableRow>
+          <TableRow key={item.key}>{(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>
         )}
       </TableBody>
     </Table>

@@ -6,8 +6,7 @@ export const TradingViewTimeline = () => {
   useEffect(() => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src =
-      'https://s3.tradingview.com/external-embedding/embed-widget-timeline.js';
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-timeline.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
       feedMode: 'market',

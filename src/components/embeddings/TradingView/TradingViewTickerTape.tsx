@@ -8,8 +8,7 @@ export const TradingViewTickerTape = () => {
   useEffect(() => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src =
-      'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
       symbols: [

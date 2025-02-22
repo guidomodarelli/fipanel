@@ -15,11 +15,7 @@ interface YearData {
   capitalInvertidoYAhorrado: number;
 }
 
-function analyzePriceVariations(
-  precios: number[],
-  capitalInicial: number,
-  inyeccionMensual: number,
-): YearData[] {
+function analyzePriceVariations(precios: number[], capitalInicial: number, inyeccionMensual: number): YearData[] {
   const datos: YearData[] = [];
   let capitalInvertido = capitalInicial;
   let capitalAhorrado = capitalInicial;
@@ -39,10 +35,10 @@ function analyzePriceVariations(
     datos.push({
       year,
       price: precios[i],
-      varPercent: parseFloat((varPercent * 100).toFixed(2)),
-      capitalInvertido: parseFloat(capitalInvertido.toFixed(2)),
-      capitalAhorrado: parseFloat(capitalAhorrado.toFixed(2)),
-      capitalInvertidoYAhorrado: parseFloat(capitalInvertidoYAhorrado.toFixed(2)),
+      varPercent: Number.parseFloat((varPercent * 100).toFixed(2)),
+      capitalInvertido: Number.parseFloat(capitalInvertido.toFixed(2)),
+      capitalAhorrado: Number.parseFloat(capitalAhorrado.toFixed(2)),
+      capitalInvertidoYAhorrado: Number.parseFloat(capitalInvertidoYAhorrado.toFixed(2)),
     });
   }
 

@@ -15,19 +15,14 @@ import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/Fet
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 
-export const caljs: (date?: Date) => Calendar = (date?: Date) =>
-  new DayjsCalendar(date);
+export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
 export const _logger: Logger = new ConsoleLogger();
 const httpService: HttpService = new FetchHttpService();
-const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(
-  httpService,
-);
+const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
 const symbolService: SymbolProvider = new MockSymbolProvider();
 
-export const getPrimaryFinancialMetrics =
-  getPrimaryFinancialMetricsUseCase(bcraService);
+export const getPrimaryFinancialMetrics = getPrimaryFinancialMetricsUseCase(bcraService);
 export const getDolarsPrices = getDolarsPricesUseCase(dolarService);
-export const getSymbolPriceMonthly =
-  getSymbolPriceMonthlyUseCase(symbolService);
+export const getSymbolPriceMonthly = getSymbolPriceMonthlyUseCase(symbolService);
 export const getSymbolPriceDaily = getSymbolPriceDailyUseCase(symbolService);

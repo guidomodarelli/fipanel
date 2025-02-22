@@ -1,10 +1,5 @@
 import { cn } from '@/lib/utils';
-import {
-  ChartBarIncreasingIcon,
-  FileChartColumnIncreasingIcon,
-  FilterIcon,
-  HomeIcon,
-} from 'lucide-react';
+import { ChartBarIncreasingIcon, FileChartColumnIncreasingIcon, FilterIcon, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '../logo/Logo';
 import {
@@ -116,9 +111,7 @@ export const AppSidebar = () => {
   };
 
   const renderItems = (items: (AppSidebarItem | AppSidebarGroup)[]) => {
-    return items.map((item) =>
-      isGroup(item) ? renderGroup(item) : renderItem(item),
-    );
+    return items.map((item) => (isGroup(item) ? renderGroup(item) : renderItem(item)));
   };
 
   return (
