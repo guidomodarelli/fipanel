@@ -12,11 +12,11 @@ import type { Calendar } from '@/core/contexts/shared/date/domain/Calendar';
 import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsCalendar';
 import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
-import { createLoggerUseCase } from '@/core/contexts/shared/logger/application/createLoggerUseCase';
+import { LoggerFactory } from '@/core/contexts/shared/logger/domain/LoggerFactory';
 import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
-export const createLogger = createLoggerUseCase(ConsoleLogger);
+export const createLogger = LoggerFactory(ConsoleLogger);
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
