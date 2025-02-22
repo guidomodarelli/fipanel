@@ -16,18 +16,14 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
 
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     let response: AlphaVantageSymbolMonthlyPriceResponse;
-    try {
+    if (process.env.NODE_ENV === 'development') {
+      response = await this.getExampleResponse();
+    } else {
       response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
         `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
           process.env.VITE_API_KEY_ALPHAVANTAGE
         }`,
       );
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        response = await this.getExampleResponse();
-      } else {
-        throw error;
-      }
     }
 
     return this.transformMonthlyTimeSeriesResponse(response);
