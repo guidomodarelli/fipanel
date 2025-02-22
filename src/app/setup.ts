@@ -16,14 +16,14 @@ import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/Cons
 import { NoopLogger } from '@/core/contexts/shared/logger/infrastructure/NoopLogger';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
-export const createLogger = (context: string, status: 'enabled' | 'disabled') => {
-  return status === 'enabled' ? ConsoleLogger.create([context]) : NoopLogger;
+export const createLogger = (InitialContext: Function, status: 'enabled' | 'disabled') => {
+  return status === 'enabled' ? ConsoleLogger.create([InitialContext.name]) : NoopLogger;
 };
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
 const symbolService: SymbolProvider = new AlphavantageSymbolProvider(
-  createLogger('AlphavantageSymbolProvider', 'disabled'),
+  createLogger(AlphavantageSymbolProvider, 'disabled'),
   httpService,
 );
 
