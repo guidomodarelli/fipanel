@@ -1,4 +1,5 @@
 'use client';
+import { InvestmentProjectionData } from '@/components/form/InvestmentProjection/InvestmentProjectionData';
 import InvestmentProjectionForm from '@/components/form/InvestmentProjection/InvestmentProjectionForm';
 import InvestmentProjectionTable from '@/components/form/InvestmentProjection/InvestmentProjectionTable';
 import type { InvestmentProjection } from '@/components/form/InvestmentProjection/scheme';
@@ -6,17 +7,12 @@ import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import { useEffect, useState } from 'react';
 import { _logger } from '../setup';
 
-interface YearData {
-  year: number;
-  price: number;
-  varPercent: number;
-  capitalInvertido: number;
-  capitalAhorrado: number;
-  capitalInvertidoYAhorrado: number;
-}
-
-function analyzePriceVariations(precios: number[], capitalInicial: number, inyeccionMensual: number): YearData[] {
-  const datos: YearData[] = [];
+function analyzePriceVariations(
+  precios: number[],
+  capitalInicial: number,
+  inyeccionMensual: number,
+): InvestmentProjectionData[] {
+  const datos: InvestmentProjectionData[] = [];
   let capitalInvertido = capitalInicial;
   let capitalAhorrado = capitalInicial;
   let capitalInvertidoYAhorrado = capitalInicial;
@@ -34,12 +30,13 @@ function analyzePriceVariations(precios: number[], capitalInicial: number, inyec
       i === 0 ? capitalInicial : (capitalInvertidoYAhorrado + inyeccionMensual) * (1 + varPercent);
 
     datos.push({
+      key: i,
       year,
       price: precios[i],
       varPercent: Number.parseFloat((varPercent * 100).toFixed(2)),
-      capitalInvertido: Number.parseFloat(capitalInvertido.toFixed(2)),
-      capitalAhorrado: Number.parseFloat(capitalAhorrado.toFixed(2)),
-      capitalInvertidoYAhorrado: Number.parseFloat(capitalInvertidoYAhorrado.toFixed(2)),
+      invested: Number.parseFloat(capitalInvertido.toFixed(2)),
+      saved: Number.parseFloat(capitalAhorrado.toFixed(2)),
+      total: Number.parseFloat(capitalInvertidoYAhorrado.toFixed(2)),
     });
   }
 
@@ -53,7 +50,7 @@ const Projection = () => {
   const [monthlyInjection, setMonthlyInjection] = useState(0);
   const [from, setFrom] = useState<Date>(new Date('1990-01-01'));
   const [to, setTo] = useState<Date>(new Date());
-  const [data, setData] = useState<YearData[]>([]);
+  const [data, setData] = useState<InvestmentProjectionData[]>([]);
   const { isLoading, getAnnualPrices } = useSymbolPriceMonthly({
     symbol,
     from,
@@ -86,7 +83,7 @@ const Projection = () => {
   return (
     <div className='flex gap-8'>
       <InvestmentProjectionForm onSubmit={handleSubmit} />
-      <InvestmentProjectionTable data={[]} />
+      <InvestmentProjectionTable data={data} />
     </div>
   );
 };
