@@ -58,11 +58,10 @@ const Projection = () => {
   });
 
   const handleSubmit = (values: InvestmentProjection) => {
-    logger.debug('Investment projection for symbol:', values.symbol);
-    logger.debug('Investment projection for', values.yearsOfInvestment, 'years');
-    logger.debug('Investment projection with initial investment:', values.initialInvestment);
-    logger.debug('Investment projection with monthly injection:', values.monthlyInjection);
-    // set from and to dates using values.yearsOfInvestment
+    logger.debug('Symbol:', values.symbol);
+    logger.debug('Years of investment:', values.yearsOfInvestment, 'years');
+    logger.debug('Initial investment:', values.initialInvestment);
+    logger.debug('Monthly injection:', values.monthlyInjection);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const from = new Date(today.getFullYear() - values.yearsOfInvestment, 0, 1);
