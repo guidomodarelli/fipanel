@@ -1,29 +1,131 @@
-'use client';
-import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
-import { AppSidebar } from './AppSidebar';
+import { cn } from '@/lib/utils';
+import { ChartBarIncreasingIcon, FileChartColumnIncreasingIcon, FilterIcon, HomeIcon } from 'lucide-react';
+import Link from 'next/link';
+import { Logo } from '../logo/Logo';
+import {
+  Sidebar as SidebarBase,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from '../ui/sidebar';
 
-const SIDEBAR_TRIGGER_HEIGHT_DEFAULT = '1.75rem';
-const SIDEBAR_TRIGGER_PADDING_TOP = '0.5rem';
-const SIDEBAR_TRIGGER_PADDING_BOTTOM = '1.25rem';
-export const SIDEBAR_TRIGGER_HEIGHT = `${SIDEBAR_TRIGGER_HEIGHT_DEFAULT} - ${SIDEBAR_TRIGGER_PADDING_TOP} - ${SIDEBAR_TRIGGER_PADDING_BOTTOM}`;
+interface AppSidebarBase {
+  key: string;
+  label: string;
+  icon?: () => React.ReactNode;
+}
 
-interface SidebarProps extends React.PropsWithChildren {}
+interface AppSidebarItem extends AppSidebarBase {
+  link: string;
+}
 
-export const Sidebar = ({ children }: SidebarProps) => {
+interface AppSidebarGroup extends AppSidebarBase {
+  children: (AppSidebarItem | AppSidebarGroup)[];
+}
+
+const isGroup = (item: AppSidebarBase): item is AppSidebarGroup => {
+  return (item as AppSidebarGroup).children !== undefined;
+};
+
+const items: AppSidebarGroup[] = [
+  {
+    key: 'explore',
+    label: 'Explorar',
+    children: [
+      {
+        key: 'home',
+        label: 'Inicio',
+        link: '/',
+        icon: () => <HomeIcon />,
+      },
+      {
+        key: 'capital-markets',
+        label: 'Capitalización de Mercados',
+        link: '/capital-markets',
+      },
+      {
+        key: 'analysis',
+        label: 'Analizador Empresarial',
+        link: '/analysis',
+        icon: () => <FileChartColumnIncreasingIcon />,
+      },
+      {
+        key: 'projection',
+        label: 'Proyección de Inversiones',
+        link: '/projecciones',
+        icon: () => <ChartBarIncreasingIcon />,
+      },
+    ],
+  },
+  {
+    key: 'screeners',
+    label: 'Screeners',
+    children: [
+      {
+        key: 'screener-international',
+        label: 'Screener Internacional',
+        link: '/screener/international',
+        icon: () => <FilterIcon />,
+      },
+      {
+        key: 'screener-argentina',
+        label: 'Screener Argentina',
+        link: '/screener/argentina',
+        icon: () => <FilterIcon />,
+      },
+    ],
+  },
+];
+
+export const Sidebar = () => {
+  const { open } = useSidebar();
+
+  const renderGroup = (group: AppSidebarGroup) => {
+    return (
+      <SidebarGroup key={group.key}>
+        <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>{renderItems(group.children)}</SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    );
+  };
+
+  const renderItem = (item: AppSidebarItem) => {
+    return (
+      <SidebarMenuItem key={item.key}>
+        <SidebarMenuButton asChild>
+          <Link href={item.link}>
+            {item.icon?.()}
+            <span>{item.label}</span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  };
+
+  const renderItems = (items: (AppSidebarItem | AppSidebarGroup)[]) => {
+    return items.map((item) => (isGroup(item) ? renderGroup(item) : renderItem(item)));
+  };
+
   return (
-    <SidebarProvider defaultOpen={true}>
-      <AppSidebar />
-      <main className='grow'>
-        <div
-          style={{
-            paddingTop: SIDEBAR_TRIGGER_PADDING_TOP,
-            paddingBottom: SIDEBAR_TRIGGER_PADDING_BOTTOM,
-          }}
+    <SidebarBase collapsible='icon'>
+      <SidebarHeader>
+        <SidebarContent
+          className={cn('flex flex-row', {
+            'justify-center': !open,
+          })}
         >
-          <SidebarTrigger />
-        </div>
-        {children}
-      </main>
-    </SidebarProvider>
+          {open ? <Logo long /> : <Logo />}
+        </SidebarContent>
+      </SidebarHeader>
+      {renderItems(items)}
+    </SidebarBase>
   );
 };

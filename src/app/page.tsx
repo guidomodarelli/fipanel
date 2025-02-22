@@ -1,7 +1,7 @@
 import DolarCard from '@/components/cards/DolarCard/DolarCard';
 import IPCCard from '@/components/cards/IPCCard/IPCCard';
 import InterestRateCard from '@/components/cards/InterestRateCard/InterestRateCard';
-import { SIDEBAR_TRIGGER_HEIGHT } from '@/components/sidebar/Sidebar';
+import { SIDEBAR_TRIGGER_HEIGHT } from '@/components/sidebar/SidebarLayout';
 
 export default function Home() {
   return (

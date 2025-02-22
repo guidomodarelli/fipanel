@@ -1,5 +1,5 @@
 import { TradingViewTickerTape } from '@/components/embeddings/TradingView/TradingViewTickerTape';
-import { Sidebar } from '@/components/sidebar/Sidebar';
+import { SidebarLayout } from '@/components/sidebar/SidebarLayout';
 import Providers from '@/providers/Providers';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -32,7 +32,7 @@ export default function RootLayout({
         <Providers>
           <TradingViewTickerTape />
           <div className='px-8'>
-            <Sidebar>{children}</Sidebar>
+            <SidebarLayout>{children}</SidebarLayout>
           </div>
         </Providers>
       </body>
