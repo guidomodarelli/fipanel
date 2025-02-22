@@ -1,4 +1,5 @@
 'use client';
+import { TradingViewTickerTape } from '../embeddings/TradingView/TradingViewTickerTape';
 import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 import { Sidebar } from './Sidebar';
 
@@ -13,17 +14,20 @@ export const SidebarLayout = ({ children }: SidebarProps) => {
   return (
     <SidebarProvider defaultOpen={true}>
       <Sidebar />
-      <main className='grow'>
-        <div
-          style={{
-            paddingTop: SIDEBAR_TRIGGER_PADDING_TOP,
-            paddingBottom: SIDEBAR_TRIGGER_PADDING_BOTTOM,
-          }}
-        >
-          <SidebarTrigger />
-        </div>
-        {children}
-      </main>
+      <div className='flex flex-col min-h-screen grow'>
+        <TradingViewTickerTape />
+        <main className='px-8 grow'>
+          <div
+            style={{
+              paddingTop: SIDEBAR_TRIGGER_PADDING_TOP,
+              paddingBottom: SIDEBAR_TRIGGER_PADDING_BOTTOM,
+            }}
+          >
+            <SidebarTrigger />
+          </div>
+          {children}
+        </main>
+      </div>
     </SidebarProvider>
   );
 };

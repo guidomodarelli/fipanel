@@ -1,4 +1,3 @@
-import { TradingViewTickerTape } from '@/components/embeddings/TradingView/TradingViewTickerTape';
 import { SidebarLayout } from '@/components/sidebar/SidebarLayout';
 import Providers from '@/providers/Providers';
 import type { Metadata } from 'next';
@@ -30,10 +29,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <TradingViewTickerTape />
-          <div className='px-8'>
-            <SidebarLayout>{children}</SidebarLayout>
-          </div>
+          <SidebarLayout>{children}</SidebarLayout>
         </Providers>
       </body>
     </html>
