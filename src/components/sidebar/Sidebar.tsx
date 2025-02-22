@@ -15,7 +15,10 @@ export const Sidebar = ({ children }: SidebarProps) => {
       <AppSidebar />
       <main className='grow'>
         <div
-          style={{ paddingTop: SIDEBAR_TRIGGER_PADDING_TOP, paddingBottom: SIDEBAR_TRIGGER_PADDING_BOTTOM }}
+          style={{
+            paddingTop: SIDEBAR_TRIGGER_PADDING_TOP,
+            paddingBottom: SIDEBAR_TRIGGER_PADDING_BOTTOM,
+          }}
         >
           <SidebarTrigger />
         </div>
