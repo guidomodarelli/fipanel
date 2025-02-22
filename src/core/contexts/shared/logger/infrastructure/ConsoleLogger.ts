@@ -12,13 +12,10 @@ const print =
   };
 
 class ConsoleLogger implements Logger {
-  private context: string[];
-  private status: Status;
-
-  constructor(context: string[], status: Status = 'enabled') {
-    this.context = context;
-    this.status = status;
-  }
+  constructor(
+    private context: string[],
+    private status: Status = 'enabled',
+  ) {}
 
   log(message: string, ...args: any[]): void {
     if (this.status === 'disabled') return;
