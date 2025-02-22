@@ -1,5 +1,6 @@
 import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import { formatNumber } from '@/lib/number';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,10 +17,11 @@ const DEBUG_VALUES = {
 } as const;
 
 interface InvestmentProjectionFormProps {
+  logger?: Logger;
   onSubmit: (values: InvestmentProjection) => void;
 }
 
-const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onSubmit: onSubmitHandler }) => {
+const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ logger, onSubmit: onSubmitHandler }) => {
   const form = useForm<InvestmentProjection>({
     resolver: zodResolver(scheme),
     defaultValues: {
@@ -44,6 +46,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ onS
   };
 
   function onSubmit(values: InvestmentProjection) {
+    logger?.debug('Submitting form with values:', values);
     onSubmitHandler(values);
   }
 
