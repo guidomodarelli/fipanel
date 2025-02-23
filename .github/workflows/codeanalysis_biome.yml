@@ -32,7 +32,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install Biome
-        run: curl -fsSL https://bun.sh/install | sh
+        uses: oven-sh/setup-bun@v2
 
       - name: Verify all files
         run: |
