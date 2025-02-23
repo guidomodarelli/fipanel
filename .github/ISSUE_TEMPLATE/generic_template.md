@@ -1,7 +1,7 @@
 ---
 name: Issue genérico
 about: Plantilla genérica para crear issues
-title: ""
+title: "[Bug|Feature|Docs|Refactor|Improvement|Question]: "
 labels: ''
 assignees: ''
 ---
