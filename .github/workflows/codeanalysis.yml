@@ -17,8 +17,8 @@ on:
       - main
 
 jobs:
-  setup:
-    name: Common setup and checks
+  check:
+    name: Check code
     runs-on: ubuntu-latest
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
@@ -64,48 +64,6 @@ jobs:
           echo "Installing dependencies"
           bun install
 
-      - name: Upload bun dependencies
-        uses: actions/upload-artifact@v4
-        with:
-          name: bun-deps
-          path: node_modules/
+      - name: Run Biome check
+        run: bun check
 
-  linter:
-    needs: setup
-    name: Run linter checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Biome
-        uses: oven-sh/setup-bun@v2
-
-      - name: Download bun dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: bun-deps
-          path: node_modules/
-
-      - name: Run Biome linter
-        run: bun lint
-
-  formatter:
-    needs: setup
-    name: Run formatter checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Biome
-        uses: oven-sh/setup-bun@v2
-
-      - name: Download bun dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: bun-deps
-          path: node_modules/
-
-      - name: Run Biome formatter
-        run: bun format
