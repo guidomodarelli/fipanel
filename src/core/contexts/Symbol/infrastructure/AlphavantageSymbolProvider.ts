@@ -4,6 +4,11 @@ import type { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import type { SymbolProvider } from '../domain/SymbolProvider';
 import type { AlphaVantageSymbolMonthlyPriceResponse } from './AlphaVantageSymbolMonthlyPriceResponse';
 
+const BASE_URL = 'https://www.alphavantage.co';
+enum AlphavantageFunction {
+  TIME_SERIES_MONTHLY = 'TIME_SERIES_MONTHLY',
+}
+
 export class AlphavantageSymbolProvider implements SymbolProvider {
   constructor(
     private readonly logger: Logger,
@@ -18,6 +23,12 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
     return (await import('./AlphavantageExampleResponse')).default;
   }
 
+  async get(path: string): Promise<AlphaVantageSymbolMonthlyPriceResponse> {
+    return this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
+      `${BASE_URL}${path}&apikey=${process.env.API_KEY_ALPHAVANTAGE}`,
+    );
+  }
+
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     let response: AlphaVantageSymbolMonthlyPriceResponse;
     this.logger.debug('Getting monthly prices for symbol:', symbol);
@@ -26,11 +37,7 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
       response = await this.getExampleResponse();
     } else {
       this.logger.debug('Using Alphavantage API');
-      response = await this.httpService.get<AlphaVantageSymbolMonthlyPriceResponse>(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${
-          process.env.VITE_API_KEY_ALPHAVANTAGE
-        }`,
-      );
+      response = await this.get(`/query?function=${AlphavantageFunction.TIME_SERIES_MONTHLY}&symbol=${symbol}`);
     }
 
     return this.transformMonthlyTimeSeriesResponse(response);
