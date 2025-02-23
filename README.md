@@ -91,7 +91,7 @@ También puedes ejecutar el linter y el formateo de código desde Docker usando 
 
 ---
 
-## Ejecución en el Host
+## Ejecución en el Host (Obviar si se utiliza Docker)
 
 Si prefieres ejecutar el proyecto directamente en tu máquina sin Docker, sigue los pasos a continuación.
 
