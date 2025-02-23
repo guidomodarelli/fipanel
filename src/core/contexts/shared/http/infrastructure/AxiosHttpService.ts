@@ -17,6 +17,11 @@ export class AxiosHttpService implements HttpService {
     return response.data;
   }
 
+  async patch<T = any, D = any>(url: string, data: D): Promise<T> {
+    const response = await axios.patch(url, data);
+    return response.data;
+  }
+
   async delete(url: string): Promise<any> {
     const response = await axios.delete(url);
     return response.data;
