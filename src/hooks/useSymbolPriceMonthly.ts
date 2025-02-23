@@ -22,15 +22,15 @@ export const useSymbolPriceMonthly = ({ symbol, from, to }: SymbolPriceMonthlyPr
     },
   });
 
-  const isDecember = (price: SymbolPriceInfo) => DateUtils.isDecember(price.date);
+  const isDecember = useCallback((price: SymbolPriceInfo) => DateUtils.isDecember(price.date), []);
 
-  const isLastYear = (price: SymbolPriceInfo) => DateUtils.isLastYear(price.date);
+  const isLastYear = useCallback((price: SymbolPriceInfo) => DateUtils.isLastYear(price.date), []);
 
-  const getAnnualPrices = useMemo(() => dataMonthly?.filter(isDecember) ?? [], [dataMonthly, symbol, from, to]);
+  const getAnnualPrices = useMemo(() => dataMonthly?.filter(isDecember) ?? [], [dataMonthly, isDecember]);
 
   const getTheLastAnnualPrice = useCallback(
     (): SymbolPriceInfo | undefined => getAnnualPrices.find(isLastYear),
-    [getAnnualPrices],
+    [getAnnualPrices, isLastYear],
   );
 
   const annualClosePriceArray = useMemo((): number[] => getAnnualPrices.map((price) => price.close), [getAnnualPrices]);
