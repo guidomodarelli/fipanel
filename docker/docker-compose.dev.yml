@@ -1,12 +1,28 @@
+x-volumes: &volumes
+  volumes:
+    - ..:/app
+
+x-build: &build
+  build:
+    context: ..
+    dockerfile: ./docker/Dockerfile.dev
+
 services:
   dev:
-    build:
-      context: ..
-      dockerfile: ./docker/Dockerfile.dev
+    <<: [*build, *volumes]
     ports:
       - "3000:3000"
-    volumes:
-      - ..:/app
     environment:
       - NODE_ENV=development
     command: bun dev
+    profiles: ["dev"]
+
+  linter:
+    <<: [*build, *volumes]
+    command: bun lint:fix
+    profiles: ["tools"]
+
+  format:
+    <<: [*build, *volumes]
+    command: bun format:fix
+    profiles: ["tools"]
