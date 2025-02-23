@@ -139,12 +139,15 @@ export const Sidebar = () => {
     <SidebarBase collapsible='icon'>
       <SidebarHeader>
         <SidebarContent
-          className={cn('flex flex-row', {
-            'justify-center': !showLongLogo && !isSidebarOpening && !isSidebarClosing,
-            'ml-1': isSidebarOpening,
-          })}
+          className={cn(
+            'flex flex-row',
+            !isMobile && {
+              'justify-center': !showLongLogo && !isSidebarOpening && !isSidebarClosing,
+              'ml-1': isSidebarOpening,
+            },
+          )}
         >
-          {showLongLogo ? <Logo long /> : <Logo />}
+          {isMobile || showLongLogo ? <Logo long /> : <Logo />}
         </SidebarContent>
       </SidebarHeader>
       {renderItems(items)}
