@@ -5,7 +5,7 @@
 - [nvm](https://github.com/nvm-sh/nvm) (recomendado para gestionar la versión de
   Node.js). Puedes instalar nvm siguiendo las instrucciones en su
   [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
-- [bun](https://bun.sh). Puedes instalar bun ejecutando el siguiente comando:
+- [bun](https://bun.sh). Puedes instalar `bun` ejecutando el siguiente comando:
 
   Linux:
 
