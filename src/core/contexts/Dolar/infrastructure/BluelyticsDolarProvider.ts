@@ -4,6 +4,8 @@ import type { DolarProvider } from '../domain/DolarProvider';
 import type { FinancialValues } from '../domain/FinancialValues';
 import type { BluelyticsMoneyResponse } from './BluelyticsMoneyResponse';
 
+const BASE_URL = 'https://api.bluelytics.com.ar/v2';
+
 export class BluelyticsDolarProvider implements DolarProvider {
   constructor(private readonly httpService: HttpService) {}
 
@@ -15,8 +17,12 @@ export class BluelyticsDolarProvider implements DolarProvider {
     };
   }
 
+  async get(path: string) {
+    return this.httpService.get(`${BASE_URL}${path}`);
+  }
+
   async getDolarPrices(): Promise<DolarPriceMap> {
-    const response = await this.httpService.get('https://api.bluelytics.com.ar/v2/latest');
+    const response = await this.get('/latest');
     return {
       oficial: this.responseToDolars(response.oficial),
       blue: this.responseToDolars(response.blue),
