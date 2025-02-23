@@ -1,6 +1,6 @@
-import type { HttpService } from '../../shared/http/domain/HttpService';
-import type { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
-import type { SymbolProvider } from '../domain/SymbolProvider';
+import type { HttpService } from '../../../shared/http/domain/HttpService';
+import type { SymbolPriceInfo } from '../../domain/SymbolPriceInfo';
+import type { SymbolProvider } from '../../domain/SymbolProvider';
 import type { FinhubSymbolProviderResponse } from './FinhubSymbolProviderResponse';
 
 export class FinhubSymbolProvider implements SymbolProvider {

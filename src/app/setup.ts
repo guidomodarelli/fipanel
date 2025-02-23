@@ -7,7 +7,7 @@ import { BCRAFinancialDataProvider } from '@/core/contexts/Metrics/infrastructur
 import { getSymbolPriceDailyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceDailyUseCase';
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import type { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
-import { AlphavantageSymbolProvider } from '@/core/contexts/Symbol/infrastructure/AlphavantageSymbolProvider';
+import { AlphavantageSymbolProvider } from '@/core/contexts/Symbol/infrastructure/Alphavantage/AlphavantageSymbolProvider';
 import type { Calendar } from '@/core/contexts/shared/date/domain/Calendar';
 import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsCalendar';
 import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService';

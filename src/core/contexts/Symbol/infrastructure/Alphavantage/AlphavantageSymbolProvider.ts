@@ -1,7 +1,7 @@
-import type { HttpService } from '../../shared/http/domain/HttpService';
-import { Logger } from '../../shared/logger/domain/Logger';
-import type { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
-import type { SymbolProvider } from '../domain/SymbolProvider';
+import type { HttpService } from '../../../shared/http/domain/HttpService';
+import { Logger } from '../../../shared/logger/domain/Logger';
+import type { SymbolPriceInfo } from '../../domain/SymbolPriceInfo';
+import type { SymbolProvider } from '../../domain/SymbolProvider';
 import type { AlphaVantageSymbolMonthlyPriceResponse } from './AlphaVantageSymbolMonthlyPriceResponse';
 
 const BASE_URL = 'https://www.alphavantage.co';
