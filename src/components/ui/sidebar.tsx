@@ -78,7 +78,7 @@ const SidebarProvider = React.forwardRef<
       }
 
       // This sets the cookie to keep the sidebar state.
-      cookieStore?.set?.({
+      globalThis?.cookieStore?.set?.({
         name: SIDEBAR_COOKIE_NAME,
         value: String(openState),
         path: '/',
