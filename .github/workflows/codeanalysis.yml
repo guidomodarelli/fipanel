@@ -64,11 +64,29 @@ jobs:
           echo "Installing dependencies"
           bun install
 
+      - name: Upload bun dependencies
+        uses: actions/upload-artifact@v4
+        with:
+          name: bun-deps
+          path: node_modules/
+
   linter:
     needs: setup
     name: Run linter checks
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Biome
+        uses: oven-sh/setup-bun@v2
+
+      - name: Download bun dependencies
+        uses: actions/download-artifact@v4
+        with:
+          name: bun-deps
+          path: node_modules/
+
       - name: Run Biome linter
         run: bun lint
 
@@ -77,5 +95,17 @@ jobs:
     name: Run formatter checks
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Biome
+        uses: oven-sh/setup-bun@v2
+
+      - name: Download bun dependencies
+        uses: actions/download-artifact@v4
+        with:
+          name: bun-deps
+          path: node_modules/
+
       - name: Run Biome formatter
         run: bun format
