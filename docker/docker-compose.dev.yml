@@ -29,3 +29,9 @@ services:
     <<: [*build, *volumes]
     command: bun format:fix
     profiles: ["check"]
+
+  check:
+    tty: true
+    <<: [*build, *volumes]
+    command: bun check:fix
+    profiles: ["check"]
