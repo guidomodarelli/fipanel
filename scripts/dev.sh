@@ -37,7 +37,7 @@ function build() {
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
-    docker_compose_dev up --renew-anon-volumes
+    docker_compose_dev up --no-recreate --no-log-prefix
 }
 
 # Función para detener y eliminar los servicios
