@@ -8,7 +8,7 @@ const BASE_URL = 'https://finnhub.io/api/v1';
 export class FinhubSymbolProvider implements SymbolProvider {
   constructor(private readonly httpService: HttpService) {}
 
-  getSymbolPriceDaily(symbol: string): Promise<SymbolPriceInfo[]> {
+  getSymbolPriceDaily(_symbol: string): Promise<SymbolPriceInfo[]> {
     throw new Error('Method not implemented.');
   }
 

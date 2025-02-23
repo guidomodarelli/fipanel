@@ -2,10 +2,10 @@ import type { Logger } from './Logger';
 import { Status } from './types';
 
 export const NoopLogger: () => Logger = () => ({
-  log: (message: string, ...args: any[]): void => {},
-  debug: (message: string, ...args: any[]): void => {},
-  info: (message: string, ...args: any[]): void => {},
-  warn: (message: string, ...args: any[]): void => {},
-  error: (message: string, ...args: any[]): void => {},
-  getLogger: (newContext: string[], status: Status): Logger => NoopLogger(),
+  log: (_message: string, ..._args: any[]): void => {},
+  debug: (_message: string, ..._args: any[]): void => {},
+  info: (_message: string, ..._args: any[]): void => {},
+  warn: (_message: string, ..._args: any[]): void => {},
+  error: (_message: string, ..._args: any[]): void => {},
+  getLogger: (_newContext: string[], _status: Status): Logger => NoopLogger(),
 });

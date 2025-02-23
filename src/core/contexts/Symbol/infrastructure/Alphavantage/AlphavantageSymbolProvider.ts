@@ -15,7 +15,7 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
     private readonly httpService: HttpService,
   ) {}
 
-  getSymbolPriceDaily(symbol: string): Promise<SymbolPriceInfo[]> {
+  getSymbolPriceDaily(_symbol: string): Promise<SymbolPriceInfo[]> {
     throw new Error('Method not implemented.');
   }
 
