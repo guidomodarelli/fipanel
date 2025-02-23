@@ -32,7 +32,7 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     let response: AlphaVantageSymbolMonthlyPriceResponse;
     this.logger.debug('Getting monthly prices for symbol:', symbol);
-    if (process.env.NODE_ENV === 'development') {
+    if (true || process.env.NODE_ENV === 'development') {
       this.logger.debug('Using example response');
       response = await this.getExampleResponse();
     } else {
