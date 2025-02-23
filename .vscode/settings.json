@@ -1,9 +1,6 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "biomejs.biome",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "always"
-  },
   "files.autoSave": "onFocusChange",
   "biome.enabled": true,
   "[typescript]": {
