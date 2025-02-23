@@ -8,7 +8,7 @@ DOCKER_COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.dev.yml"
 
 # Función para mostrar cómo usar el script
 function usage() {
-    echo "Uso: $0 {up|down|start|stop|restart|lint|format|check}"
+    echo "Uso: $0 {build|up|down|start|stop|restart|lint|format|check}"
     exit 1
 }
 
@@ -28,10 +28,16 @@ function docker_compose_dev() {
     docker_compose --profile dev "$@"
 }
 
+# Función para buildear la imagen de desarrollo
+function build() {
+    echo "Construyendo la imagen de desarrollo..."
+    docker_compose_dev build
+}
+
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
-    docker_compose_dev up --renew-anon-volumes
+    docker_compose_dev up --renew-anon-volumes --build
 }
 
 # Función para detener y eliminar los servicios
@@ -83,6 +89,9 @@ function main() {
 
     # Verifica el primer parámetro y ejecuta el comando adecuado
     case "$1" in
+        build)
+            build
+            ;;
         up)
             up
             ;;

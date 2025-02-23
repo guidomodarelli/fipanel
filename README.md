@@ -59,6 +59,20 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker y Docker
    ./scripts/dev.sh restart
    ```
 
+5. **Construir las imágenes**
+
+   Para reconstruir las imágenes de Docker, ejecuta:
+
+   ```bash
+   ./scripts/dev.sh build
+   ```
+
+   Este comando es útil cuando:
+   - Hay cambios en los Dockerfile
+   - Necesitas actualizar las imágenes
+   - Has modificado dependencias en el package.json
+   - Has actualizado o agregado nuevos paquetes con `bun install`
+
 Este script utiliza el archivo `docker-compose.dev.yml` ubicado en la carpeta `docker/` para gestionar los contenedores del proyecto en desarrollo.
 
 ### Ejecutar el Linter y el Formateo desde Docker
@@ -230,3 +244,17 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    ```bash
    ./scripts/prod.sh restart
    ```
+
+6. **Construir las imágenes**
+
+   Para reconstruir las imágenes de Docker, ejecuta:
+
+   ```bash
+   ./scripts/prod.sh build
+   ```
+
+   Este comando es útil cuando:
+   - Hay cambios en los Dockerfile
+   - Necesitas actualizar las imágenes
+   - Has modificado dependencias en el package.json
+   - Has actualizado o agregado nuevos paquetes con `bun install`
