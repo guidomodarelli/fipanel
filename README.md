@@ -1,6 +1,6 @@
-## Comenzando
+# Comenzando
 
-### Requisitos previos
+## Requisitos previos
 
 - [nvm](https://github.com/nvm-sh/nvm) (recomendado para gestionar la versión de
   Node.js). Puedes instalar nvm siguiendo las instrucciones en su
@@ -23,7 +23,7 @@ Una vez instalado `nvm`, necesitas ejecutar `nvm use` en la raiz del proyecto
 para usar la versión especificada en `.nvmrc` o `nvm install` en caso de que esa
 versión no esté instalada.
 
-### Instalación
+## Instalación
 
 Primero, instala las dependencias con:
 
@@ -49,3 +49,11 @@ siguiente:
 - Asegúrate de que todas las dependencias estén instaladas correctamente.
 - Revisa la terminal para cualquier mensaje de error.
 - Verifica la consola del navegador para errores de JavaScript.
+
+## ¿Cómo formatear el código desde la terminal?
+
+Para formatear el código, ejecuta el siguiente comando:
+
+```bash
+bun format
+```
