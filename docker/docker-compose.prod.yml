@@ -1,5 +1,6 @@
 services:
   prod:
+    tty: true
     build:
       context: ..
       dockerfile: ./docker/Dockerfile.prod

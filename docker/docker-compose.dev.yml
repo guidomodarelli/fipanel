@@ -9,6 +9,7 @@ x-build: &build
 
 services:
   dev:
+    tty: true
     <<: [*build, *volumes]
     ports:
       - "3000:3000"
@@ -18,11 +19,13 @@ services:
     profiles: ["dev"]
 
   linter:
+    tty: true
     <<: [*build, *volumes]
     command: bun lint:fix
     profiles: ["check"]
 
   format:
+    tty: true
     <<: [*build, *volumes]
     command: bun format:fix
     profiles: ["check"]
