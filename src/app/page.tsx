@@ -5,7 +5,6 @@ import InterestRateCard from '@/components/cards/InterestRateCard/InterestRateCa
 import { SIDEBAR_TRIGGER_HEIGHT } from '@/components/sidebar/SidebarLayout';
 import type { RssFeedMetadata } from '@/core/contexts/RSS-Reader/domain/RssDataStructure';
 import { useEffect, useState } from 'react';
-import { CLARIN_ECONOMY_RSS } from './constants';
 import { createLogger, rssReader } from './setup';
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await rssReader.readFrom(CLARIN_ECONOMY_RSS);
+        const data = await rssReader.readFrom('/api/rss/clarin/economia');
         setData(data);
         logger.debug(data);
       } catch (error) {
