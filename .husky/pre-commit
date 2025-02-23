@@ -40,3 +40,11 @@ if [ -n "$files" ]; then
 else
   printInfo "No files to check for formatting."
 fi
+
+printInfo "⏳ Checking for checking errors..."
+if [ -n "$files" ]; then
+  bun check:fix $files
+  printSuccess "Check passed!"
+else
+  printInfo "No files to check."
+fi
