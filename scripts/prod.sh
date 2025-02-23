@@ -20,34 +20,38 @@ function check_docker_compose_file() {
     fi
 }
 
+function docker_compose() {
+    docker compose -f $DOCKER_COMPOSE_FILE "$@"
+}
+
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE up -d
+    docker_compose up -d
 }
 
 # Función para detener y eliminar los servicios
 function down() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE down
+    docker_compose down --volumes --remove-orphans
 }
 
 # Función para iniciar los servicios detenidos
 function start() {
     echo "Iniciando los servicios detenidos con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE start
+    docker_compose start
 }
 
 # Función para detener los servicios sin eliminarlos
 function stop() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE stop
+    docker_compose stop
 }
 
 # Función para reiniciar los servicios
 function restart() {
     echo "Reiniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE restart
+    docker_compose restart
 }
 
 # Función principal
