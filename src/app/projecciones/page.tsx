@@ -51,7 +51,7 @@ const Projection = () => {
   const [from, setFrom] = useState<Date | undefined>(undefined);
   const [to, setTo] = useState<Date | undefined>(undefined);
   const [data, setData] = useState<InvestmentProjectionData[]>([]);
-  const { isLoading, getAnnualPrices } = useSymbolPriceMonthly({
+  const { getAnnualPrices } = useSymbolPriceMonthly({
     symbol,
     from,
     to,
