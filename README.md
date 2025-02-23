@@ -59,6 +59,36 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker y Docker
 
 Este script utiliza el archivo `docker-compose.dev.yml` ubicado en la carpeta `docker/` para gestionar los contenedores del proyecto en desarrollo.
 
+### Ejecutar el Linter y el Formateo desde Docker
+
+También puedes ejecutar el linter y el formateo de código desde Docker usando el script `dev.sh`.
+
+1. **Ejecutar el linter** (para verificar el código):
+
+   Para ejecutar el linter (`bun lint:fix`) dentro del contenedor, ejecuta:
+
+   ```bash
+   ./scripts/dev.sh lint
+   ```
+
+2. **Ejecutar el formateo de código**:
+
+   Para ejecutar el formateo de código (`bun format:fix`) dentro del contenedor, ejecuta:
+
+   ```bash
+   ./scripts/dev.sh format
+   ```
+
+3. **Ejecutar ambos juntos (lint + format)**:
+
+   Si deseas ejecutar ambos, el linter y el formateo, de manera secuencial, usa el siguiente comando:
+
+   ```bash
+   ./scripts/dev.sh check
+   ```
+
+---
+
 ### Ver el resultado
 
 - Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`). Asegúrate de verificar el puerto a la izquierda del `:` en la línea de configuración del puerto, ya que es el que se utilizará para acceder a la aplicación en el navegador.
