@@ -185,4 +185,52 @@ bun lint:fix
 
 ## Despliegue
 
-El proceso de despliegue está pendiente de configuración. Más detalles estarán disponibles pronto.
+El proceso de despliegue del proyecto se puede realizar de dos formas: directamente en el host o utilizando Docker. A continuación, se describen los pasos para ejecutar el proyecto en producción utilizando Docker.
+
+### Despliegue con Docker en Producción
+
+Si prefieres ejecutar los servicios en un entorno de producción con Docker, puedes usar el script `prod.sh`, que está diseñado para gestionar los contenedores en producción.
+
+#### Uso de Docker para Producción
+
+1. **Iniciar los servicios en producción**
+
+   Para iniciar los servicios en modo producción, ejecuta:
+
+   ```bash
+   ./scripts/prod.sh up
+   ```
+
+   Esto iniciará los servicios definidos en `docker-compose.prod.yml` y los ejecutará en segundo plano.
+
+2. **Detener y eliminar los servicios**
+
+   Para detener y eliminar los contenedores, redes y volúmenes asociados:
+
+   ```bash
+   ./scripts/prod.sh down
+   ```
+
+3. **Iniciar los servicios detenidos**
+
+   Si los servicios fueron detenidos previamente, puedes reiniciarlos con:
+
+   ```bash
+   ./scripts/prod.sh start
+   ```
+
+4. **Detener los servicios sin eliminarlos**
+
+   Para detener los servicios sin eliminar los contenedores y volúmenes:
+
+   ```bash
+   ./scripts/prod.sh stop
+   ```
+
+5. **Reiniciar los servicios**
+
+   Si necesitas reiniciar los servicios, puedes usar:
+
+   ```bash
+   ./scripts/prod.sh restart
+   ```
