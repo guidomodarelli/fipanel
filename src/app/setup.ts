@@ -14,6 +14,8 @@ import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
 import { LoggerFactory } from '@/core/contexts/shared/logger/domain/LoggerFactory';
 import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
+import type { XmlParser } from '@/core/contexts/shared/xml-parser/domain/XmlParser';
+import { FastXmlParser } from '@/core/contexts/shared/xml-parser/infrastructure/FastXmlParser';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
 export const createLogger = LoggerFactory(new ConsoleLogger());
@@ -21,6 +23,7 @@ const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
 const symbolService: SymbolProvider = new MockSymbolProvider();
+const xmlParser: XmlParser = new FastXmlParser();
 
 export const getPrimaryFinancialMetrics = getPrimaryFinancialMetricsUseCase(bcraService);
 export const getDolarsPrices = getDolarsPricesUseCase(dolarService);
