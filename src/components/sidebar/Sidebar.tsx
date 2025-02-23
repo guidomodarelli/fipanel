@@ -85,7 +85,7 @@ const items: AppSidebarGroup[] = [
 ];
 
 export const Sidebar = () => {
-  const { open: isOpenSidebar } = useSidebar();
+  const { open: isOpenSidebar, toggleSidebar } = useSidebar();
   const [showLongLogo, setShowLongLogo] = useState(true);
   const [isSidebarOpening, setIsSidebarOpening] = useState(false);
   const [isSidebarClosing, setIsSidebarClosing] = useState(false);
@@ -122,7 +122,7 @@ export const Sidebar = () => {
     return (
       <SidebarMenuItem key={item.key}>
         <SidebarMenuButton asChild>
-          <Link href={item.link}>
+          <Link href={item.link} onClick={toggleSidebar}>
             {item.icon?.()}
             <span>{item.label}</span>
           </Link>
