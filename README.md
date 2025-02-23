@@ -6,8 +6,12 @@ Fipanel es una aplicación diseñada para la gestión inteligente y eficiente de
 
 Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 
-- [nvm](https://github.com/nvm-sh/nvm) (Recomendado para gestionar la versión de Node.js): Puedes instalar `nvm` siguiendo las instrucciones en su [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
-- [bun](https://bun.sh): Para instalar `bun`, ejecuta el siguiente comando:
+- [nvm](https://github.com/nvm-sh/nvm) (Recomendado para gestionar la versión de Node.js)
+
+  Puedes instalar `nvm` siguiendo las instrucciones en su [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
+- [bun](https://bun.sh)
+
+  Para instalar `bun`, ejecuta el siguiente comando:
 
   **Linux:**
 
