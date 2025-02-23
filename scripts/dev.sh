@@ -20,52 +20,60 @@ function check_docker_compose_file() {
     fi
 }
 
+function docker_compose() {
+    docker compose -f $DOCKER_COMPOSE_FILE "$@"
+}
+
+function docker_compose_dev() {
+    docker_compose --profile dev "$@"
+}
+
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev up --renew-anon-volumes
+    docker_compose_dev up --renew-anon-volumes
 }
 
 # Función para detener y eliminar los servicios
 function down() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev down -v --remove-orphans
+    docker_compose_dev down --volumes --remove-orphans
 }
 
 # Función para iniciar los servicios detenidos
 function start() {
     echo "Iniciando los servicios detenidos con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev start
+    docker_compose_dev start
 }
 
 # Función para detener los servicios sin eliminarlos
 function stop() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev stop
+    docker_compose_dev stop
 }
 
 # Función para reiniciar los servicios
 function restart() {
     echo "Reiniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev restart
+    docker_compose_dev restart
 }
 
 # Función para ejecutar el linter
 function lint() {
     echo "Ejecutando linter con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE up linter
+    docker_compose up linter
 }
 
 # Función para ejecutar el formateo de código
 function format() {
     echo "Ejecutando formateo de código con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE up format
+    docker_compose up format
 }
 
 # Función para ejecutar ambos, lint y format
 function check() {
     echo "Ejecutando linter y formateo de código con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile check up
+    docker_compose --profile check up
 }
 
 # Función principal
