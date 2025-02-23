@@ -23,31 +23,31 @@ function check_docker_compose_file() {
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE up
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev up
 }
 
 # Función para detener y eliminar los servicios
 function down() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE down
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev down
 }
 
 # Función para iniciar los servicios detenidos
 function start() {
     echo "Iniciando los servicios detenidos con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE start
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev start
 }
 
 # Función para detener los servicios sin eliminarlos
 function stop() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE stop
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev stop
 }
 
 # Función para reiniciar los servicios
 function restart() {
     echo "Reiniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE restart
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev restart
 }
 
 # Función para ejecutar el linter
