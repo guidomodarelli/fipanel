@@ -87,19 +87,24 @@ const items: AppSidebarGroup[] = [
 export const Sidebar = () => {
   const { open: isOpenSidebar } = useSidebar();
   const [showLongLogo, setShowLongLogo] = useState(true);
+  const [isSidebarOpening, setIsSidebarOpening] = useState(false);
+  const [isSidebarClosing, setIsSidebarClosing] = useState(false);
 
   useEffect(() => {
+    let timeout = 0;
     if (isOpenSidebar) {
-      // Al abrir, cambiar inmediatamente a logo largo
-      setShowLongLogo(true);
-      return () => {};
+      setIsSidebarOpening(true);
+      timeout = 150;
     } else {
-      const timeout = setTimeout(() => {
-        setShowLongLogo(false);
-      }, 200);
-
-      return () => clearTimeout(timeout);
+      setIsSidebarClosing(true);
+      timeout = 200;
     }
+    const timeoutId = setTimeout(() => {
+      setShowLongLogo(isOpenSidebar);
+      setIsSidebarOpening(false);
+      setIsSidebarClosing(false);
+    }, timeout);
+    return () => clearTimeout(timeoutId);
   }, [isOpenSidebar]);
 
   const renderGroup = (group: AppSidebarGroup) => {
@@ -135,7 +140,8 @@ export const Sidebar = () => {
       <SidebarHeader>
         <SidebarContent
           className={cn('flex flex-row', {
-            'justify-center': !showLongLogo,
+            'justify-center': !showLongLogo && !isSidebarOpening && !isSidebarClosing,
+            'ml-1': isSidebarOpening,
           })}
         >
           {showLongLogo ? <Logo long /> : <Logo />}
