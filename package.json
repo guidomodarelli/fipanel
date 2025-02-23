@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "echo 0 || next lint",
+    "lint": "bunx @biomejs/biome lint --diagnostic-level=warn --no-errors-on-unmatched",
     "lint:fix": "bun lint --fix",
     "format": "bunx @biomejs/biome format --diagnostic-level=warn --no-errors-on-unmatched",
     "format:fix": "bun format --fix",
