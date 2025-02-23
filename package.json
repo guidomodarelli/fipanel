@@ -10,7 +10,7 @@
     "lint:fix": "bun lint --fix",
     "format": "bunx @biomejs/biome format --diagnostic-level=warn --no-errors-on-unmatched",
     "format:fix": "bun format --fix",
-    "prepare": "husky"
+    "prepare": "[[ $NODE_ENV != 'production' ]] && husky || exit 0"
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",
