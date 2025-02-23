@@ -1,6 +1,6 @@
-import { Logger } from './Logger';
+import type { Logger } from './Logger';
 import { LoggerDecorator } from './LoggerDecorator';
-import { Status } from './types';
+import type { Status } from './types';
 
 export type LoggerFactory = {
   create: (context: string[], status: Status) => Logger;

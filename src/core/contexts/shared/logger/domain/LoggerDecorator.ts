@@ -1,5 +1,5 @@
-import { Logger } from './Logger';
-import { Status } from './types';
+import type { Logger } from './Logger';
+import type { Status } from './types';
 
 export class LoggerDecorator {
   private constructor(

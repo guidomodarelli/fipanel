@@ -1,6 +1,6 @@
 import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Logger } from '@/core/contexts/shared/logger/domain/Logger';
+import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import { formatNumber } from '@/lib/number';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';

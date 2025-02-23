@@ -1,5 +1,5 @@
 'use client';
-import { InvestmentProjectionData } from '@/components/form/InvestmentProjection/InvestmentProjectionData';
+import type { InvestmentProjectionData } from '@/components/form/InvestmentProjection/InvestmentProjectionData';
 import InvestmentProjectionForm from '@/components/form/InvestmentProjection/InvestmentProjectionForm';
 import InvestmentProjectionTable from '@/components/form/InvestmentProjection/InvestmentProjectionTable';
 import type { InvestmentProjection } from '@/components/form/InvestmentProjection/scheme';

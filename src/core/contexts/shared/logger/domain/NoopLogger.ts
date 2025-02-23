@@ -1,5 +1,5 @@
 import type { Logger } from './Logger';
-import { Status } from './types';
+import type { Status } from './types';
 
 export const NoopLogger: () => Logger = () => ({
   log: (_message: string, ..._args: any[]): void => {},
