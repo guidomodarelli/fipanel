@@ -33,7 +33,16 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker y Docker
    ./scripts/dev.sh up
    ```
 
-   Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`). Asegúrate de verificar el puerto a la izquierda del `:` en la línea de configuración del puerto, ya que es el que se utilizará para acceder a la aplicación en el navegador.
+   Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`).
+
+   Por ejemplo, si en el archivo `docker-compose.dev.yml` tienes una configuración como:
+   ```yaml
+   services:
+     app:
+       ports:
+         - "8080:3000"
+   ```
+   Entonces deberás acceder a [http://localhost:8080](http://localhost:8080) en tu navegador, ya que 8080 es el puerto expuesto en tu máquina local.
 
 2. **Detener los servicios**
 
