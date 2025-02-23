@@ -23,13 +23,13 @@ function check_docker_compose_file() {
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev up
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev up --renew-anon-volumes
 }
 
 # Función para detener y eliminar los servicios
 function down() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker compose -f $DOCKER_COMPOSE_FILE --profile dev down
+    docker compose -f $DOCKER_COMPOSE_FILE --profile dev down -v --remove-orphans
 }
 
 # Función para iniciar los servicios detenidos
