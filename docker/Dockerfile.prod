@@ -9,7 +9,7 @@ RUN bun install --production
 # Copia el resto de los archivos del proyecto
 COPY . .
 
-RUN bun build
+RUN bun run build
 
 EXPOSE 3000
 
