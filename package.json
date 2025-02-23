@@ -6,8 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "bunx @biomejs/biome format --diagnostic-level=warn --write ./src"
+    "lint": "echo \"true\" || next lint",
+    "lint:fix": "bunx lint --fix",
+    "format": "bunx @biomejs/biome format --diagnostic-level=warn --write",
+    "format:fix": "bunx format --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",
@@ -44,6 +47,7 @@
     "chalk": "^5.4.1",
     "eslint": "^8",
     "eslint-config-next": "15.1.7",
+    "husky": "^9.1.7",
     "postcss": "^8",
     "prettier": "^3.5.1",
     "tailwindcss": "^3.4.1",

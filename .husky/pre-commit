@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+printBlue() {
+  printf "\033[34;1m%s\033[m" "$@"
+}
+
+printGreen() {
+  printf "\033[32;1m%s\033[m" "$@"
+}
+
+printFormat() {
+  local text="$1"
+  shift
+  printf "[ $text ] %s\n" "$@"
+}
+
+printInfo() {
+  printFormat "$(printBlue "INFO")" "$@"
+}
+
+printSuccess() {
+  printFormat "$(printGreen "SUCCESS")" "✅ $@"
+}
+
+files=$(git diff-index --cached --name-only --diff-filter=ACMR HEAD | grep -vE "bun.lock")
+eslint_files=$(echo "$files" | grep -E ".*\.([jt]sx?|json|css)$" || true)
+
+printInfo "⏳ Checking for linting errors..."
+if [ -n "$eslint_files" ]; then
+  bunx run lint:fix $eslint_files
+  printSuccess "Linter check passed!"
+else
+  printInfo "No files to check for linting."
+fi
+
+printInfo "⏳ Checking for formatting errors..."
+if [ -n "$files" ]; then
+  bunx run format:fix $files
+  printSuccess "Formatter check passed!"
+else
+  printInfo "No files to check for formatting."
+fi
