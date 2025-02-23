@@ -20,9 +20,9 @@ services:
   linter:
     <<: [*build, *volumes]
     command: bun lint:fix
-    profiles: ["tools"]
+    profiles: ["check"]
 
   format:
     <<: [*build, *volumes]
     command: bun format:fix
-    profiles: ["tools"]
+    profiles: ["check"]

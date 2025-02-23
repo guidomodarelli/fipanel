@@ -8,7 +8,7 @@ DOCKER_COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.dev.yml"
 
 # Función para mostrar cómo usar el script
 function usage() {
-    echo "Uso: $0 {up|down|start|stop|restart}"
+    echo "Uso: $0 {up|down|start|stop|restart|lint|format|check}"
     exit 1
 }
 
@@ -50,6 +50,24 @@ function restart() {
     docker compose -f $DOCKER_COMPOSE_FILE restart
 }
 
+# Función para ejecutar el linter
+function lint() {
+    echo "Ejecutando linter con Docker Compose..."
+    docker compose -f $DOCKER_COMPOSE_FILE up linter
+}
+
+# Función para ejecutar el formateo de código
+function format() {
+    echo "Ejecutando formateo de código con Docker Compose..."
+    docker compose -f $DOCKER_COMPOSE_FILE up format
+}
+
+# Función para ejecutar ambos, lint y format
+function check() {
+    echo "Ejecutando linter y formateo de código con Docker Compose..."
+    docker compose -f $DOCKER_COMPOSE_FILE --profile check up
+}
+
 # Función principal
 function main() {
     # Verifica que el archivo docker-compose exista
@@ -71,6 +89,15 @@ function main() {
             ;;
         restart)
             restart
+            ;;
+        lint)
+            lint
+            ;;
+        format)
+            format
+            ;;
+        check)
+            check
             ;;
         *)
             usage
