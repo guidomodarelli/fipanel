@@ -5,10 +5,18 @@
 - [nvm](https://github.com/nvm-sh/nvm) (recomendado para gestionar la versión de
   Node.js). Puedes instalar nvm siguiendo las instrucciones en su
   [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
-- [pnpm](https://pnpm.io). Puedes instalar pnpm ejecutando el siguiente comando:
+- [bun](https://bun.sh). Puedes instalar bun ejecutando el siguiente comando:
+
+  Linux:
 
   ```bash
-  npm install -g pnpm
+  curl -fsSL https://bun.sh/install | bash
+  ```
+
+  Windows:
+
+  ```powershell
+  powershell -c "irm bun.sh/install.ps1 | iex"
   ```
 
 Una vez instalado `nvm`, necesitas ejecutar `nvm use` en la raiz del proyecto
@@ -20,13 +28,13 @@ versión no esté instalada.
 Primero, instala las dependencias con:
 
 ```bash
-pnpm install
+bun install
 ```
 
 Luego, ejecuta el servidor de desarrollo:
 
 ```bash
-pnpm dev
+bun dev
 ```
 
 Abre [http://localhost:3000](http://localhost:3000) con tu navegador para ver el
