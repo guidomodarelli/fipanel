@@ -6,60 +6,8 @@ Fipanel es una aplicación diseñada para la gestión inteligente y eficiente de
 
 Este proyecto se puede ejecutar de dos formas:
 
-1. **Ejecución en el host**: Instalar y ejecutar el proyecto directamente en tu máquina local.
-2. **Ejecución con Docker**: Usar Docker y Docker Compose para gestionar el entorno de desarrollo.
-
----
-
-## Ejecución en el Host
-
-Si prefieres ejecutar el proyecto directamente en tu máquina sin Docker, sigue los pasos a continuación.
-
-### Requisitos previos
-
-Antes de comenzar, asegúrate de tener instalados los siguientes programas:
-
-- [nvm](https://github.com/nvm-sh/nvm) (Recomendado para gestionar la versión de Node.js)
-
-  Puedes instalar `nvm` siguiendo las instrucciones en su [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-- [bun](https://bun.sh) (Para gestión de dependencias y ejecución de scripts)
-
-  Para instalar `bun`, ejecuta el siguiente comando:
-
-  **Linux:**
-
-  ```bash
-  curl -fsSL https://bun.sh/install | bash
-  ```
-
-  **Windows:**
-
-  ```powershell
-  powershell -c "irm bun.sh/install.ps1 | iex"
-  ```
-
-Una vez instalado `nvm`, ejecuta `nvm use` en la raíz del proyecto para usar la versión de Node.js especificada en el archivo `.nvmrc`. Si no está instalada, usa `nvm install` para instalarla.
-
-### Instalación
-
-1. **Instalar dependencias**
-
-   Ejecuta el siguiente comando para instalar las dependencias necesarias:
-
-   ```bash
-   bun install
-   ```
-
-2. **Iniciar el servidor de desarrollo**
-
-   Luego, ejecuta el servidor de desarrollo con:
-
-   ```bash
-   bun dev
-   ```
-
-   Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. El puerto puede variar, así que asegúrate de revisar la terminal para confirmar el puerto correcto.
+1. **Ejecución con Docker** (Recomendado): Usar Docker y Docker Compose para gestionar el entorno de desarrollo.
+2. **Ejecución en el host**: Instalar y ejecutar el proyecto directamente en tu máquina local.
 
 ---
 
@@ -114,6 +62,58 @@ Este script utiliza el archivo `docker-compose.dev.yml` ubicado en la carpeta `d
 ### Ver el resultado
 
 - Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`). Asegúrate de verificar el puerto a la izquierda del `:` en la línea de configuración del puerto, ya que es el que se utilizará para acceder a la aplicación en el navegador.
+
+---
+
+## Ejecución en el Host
+
+Si prefieres ejecutar el proyecto directamente en tu máquina sin Docker, sigue los pasos a continuación.
+
+### Requisitos previos
+
+Antes de comenzar, asegúrate de tener instalados los siguientes programas:
+
+- [nvm](https://github.com/nvm-sh/nvm) (Recomendado para gestionar la versión de Node.js)
+
+  Puedes instalar `nvm` siguiendo las instrucciones en su [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+- [bun](https://bun.sh) (Para gestión de dependencias y ejecución de scripts)
+
+  Para instalar `bun`, ejecuta el siguiente comando:
+
+  **Linux:**
+
+  ```bash
+  curl -fsSL https://bun.sh/install | bash
+  ```
+
+  **Windows:**
+
+  ```powershell
+  powershell -c "irm bun.sh/install.ps1 | iex"
+  ```
+
+Una vez instalado `nvm`, ejecuta `nvm use` en la raíz del proyecto para usar la versión de Node.js especificada en el archivo `.nvmrc`. Si no está instalada, usa `nvm install` para instalarla.
+
+### Instalación
+
+1. **Instalar dependencias**
+
+   Ejecuta el siguiente comando para instalar las dependencias necesarias:
+
+   ```bash
+   bun install
+   ```
+
+2. **Iniciar el servidor de desarrollo**
+
+   Luego, ejecuta el servidor de desarrollo con:
+
+   ```bash
+   bun dev
+   ```
+
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. El puerto puede variar, así que asegúrate de revisar la terminal para confirmar el puerto correcto.
 
 ---
 
