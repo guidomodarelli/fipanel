@@ -1,0 +1,13 @@
+version: '3'
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ..:/app
+    environment:
+      - NODE_ENV=development
+    command: bun dev
