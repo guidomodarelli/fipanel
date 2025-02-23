@@ -2,28 +2,28 @@ import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService
 import axios from 'axios';
 
 export class AxiosHttpService implements HttpService {
-  async get(url: string) {
+  async get<T>(url: string): Promise<T> {
     const response = await axios.get(url);
-    return response.data;
+    return response.data as T;
   }
 
-  async post(url: string, data: any): Promise<any> {
+  async post<T = unknown, D = unknown>(url: string, data: D): Promise<T> {
     const response = await axios.post(url, data);
-    return response.data;
+    return response.data as T;
   }
 
-  async put(url: string, data: any): Promise<any> {
+  async put<T = unknown, D = unknown>(url: string, data: D): Promise<T> {
     const response = await axios.put(url, data);
-    return response.data;
+    return response.data as T;
   }
 
-  async patch<T = any, D = any>(url: string, data: D): Promise<T> {
+  async patch<T = unknown, D = unknown>(url: string, data: D): Promise<T> {
     const response = await axios.patch(url, data);
-    return response.data;
+    return response.data as T;
   }
 
-  async delete(url: string): Promise<any> {
+  async delete<T = unknown>(url: string): Promise<T> {
     const response = await axios.delete(url);
-    return response.data;
+    return response.data as T;
   }
 }
