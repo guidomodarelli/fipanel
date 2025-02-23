@@ -131,6 +131,26 @@ Para formatear el código, ejecuta el siguiente comando:
 bun format
 ```
 
+Para formatear el código y corregir automáticamente los errores, ejecuta:
+
+```bash
+bun format:fix
+```
+
+## Linter y corrección de errores
+
+Para asegurarte de que el código esté libre de errores y siga las mejores prácticas, utiliza un linter. Puedes ejecutar el linter con el siguiente comando:
+
+```bash
+bun lint
+```
+
+Para corregir automáticamente los errores, ejecuta:
+
+```bash
+bun lint:fix
+```
+
 ---
 
 ## Despliegue
