@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "echo \"true\" || next lint",
     "lint:fix": "bun lint --fix",
-    "format": "bunx @biomejs/biome format --diagnostic-level=warn --no-errors-on-unmatched --write",
+    "format": "bunx @biomejs/biome format --diagnostic-level=warn --no-errors-on-unmatched",
     "format:fix": "bun format --fix",
     "prepare": "husky"
   },
