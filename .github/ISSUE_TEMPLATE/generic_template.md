@@ -1,3 +1,11 @@
+---
+name: Issue genérico
+about: Plantilla genérica para crear issues
+title: ""
+labels: ''
+assignees: ''
+---
+
 ## 📋 Tipo de issue
 <!-- Marca con una "x" lo que aplique -->
 - [ ] 🐛 Bug report
