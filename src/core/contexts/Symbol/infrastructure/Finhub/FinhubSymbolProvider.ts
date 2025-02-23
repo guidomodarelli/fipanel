@@ -19,7 +19,7 @@ export class FinhubSymbolProvider implements SymbolProvider {
   }
 
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
-    const response = await this.get(`stock/candle?symbol=${symbol}`);
+    const response = await this.get(`/stock/candle?symbol=${symbol}`);
 
     return [
       {
