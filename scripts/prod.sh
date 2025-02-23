@@ -8,7 +8,7 @@ DOCKER_COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.prod.yml"
 
 # Función para mostrar cómo usar el script
 function usage() {
-    echo "Uso: $0 {up|down|start|stop|restart}"
+    echo "Uso: $0 {build|up|down|start|stop|restart}"
     exit 1
 }
 
@@ -22,6 +22,12 @@ function check_docker_compose_file() {
 
 function docker_compose() {
     docker compose -f $DOCKER_COMPOSE_FILE "$@"
+}
+
+# Función para buildear la imagen de producción
+function build() {
+    echo "Construyendo la imagen de producción..."
+    docker_compose build
 }
 
 # Función para iniciar los servicios
@@ -61,6 +67,9 @@ function main() {
 
     # Verifica el primer parámetro y ejecuta el comando adecuado
     case "$1" in
+        build)
+            build
+            ;;
         up)
             up
             ;;
