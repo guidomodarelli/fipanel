@@ -49,25 +49,9 @@ Una vez instalado `nvm`, ejecuta `nvm use` en la raíz del proyecto para usar la
 
 ## Archivo de configuración
 
-El proyecto utiliza un archivo `.env.template` para configurar la clave API de Alpha Vantage. Debes crear un archivo `.env` basado en este template y agregar tu clave API personal:
+El proyecto incluye un archivo `.env.template` para configurar las variables de entorno necesarias. Para configurarlo, crea un archivo `.env` basado en el template y ajusta las variables a los valores correctos según lo que necesites.
 
-```plaintext
-# Description: Template for the .env file
-
-# Alpha Vantage API Key
-# Get your free API key from https://www.alphavantage.co/support/#api-key
-API_KEY_ALPHAVANTAGE=your_api_key_here
-```
-
-## Problemas Conocidos
-
-Si encuentras algún problema durante el desarrollo, revisa lo siguiente:
-
-- Asegúrate de que todas las dependencias estén instaladas correctamente.
-- Revisa la terminal para cualquier mensaje de error.
-- Verifica la consola del navegador para errores de JavaScript.
-
-## ¿Cómo formatear el código desde la terminal?
+## Formateo de código
 
 Para formatear el código, ejecuta el siguiente comando:
 
