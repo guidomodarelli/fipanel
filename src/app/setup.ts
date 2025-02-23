@@ -4,6 +4,8 @@ import { BluelyticsDolarProvider } from '@/core/contexts/Dolar/infrastructure/Bl
 import { getPrimaryFinancialMetricsUseCase } from '@/core/contexts/Metrics/application/getPrimaryFinancialMetricsUseCase';
 import type { FinancialDataProvider } from '@/core/contexts/Metrics/domain/FinancialDataProvider';
 import { BCRAFinancialDataProvider } from '@/core/contexts/Metrics/infrastructure/BCRAFinancialDataProvider';
+import type { RssReader } from '@/core/contexts/RSS-Reader/domain/RssReader';
+import { XmlParserRssReader } from '@/core/contexts/RSS-Reader/infrastructure/XmlParserRssReader';
 import { getSymbolPriceDailyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceDailyUseCase';
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import type { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
@@ -24,6 +26,7 @@ const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpSer
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
 const symbolService: SymbolProvider = new MockSymbolProvider();
 const xmlParser: XmlParser = new FastXmlParser();
+export const rssReader: RssReader = new XmlParserRssReader(xmlParser, httpService);
 
 export const getPrimaryFinancialMetrics = getPrimaryFinancialMetricsUseCase(bcraService);
 export const getDolarsPrices = getDolarsPricesUseCase(dolarService);
