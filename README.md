@@ -33,6 +33,8 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker y Docker
    ./scripts/dev.sh up
    ```
 
+   Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`). Asegúrate de verificar el puerto a la izquierda del `:` en la línea de configuración del puerto, ya que es el que se utilizará para acceder a la aplicación en el navegador.
+
 2. **Detener los servicios**
 
    Para detener los contenedores sin eliminarlos:
@@ -86,12 +88,6 @@ También puedes ejecutar el linter y el formateo de código desde Docker usando 
    ```bash
    ./scripts/dev.sh check
    ```
-
----
-
-### Ver el resultado
-
-- Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`). Asegúrate de verificar el puerto a la izquierda del `:` en la línea de configuración del puerto, ya que es el que se utilizará para acceder a la aplicación en el navegador.
 
 ---
 
