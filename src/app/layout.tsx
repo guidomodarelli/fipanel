@@ -1,17 +1,23 @@
 import { SidebarLayout } from '@/components/sidebar/SidebarLayout';
 import Providers from '@/providers/Providers';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Montserrat, Roboto } from 'next/font/google';
 import './globals.css';
 import './setup.ts';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const fontHeadings = Montserrat({
+  variable: '--font-heading',
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const fontBody = Roboto({
+  weight: '400',
+  variable: '--font-body',
+  subsets: ['latin'],
+});
+
+const fontMono = Geist_Mono({
+  variable: '--font-mono',
   subsets: ['latin'],
 });
 
@@ -27,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${fontHeadings.variable} ${fontMono.variable} ${fontBody.variable} antialiased`}>
         <Providers>
           <SidebarLayout>{children}</SidebarLayout>
         </Providers>
