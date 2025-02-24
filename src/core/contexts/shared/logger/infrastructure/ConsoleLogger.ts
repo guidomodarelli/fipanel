@@ -4,30 +4,30 @@ import type { Logger } from '../domain/Logger';
 export class ConsoleLogger implements Logger {
   constructor(private context: string[] = []) {}
 
-  private print(level: string, message: string, ...args: unknown[]) {
+  private print(level: string, ...args: unknown[]) {
     const timestamp = new Date().toLocaleTimeString();
     const contextStr = this.context.length ? ` [${chalk.bold.gray(this.context.join(' » '))}]` : '';
-    console.log(`[${chalk.gray(timestamp)}] [${level}]${contextStr} ${message}`, ...args);
+    console.log(`[${chalk.gray(timestamp)}] [${level}]${contextStr} `, ...args);
   }
 
-  log(message: string, ...args: unknown[]): void {
-    this.print(chalk.bold.white('LOG'), message, ...args);
+  log(...args: unknown[]): void {
+    this.print(chalk.bold.white('LOG'), ...args);
   }
 
-  debug(message: string, ...args: unknown[]): void {
-    this.print(chalk.bold.cyan('DEBUG'), message, ...args);
+  debug(...args: unknown[]): void {
+    this.print(chalk.bold.cyan('DEBUG'), ...args);
   }
 
-  info(message: string, ...args: unknown[]): void {
-    this.print(chalk.bold.blue('INFO'), message, ...args);
+  info(...args: unknown[]): void {
+    this.print(chalk.bold.blue('INFO'), ...args);
   }
 
-  warn(message: string, ...args: unknown[]): void {
-    this.print(chalk.bold.yellow('WARN'), message, ...args);
+  warn(...args: unknown[]): void {
+    this.print(chalk.bold.yellow('WARN'), ...args);
   }
 
-  error(message: string, ...args: unknown[]): void {
-    this.print(chalk.bold.red('ERROR'), message, ...args);
+  error(...args: unknown[]): void {
+    this.print(chalk.bold.red('ERROR'), ...args);
   }
 
   getLogger(newContext: string[]): Logger {
