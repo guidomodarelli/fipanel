@@ -27,7 +27,7 @@ eslint_files=$(echo "$files" | grep -E ".*\.([jt]sx?|json|css)$" || true)
 
 printInfo "⏳ Checking for linting errors..."
 if [ -n "$eslint_files" ]; then
-  bun lint $eslint_files
+  bun lint:fix $eslint_files
   printSuccess "Linter check passed!"
 else
   printInfo "No files to check for linting."
@@ -35,7 +35,7 @@ fi
 
 printInfo "⏳ Checking for formatting errors..."
 if [ -n "$files" ]; then
-  bun format $files
+  bun format:fix $files
   printSuccess "Formatter check passed!"
 else
   printInfo "No files to check for formatting."
@@ -43,7 +43,7 @@ fi
 
 printInfo "⏳ Checking for checking errors..."
 if [ -n "$files" ]; then
-  bun check $files
+  bun check:fix $files
   printSuccess "Check passed!"
 else
   printInfo "No files to check."
