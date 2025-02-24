@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server';
 
-export const revalidate = 300; // 5 minutes
+export const revalidate = 900; // 15 minutes
 
 export async function GET(request: NextRequest) {
   try {
