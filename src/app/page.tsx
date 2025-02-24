@@ -2,15 +2,17 @@
 import DolarCard from '@/components/cards/DolarCard/DolarCard';
 import IPCCard from '@/components/cards/IPCCard/IPCCard';
 import InterestRateCard from '@/components/cards/InterestRateCard/InterestRateCard';
+import { RssFeedMetadata } from '@/components/rss/RssFeedMetadata';
 import { SIDEBAR_TRIGGER_HEIGHT } from '@/components/sidebar/SidebarLayout';
-import type { RssFeedMetadata } from '@/core/contexts/RSS-Reader/domain/RssDataStructure';
+import type { RssFeedMetadata as RssFeedMetadataType } from '@/core/contexts/RSS-Reader/domain/RssDataStructure';
 import { useEffect, useState } from 'react';
 import { CLARIN_ECONOMY_RSS } from './constants';
 import { createLogger, rssReader } from './setup';
 
 export default function Home() {
   const logger = createLogger(Home, 'enabled');
-  const [data, setData] = useState<Partial<RssFeedMetadata>>({});
+  // @ts-expect-error
+  const [data, setData] = useState<RssFeedMetadataType>({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +35,7 @@ export default function Home() {
         <DolarCard />
         <InterestRateCard />
       </div>
+      {data && <RssFeedMetadata className='mt-6' {...data} />}
     </div>
   );
 }
