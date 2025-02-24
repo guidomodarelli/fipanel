@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChartBarIncreasingIcon, FileChartColumnIncreasingIcon, FilterIcon, HomeIcon } from 'lucide-react';
+import { ChartBarIncreasingIcon, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Logo } from '../logo/Logo';
@@ -45,17 +45,17 @@ const items: AppSidebarGroup[] = [
         link: '/',
         icon: () => <HomeIcon />,
       },
-      {
-        key: 'capital-markets',
-        label: 'Capitalización de Mercados',
-        link: '/capital-markets',
-      },
-      {
-        key: 'analysis',
-        label: 'Analizador Empresarial',
-        link: '/analysis',
-        icon: () => <FileChartColumnIncreasingIcon />,
-      },
+      // {
+      //   key: 'capital-markets',
+      //   label: 'Capitalización de Mercados',
+      //   link: '/capital-markets',
+      // },
+      // {
+      //   key: 'analysis',
+      //   label: 'Analizador Empresarial',
+      //   link: '/analysis',
+      //   icon: () => <FileChartColumnIncreasingIcon />,
+      // },
       {
         key: 'projection',
         label: 'Proyección de Inversiones',
@@ -64,24 +64,24 @@ const items: AppSidebarGroup[] = [
       },
     ],
   },
-  {
-    key: 'screeners',
-    label: 'Screeners',
-    children: [
-      {
-        key: 'screener-international',
-        label: 'Screener Internacional',
-        link: '/screener/international',
-        icon: () => <FilterIcon />,
-      },
-      {
-        key: 'screener-argentina',
-        label: 'Screener Argentina',
-        link: '/screener/argentina',
-        icon: () => <FilterIcon />,
-      },
-    ],
-  },
+  // {
+  //   key: 'screeners',
+  //   label: 'Screeners',
+  //   children: [
+  //     {
+  //       key: 'screener-international',
+  //       label: 'Screener Internacional',
+  //       link: '/screener/international',
+  //       icon: () => <FilterIcon />,
+  //     },
+  //     {
+  //       key: 'screener-argentina',
+  //       label: 'Screener Argentina',
+  //       link: '/screener/argentina',
+  //       icon: () => <FilterIcon />,
+  //     },
+  //   ],
+  // },
 ];
 
 export const Sidebar = () => {
