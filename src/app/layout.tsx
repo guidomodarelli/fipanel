@@ -35,7 +35,9 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${fontHeadings.variable} ${fontMono.variable} ${fontBody.variable} antialiased`}>
         <Providers>
-          <SidebarLayout>{children}</SidebarLayout>
+          <SidebarLayout>
+            <div className='pb-32'>{children}</div>
+          </SidebarLayout>
         </Providers>
       </body>
     </html>
