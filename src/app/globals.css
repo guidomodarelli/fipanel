@@ -86,3 +86,33 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.rss-rendered-element {
+  ul,
+  ol {
+    @apply list-outside ps-10;
+
+    li {
+      @apply mb-2;
+    }
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    > p:first-child {
+      display: inline;
+      margin-left: 0 !important;
+
+      + * {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
