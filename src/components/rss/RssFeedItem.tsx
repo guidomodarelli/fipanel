@@ -1,5 +1,6 @@
 import type { RssFeedItem as RssFeedItemType } from '@/core/contexts/RSS-Reader/domain/RssDataStructure';
 import { DateUtils } from '@/lib/date';
+import Link from 'next/link';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 
@@ -17,7 +18,9 @@ export const RssFeedItem: React.FC<RssFeedItemProps> = (props) => {
 
   return (
     <div className='flex flex-col gap-2 bg-gray-50 p-6 rounded-2xl shadow-md'>
-      <h2 className='text-xl font-bold'>{props.title}</h2>
+      <Link href={props.guid} target='_blank' rel='noreferrer noopener'>
+        <h2 className='text-xl font-bold'>{props.title}</h2>
+      </Link>
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml:  */}
       <div className='rss-rendered-element' dangerouslySetInnerHTML={{ __html: description }} />
       {props.category && props.category.length > 0 && (
