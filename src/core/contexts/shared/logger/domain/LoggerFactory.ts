@@ -8,13 +8,13 @@ export type LoggerFactory = {
 
 export const LoggerFactory =
   (logger: Logger) =>
-  (initialContext: () => void, status: Status): Logger => {
-    if (typeof initialContext !== 'function') {
-      throw new Error('initialContext must be a function');
+  (initialContext: string, status: Status): Logger => {
+    if (typeof initialContext !== 'string') {
+      throw new Error('initialContext must be a string');
     }
-    if (initialContext.name === '') {
-      throw new Error('initialContext must be a named function');
+    if (initialContext === '') {
+      throw new Error('initialContext cannot be an empty string');
     }
-    const loggerInstance = logger.getLogger([initialContext.name]);
+    const loggerInstance = logger.getLogger([initialContext]);
     return LoggerDecorator.create(loggerInstance, status);
   };
