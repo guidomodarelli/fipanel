@@ -1,4 +1,5 @@
 import type { RssFeedItem as RssFeedItemType } from '@/core/contexts/RSS-Reader/domain/RssDataStructure';
+import { DateUtils } from '@/lib/date';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 
@@ -6,6 +7,7 @@ interface RssFeedItemProps extends RssFeedItemType {}
 
 export const RssFeedItem: React.FC<RssFeedItemProps> = (props) => {
   const [description, setDescription] = useState(props.description);
+  const pubDate = DateUtils.format(new Date(props.pubDate), { withTime: true });
 
   useEffect(() => {
     const parser = new DOMParser();
@@ -22,12 +24,12 @@ export const RssFeedItem: React.FC<RssFeedItemProps> = (props) => {
         <div className='flex flex-wrap'>
           {props.category.map((cat) => (
             <span className='mr-2 text-sm text-gray-500' key={cat}>
-              {cat}
+              {cat.toUpperCase()}
             </span>
           ))}
         </div>
       )}
-      {props.pubDate && <p className='text-gray-400 text-sm'>{props.pubDate}</p>}
+      {pubDate && <p className='text-gray-400 text-sm'>{pubDate}</p>}
     </div>
   );
 };

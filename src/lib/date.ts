@@ -5,11 +5,12 @@ export const DateUtils = {
     return date.getMonth() === MONTH.DECEMBER;
   },
 
-  format(date: Date) {
+  format(date: Date, { withTime = false } = {}) {
     return date.toLocaleDateString('es-AR', {
       day: 'numeric',
       month: 'numeric',
       year: 'numeric',
+      ...(withTime && { hour: 'numeric', minute: 'numeric' }),
     });
   },
 
