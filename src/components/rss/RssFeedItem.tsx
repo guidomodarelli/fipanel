@@ -18,7 +18,7 @@ export const RssFeedItem: React.FC<RssFeedItemProps> = (props) => {
 
   return (
     <div className='flex flex-col gap-2 bg-gray-50 p-6 rounded-2xl shadow-md'>
-      <Link href={props.guid} target='_blank' rel='noreferrer noopener'>
+      <Link href={props.guid} rel='noreferrer noopener' target='_blank'>
         <h2 className='text-xl font-bold'>{props.title}</h2>
       </Link>
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml:  */}
