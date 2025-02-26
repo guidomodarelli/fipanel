@@ -3,14 +3,14 @@ import { cn } from '@/lib/utils';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import type React from 'react';
 import { useCallback } from 'react';
-import type { InvestmentProjectionData } from './InvestmentProjectionData';
+import type { TimeMachineData } from './TimeMachineData';
 
-interface InvestmentProjectionTableColumn {
+interface TimeMachineTableColumn {
   name: string;
   uid: 'year' | 'price' | 'variation' | 'saved' | 'invested' | 'i+s';
 }
 
-export const columns: InvestmentProjectionTableColumn[] = [
+export const columns: TimeMachineTableColumn[] = [
   { name: 'AÑO', uid: 'year' },
   { name: 'PRECIO', uid: 'price' },
   { name: 'VARIACIÓN %', uid: 'variation' },
@@ -19,8 +19,8 @@ export const columns: InvestmentProjectionTableColumn[] = [
   { name: 'AHORRADO + INVERTIDO', uid: 'i+s' },
 ];
 
-interface InvestmentProjectionTableProps {
-  data: InvestmentProjectionData[];
+interface TimeMachineTableProps {
+  data: TimeMachineData[];
 }
 
 const resolveCssClassByRange = (value: number, ranges: [string, number, number][]) => {
@@ -33,11 +33,11 @@ const resolveCssClassByRange = (value: number, ranges: [string, number, number][
   return rangeMatch ? rangeMatch[0] : '';
 };
 
-const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ data = [] }) => {
-  const renderCell = useCallback((data: InvestmentProjectionData, columnKey: React.Key) => {
-    const cellValue = data[columnKey as keyof InvestmentProjectionData];
+const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [] }) => {
+  const renderCell = useCallback((data: TimeMachineData, columnKey: React.Key) => {
+    const cellValue = data[columnKey as keyof TimeMachineData];
 
-    switch (columnKey as InvestmentProjectionTableColumn['uid']) {
+    switch (columnKey as TimeMachineTableColumn['uid']) {
       case 'year':
         return data.year;
       case 'price':
@@ -56,7 +56,7 @@ const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ d
   }, []);
 
   return (
-    <Table aria-label='Investment Projections' className='max-h-[25.3rem] overflow-y-auto' isHeaderSticky removeWrapper>
+    <Table aria-label='Máquina del tiempo' className='max-h-[25.3rem] overflow-y-auto' isHeaderSticky removeWrapper>
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn className='text-center' key={column.uid}>
@@ -100,4 +100,4 @@ const InvestmentProjectionTable: React.FC<InvestmentProjectionTableProps> = ({ d
   );
 };
 
-export default InvestmentProjectionTable;
+export default TimeMachineTable;

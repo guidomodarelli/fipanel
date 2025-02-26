@@ -9,10 +9,10 @@ import { useForm } from 'react-hook-form';
 import {
   ANNUAL_INJECTION_LABEL,
   INITIAL_INVESTMENT_LABEL,
-  type InvestmentProjection,
+  type TimeMachineScheme,
   YEARS_OF_INVESTMENT_LABEL,
   scheme,
-} from './scheme';
+} from './TimeMachineScheme';
 import { symbols } from './symbols';
 
 const DEBUG_VALUES = {
@@ -22,13 +22,13 @@ const DEBUG_VALUES = {
   symbol: 'IBM',
 } as const;
 
-interface InvestmentProjectionFormProps {
+interface TimeMachineFormProps {
   logger?: Logger;
-  onSubmit: (values: InvestmentProjection) => void;
+  onSubmit: (values: TimeMachineScheme) => void;
 }
 
-const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ logger, onSubmit: onSubmitHandler }) => {
-  const form = useForm<InvestmentProjection>({
+const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onSubmitHandler }) => {
+  const form = useForm<TimeMachineScheme>({
     resolver: zodResolver(scheme),
     defaultValues: {
       yearsOfInvestment: isDev ? DEBUG_VALUES.yearsOfInvestment : ('' as unknown as number),
@@ -51,7 +51,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
     return normalizedText.slice(0, normalizaedInputValue.length) === normalizaedInputValue;
   };
 
-  function onSubmit(values: InvestmentProjection) {
+  function onSubmit(values: TimeMachineScheme) {
     logger?.debug('Submitting form with values:', values);
     onSubmitHandler(values);
   }
@@ -166,4 +166,4 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
   );
 };
 
-export default InvestmentProjectionForm;
+export default TimeMachineForm;

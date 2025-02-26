@@ -48,4 +48,4 @@ export const scheme = z.object({
     }),
 });
 
-export type InvestmentProjection = z.infer<typeof scheme>;
+export type TimeMachineScheme = z.infer<typeof scheme>;

@@ -1,4 +1,4 @@
-export interface InvestmentProjectionData {
+export interface TimeMachineData {
   key: string | number;
   price: number;
   varPercent: number;
