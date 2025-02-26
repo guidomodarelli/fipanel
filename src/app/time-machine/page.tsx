@@ -8,35 +8,42 @@ import { useEffect, useState } from 'react';
 import { createLogger } from '../setup';
 
 function analyzePriceVariations(
-  precios: number[],
-  capitalInicial: number,
-  inyeccionMensual: number,
+  priceHistory: number[],
+  initialInvestmentAmount: number,
+  annualInvestmentInjection: number,
 ): InvestmentProjectionData[] {
-  const datos: InvestmentProjectionData[] = [];
-  let capitalInvertido = capitalInicial;
-  let capitalAhorrado = capitalInicial;
-  let capitalInvertidoYAhorrado = capitalInicial;
+  const datos: InvestmentProjectionData[] = [
+    {
+      key: 0,
+      year: new Date().getFullYear(),
+      price: priceHistory[0],
+      varPercent: 0,
+      invested: initialInvestmentAmount,
+      saved: initialInvestmentAmount,
+      total: initialInvestmentAmount,
+    },
+  ];
+  let capitalInvestmentBalance = initialInvestmentAmount;
+  let capitalAhorrado = initialInvestmentAmount;
+  let totalCapitalAccumulated = initialInvestmentAmount;
   const currentYear = new Date().getFullYear();
 
-  for (let i = 0; i < precios.length; i++) {
-    const year = currentYear - (precios.length - i - 1);
-    const varPercent = i === 0 ? 0 : (precios[i] - precios[i - 1]) / precios[i - 1];
+  for (let i = 1; i < priceHistory.length; i++) {
+    const year = currentYear - (priceHistory.length - i - 1);
+    const priceVariationPercentage = (priceHistory[i] - priceHistory[i - 1]) / priceHistory[i - 1];
 
-    capitalInvertido = i === 0 ? capitalInicial : capitalInvertido * (1 + varPercent);
-
-    capitalAhorrado = i === 0 ? capitalInicial : capitalAhorrado + inyeccionMensual * 12;
-
-    capitalInvertidoYAhorrado =
-      i === 0 ? capitalInicial : (capitalInvertidoYAhorrado + inyeccionMensual) * (1 + varPercent);
+    capitalInvestmentBalance = capitalInvestmentBalance * (1 + priceVariationPercentage);
+    capitalAhorrado += annualInvestmentInjection;
+    totalCapitalAccumulated = (totalCapitalAccumulated + annualInvestmentInjection) * (1 + priceVariationPercentage);
 
     datos.push({
       key: i,
       year,
-      price: precios[i],
-      varPercent: Number.parseFloat((varPercent * 100).toFixed(2)),
-      invested: Number.parseFloat(capitalInvertido.toFixed(2)),
+      price: priceHistory[i],
+      varPercent: Number.parseFloat((priceVariationPercentage * 100).toFixed(2)),
+      invested: Number.parseFloat(capitalInvestmentBalance.toFixed(2)),
       saved: Number.parseFloat(capitalAhorrado.toFixed(2)),
-      total: Number.parseFloat(capitalInvertidoYAhorrado.toFixed(2)),
+      total: Number.parseFloat(totalCapitalAccumulated.toFixed(2)),
     });
   }
 

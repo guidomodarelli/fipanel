@@ -57,9 +57,9 @@ const items: AppSidebarGroup[] = [
       //   icon: () => <FileChartColumnIncreasingIcon />,
       // },
       {
-        key: 'projection',
-        label: 'Proyección de Inversiones',
-        link: '/projecciones',
+        key: 'time-machine',
+        label: 'Máquina del tiempo financiera',
+        link: '/time-machine',
         icon: () => <ChartBarIncreasingIcon />,
       },
     ],
