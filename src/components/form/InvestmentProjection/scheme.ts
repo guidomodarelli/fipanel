@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
-const YEARS_OF_INVESTMENT_LABEL = 'Años de inversión';
-const INITIAL_INVESTMENT_LABEL = 'Inversión inicial';
-const MONTHLY_INJECTION_LABEL = 'Inyección Mensual';
-const SYMBOL_LABEL = 'Símbolo';
+export const YEARS_OF_INVESTMENT_LABEL = 'Años de inversión';
+export const INITIAL_INVESTMENT_LABEL = 'Inversión inicial';
+export const ANNUAL_INJECTION_LABEL = 'Inyección Anual';
+export const SYMBOL_LABEL = 'Símbolo';
 const SYMBOL_MIN_LENGTH = 2;
 const YEARS_OF_INVESTMENT_MIN = 1;
 const YEARS_OF_INVESTMENT_MAX = 20;
 const INITIAL_INVESTMENT_MIN = 1;
-const MONTHLY_INJECTION_MIN = 1;
+const ANNUAL_INJECTION_MIN = 1;
 
 export const scheme = z.object({
   yearsOfInvestment: z
@@ -30,13 +30,13 @@ export const scheme = z.object({
     .min(INITIAL_INVESTMENT_MIN, {
       message: `${INITIAL_INVESTMENT_LABEL} debe ser mayor que ${INITIAL_INVESTMENT_MIN - 1}`,
     }),
-  monthlyInjection: z
+  annualInjection: z
     .number({
-      required_error: `${MONTHLY_INJECTION_LABEL} es obligatorio`,
-      invalid_type_error: `${MONTHLY_INJECTION_LABEL} debe ser un número`,
+      required_error: `${ANNUAL_INJECTION_LABEL} es obligatorio`,
+      invalid_type_error: `${ANNUAL_INJECTION_LABEL} debe ser un número`,
     })
-    .min(MONTHLY_INJECTION_MIN, {
-      message: `${MONTHLY_INJECTION_LABEL} debe ser mayor que ${MONTHLY_INJECTION_MIN - 1}`,
+    .min(ANNUAL_INJECTION_MIN, {
+      message: `${ANNUAL_INJECTION_LABEL} debe ser mayor que ${ANNUAL_INJECTION_MIN - 1}`,
     }),
   symbol: z
     .string({

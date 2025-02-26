@@ -54,7 +54,7 @@ const Projection = () => {
   const logger = createLogger('Projection', 'disabled');
   const [symbol, setSymbol] = useState('');
   const [initialInvestment, setInitialInvestment] = useState(0);
-  const [monthlyInjection, setMonthlyInjection] = useState(0);
+  const [annualInjection, setAnnualInjection] = useState(0);
   const [from, setFrom] = useState<Date | undefined>(undefined);
   const [to, setTo] = useState<Date | undefined>(undefined);
   const [data, setData] = useState<InvestmentProjectionData[]>([]);
@@ -68,7 +68,7 @@ const Projection = () => {
     logger.debug('Symbol:', values.symbol);
     logger.debug('Years of investment:', values.yearsOfInvestment, 'years');
     logger.debug('Initial investment:', values.initialInvestment);
-    logger.debug('Monthly injection:', values.monthlyInjection);
+    logger.debug('Annual injection:', values.annualInjection);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const from = new Date(today.getFullYear() - values.yearsOfInvestment, 0, 1);
@@ -76,23 +76,23 @@ const Projection = () => {
     setFrom(from);
     setTo(today);
     setInitialInvestment(values.initialInvestment);
-    setMonthlyInjection(values.monthlyInjection);
+    setAnnualInjection(values.annualInjection);
   };
 
   useEffect(() => {
     logger.debug('Symbol:', symbol);
     logger.debug('Annual prices:', getAnnualPrices);
     logger.debug('Initial investment:', initialInvestment);
-    logger.debug('Monthly injection:', monthlyInjection);
+    logger.debug('Monthly injection:', annualInjection);
     logger.debug('From:', from?.toLocaleDateString());
     logger.debug('To:', to?.toLocaleDateString());
-    if (getAnnualPrices.length && initialInvestment && monthlyInjection) {
+    if (getAnnualPrices.length && initialInvestment && annualInjection) {
       logger.debug('Analyzing price variations');
-      const data = analyzePriceVariations(getAnnualPrices, initialInvestment, monthlyInjection);
+      const data = analyzePriceVariations(getAnnualPrices, initialInvestment, annualInjection);
       setData(data);
       logger.debug('Projection data set:', data);
     }
-  }, [symbol, getAnnualPrices, initialInvestment, monthlyInjection]);
+  }, [symbol, getAnnualPrices, initialInvestment, annualInjection]);
 
   return (
     <div className='flex gap-8'>

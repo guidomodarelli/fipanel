@@ -5,14 +5,20 @@ import { formatNumber } from '@/lib/number';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { type InvestmentProjection, scheme } from './scheme';
+import {
+  ANNUAL_INJECTION_LABEL,
+  INITIAL_INVESTMENT_LABEL,
+  type InvestmentProjection,
+  scheme,
+  YEARS_OF_INVESTMENT_LABEL,
+} from './scheme';
 import { symbols } from './symbols';
 
 const DEBUG = process.env.NODE_ENV === 'development';
 const DEBUG_VALUES = {
   yearsOfInvestment: 10,
   initialInvestment: 2_000,
-  monthlyInjection: 100,
+  annualInjection: 1200,
   symbol: 'IBM',
 } as const;
 
@@ -27,7 +33,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
     defaultValues: {
       yearsOfInvestment: DEBUG ? DEBUG_VALUES.yearsOfInvestment : ('' as unknown as number),
       initialInvestment: DEBUG ? DEBUG_VALUES.initialInvestment : ('' as unknown as number),
-      monthlyInjection: DEBUG ? DEBUG_VALUES.monthlyInjection : ('' as unknown as number),
+      annualInjection: DEBUG ? DEBUG_VALUES.annualInjection : ('' as unknown as number),
       symbol: DEBUG ? DEBUG_VALUES.symbol : '',
     },
   });
@@ -70,7 +76,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
               <FormControl>
                 <Input
                   className='max-w-sm'
-                  label='Años de inversión'
+                  label={YEARS_OF_INVESTMENT_LABEL}
                   labelPlacement='inside'
                   type='text'
                   {...field}
@@ -91,7 +97,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
               <FormControl>
                 <Input
                   className='max-w-sm'
-                  label='Inversión inicial'
+                  label={INITIAL_INVESTMENT_LABEL}
                   labelPlacement='inside'
                   startContent={<DolarSignIcon />}
                   type='text'
@@ -107,13 +113,13 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
         />
         <FormField
           control={form.control}
-          name='monthlyInjection'
+          name='annualInjection'
           render={({ field, fieldState }) => (
             <FormItem>
               <FormControl>
                 <Input
                   className='max-w-sm'
-                  label='Inyección Mensual'
+                  label={ANNUAL_INJECTION_LABEL}
                   labelPlacement='inside'
                   startContent={<DolarSignIcon />}
                   type='text'
