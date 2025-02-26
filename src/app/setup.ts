@@ -19,10 +19,10 @@ import { NoopLogger } from '@/core/contexts/shared/logger/domain/NoopLogger';
 import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 import type { XmlParser } from '@/core/contexts/shared/xml-parser/domain/XmlParser';
 import { FastXmlParser } from '@/core/contexts/shared/xml-parser/infrastructure/FastXmlParser';
-import { isProd } from '@/utils/node-env';
+import { isDev } from '@/utils/node-env';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
-export const createLogger = LoggerFactory(isProd ? new ConsoleLogger() : new NoopLogger());
+export const createLogger = LoggerFactory(isDev ? new ConsoleLogger() : new NoopLogger());
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
