@@ -2,8 +2,8 @@
 import { createLogger } from '@/app/setup';
 import type { TimeMachineData } from '@/components/TimeMachine/TimeMachineData';
 import TimeMachineForm from '@/components/TimeMachine/TimeMachineForm';
-import TimeMachineTable from '@/components/TimeMachine/TimeMachineTable';
 import type { TimeMachineScheme } from '@/components/TimeMachine/TimeMachineScheme';
+import TimeMachineTable from '@/components/TimeMachine/TimeMachineTable';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import { useEffect, useState } from 'react';
 
