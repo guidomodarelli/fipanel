@@ -8,7 +8,7 @@ import { CLARIN_ECONOMY_RSS } from './constants';
 import { createLogger } from './setup';
 
 export default function Home() {
-  const logger = createLogger('Home', 'enabled');
+  const logger = createLogger('Home', 'disabled');
   return (
     <div className={'flex flex-col gap-4 items-center'} style={{ height: `calc(100% - ${SIDEBAR_TRIGGER_HEIGHT})` }}>
       <div className='flex gap-4 flex-col md:flex-row'>
