@@ -15,12 +15,15 @@ import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsC
 import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
 import { LoggerFactory } from '@/core/contexts/shared/logger/domain/LoggerFactory';
+import { NoopLogger } from '@/core/contexts/shared/logger/domain/NoopLogger';
 import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 import type { XmlParser } from '@/core/contexts/shared/xml-parser/domain/XmlParser';
 import { FastXmlParser } from '@/core/contexts/shared/xml-parser/infrastructure/FastXmlParser';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
-export const createLogger = LoggerFactory(new ConsoleLogger());
+export const createLogger = LoggerFactory(isProd ? new ConsoleLogger() : new NoopLogger());
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);
 const dolarService: DolarProvider = new BluelyticsDolarProvider(httpService);
