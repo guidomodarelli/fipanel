@@ -2,6 +2,7 @@ import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import { formatNumber } from '@/lib/number';
+import { isDev } from '@/utils/node-env';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -14,7 +15,6 @@ import {
 } from './scheme';
 import { symbols } from './symbols';
 
-const DEBUG = process.env.NODE_ENV === 'development';
 const DEBUG_VALUES = {
   yearsOfInvestment: 10,
   initialInvestment: 2_000,
@@ -31,10 +31,10 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
   const form = useForm<InvestmentProjection>({
     resolver: zodResolver(scheme),
     defaultValues: {
-      yearsOfInvestment: DEBUG ? DEBUG_VALUES.yearsOfInvestment : ('' as unknown as number),
-      initialInvestment: DEBUG ? DEBUG_VALUES.initialInvestment : ('' as unknown as number),
-      annualInjection: DEBUG ? DEBUG_VALUES.annualInjection : ('' as unknown as number),
-      symbol: DEBUG ? DEBUG_VALUES.symbol : '',
+      yearsOfInvestment: isDev ? DEBUG_VALUES.yearsOfInvestment : ('' as unknown as number),
+      initialInvestment: isDev ? DEBUG_VALUES.initialInvestment : ('' as unknown as number),
+      annualInjection: isDev ? DEBUG_VALUES.annualInjection : ('' as unknown as number),
+      symbol: isDev ? DEBUG_VALUES.symbol : '',
     },
   });
 
@@ -144,7 +144,7 @@ const InvestmentProjectionForm: React.FC<InvestmentProjectionFormProps> = ({ log
                   className='max-w-sm'
                   defaultFilter={prefixFilter}
                   defaultItems={symbols}
-                  defaultSelectedKey={DEBUG ? DEBUG_VALUES.symbol : undefined}
+                  defaultSelectedKey={isDev ? DEBUG_VALUES.symbol : undefined}
                   label='Escoge un símbolo'
                   {...field}
                   errorMessage={fieldState.error?.message}

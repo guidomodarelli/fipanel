@@ -1,3 +1,4 @@
+import { isDev } from '@/utils/node-env';
 import type { HttpService } from '../../../shared/http/domain/HttpService';
 import type { Logger } from '../../../shared/logger/domain/Logger';
 import type { SymbolPriceInfo } from '../../domain/SymbolPriceInfo';
@@ -32,7 +33,7 @@ export class AlphavantageSymbolProvider implements SymbolProvider {
   async getSymbolPriceMonthly(symbol: string): Promise<SymbolPriceInfo[]> {
     let response: AlphaVantageSymbolMonthlyPriceResponse;
     this.logger.debug('Getting monthly prices for symbol:', symbol);
-    if (process.env.NODE_ENV === 'development') {
+    if (isDev) {
       this.logger.debug('Using example response');
       response = await this.getExampleResponse();
     } else {

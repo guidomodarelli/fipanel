@@ -19,8 +19,7 @@ import { NoopLogger } from '@/core/contexts/shared/logger/domain/NoopLogger';
 import { ConsoleLogger } from '@/core/contexts/shared/logger/infrastructure/ConsoleLogger';
 import type { XmlParser } from '@/core/contexts/shared/xml-parser/domain/XmlParser';
 import { FastXmlParser } from '@/core/contexts/shared/xml-parser/infrastructure/FastXmlParser';
-
-const isProd = process.env.NODE_ENV === 'production';
+import { isProd } from '@/utils/node-env';
 
 export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
 export const createLogger = LoggerFactory(isProd ? new ConsoleLogger() : new NoopLogger());

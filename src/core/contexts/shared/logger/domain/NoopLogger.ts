@@ -7,7 +7,7 @@ export class NoopLogger implements Logger {
   info(_message: string, ..._args: unknown[]): void {}
   warn(_message: string, ..._args: unknown[]): void {}
   error(_message: string, ..._args: unknown[]): void {}
-  getLogger(_newContext: string[], _status: Status): Logger {
+  getLogger(_newContext: string[], _status?: Status): Logger {
     return new NoopLogger();
   }
 }
