@@ -24,7 +24,7 @@ function analyzePriceVariations(
 
     capitalInvertido = i === 0 ? capitalInicial : capitalInvertido * (1 + varPercent);
 
-    capitalAhorrado = i === 0 ? capitalInicial : capitalAhorrado + inyeccionMensual;
+    capitalAhorrado = i === 0 ? capitalInicial : capitalAhorrado + inyeccionMensual * 12;
 
     capitalInvertidoYAhorrado =
       i === 0 ? capitalInicial : (capitalInvertidoYAhorrado + inyeccionMensual) * (1 + varPercent);
