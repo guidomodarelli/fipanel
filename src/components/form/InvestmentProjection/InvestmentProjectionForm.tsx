@@ -9,8 +9,8 @@ import {
   ANNUAL_INJECTION_LABEL,
   INITIAL_INVESTMENT_LABEL,
   type InvestmentProjection,
-  scheme,
   YEARS_OF_INVESTMENT_LABEL,
+  scheme,
 } from './scheme';
 import { symbols } from './symbols';
 
