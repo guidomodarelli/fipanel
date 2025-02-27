@@ -7,7 +7,8 @@ import TimeMachineTable from '@/components/pages/TimeMachine/TimeMachineTable';
 import { analyzePriceVariations } from '@/components/pages/TimeMachine/analyzePriceVariations';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { TimeMachineChart } from './TimeMachineChart';
 
 export const TimeMachine = () => {
   const logger = createLogger('Projection', 'disabled');
@@ -37,7 +38,32 @@ export const TimeMachine = () => {
     setAnnualInjection(values.annualInjection);
   };
 
+  const getYears = useCallback((from?: Date, to?: Date) => {
+    if (!from || !to) return [];
+    return Array.from({ length: to.getFullYear() - from.getFullYear() + 1 }, (_, i) => from.getFullYear() + i);
+  }, []);
+
+  const getPriceSeries = useCallback((data: TimeMachineData[]) => {
+    return data.map((item) => item.price);
+  }, []);
+
+  const getInvestedSeries = useCallback((data: TimeMachineData[]) => {
+    return data.map((item) => item.invested);
+  }, []);
+
+  const getSavedSeries = useCallback((data: TimeMachineData[]) => {
+    return data.map((item) => item.saved);
+  }, []);
+
+  const getTotalSeries = useCallback((data: TimeMachineData[]) => {
+    return data.map((item) => item.total);
+  }, []);
+
   useEffect(() => {
+    if (from && to) {
+      const years = getYears(from, to);
+      logger.debug('Years:', years);
+    }
     logger.debug('Symbol:', symbol);
     logger.debug('Annual prices:', getAnnualPrices);
     logger.debug('Initial investment:', initialInvestment);
@@ -53,9 +79,16 @@ export const TimeMachine = () => {
   }, [symbol, getAnnualPrices, initialInvestment, annualInjection]);
 
   return (
-    <div className='flex gap-8'>
-      <TimeMachineForm logger={logger.getLogger([TimeMachineForm.name])} onSubmit={handleSubmit} />
-      <TimeMachineTable data={data} />
-    </div>
+    <>
+      <div className='flex gap-8 m-8'>
+        <TimeMachineForm logger={logger.getLogger([TimeMachineForm.name])} onSubmit={handleSubmit} />
+        <TimeMachineTable data={data} />
+      </div>
+      <TimeMachineChart
+        logger={logger.getLogger([TimeMachineChart.name])}
+        series={[getPriceSeries(data), getInvestedSeries(data), getSavedSeries(data), getTotalSeries(data)]}
+        years={getYears(from, to)}
+      />
+    </>
   );
 };
