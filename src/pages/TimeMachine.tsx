@@ -6,6 +6,7 @@ import type { TimeMachineScheme } from '@/components/TimeMachine/TimeMachineSche
 import TimeMachineTable from '@/components/TimeMachine/TimeMachineTable';
 import { analyzePriceVariations } from '@/components/TimeMachine/analyzePriceVariations';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 
 export const TimeMachine = () => {
@@ -27,12 +28,11 @@ export const TimeMachine = () => {
     logger.debug('Years of investment:', values.yearsOfInvestment, 'years');
     logger.debug('Initial investment:', values.initialInvestment);
     logger.debug('Annual injection:', values.annualInjection);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const from = new Date(today.getFullYear() - values.yearsOfInvestment, 0, 1);
+    const today = dayjs().startOf('day');
+    const from = today.subtract(values.yearsOfInvestment, 'years').startOf('year');
     setSymbol(values.symbol);
-    setFrom(from);
-    setTo(today);
+    setFrom(from.toDate());
+    setTo(today.toDate());
     setInitialInvestment(values.initialInvestment);
     setAnnualInjection(values.annualInjection);
   };
