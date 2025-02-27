@@ -1,6 +1,7 @@
+import { useSidebar } from '@/components/ui/sidebar';
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import * as echarts from 'echarts';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface TimeMachineChartProps {
   logger: Logger;
@@ -10,6 +11,7 @@ interface TimeMachineChartProps {
 }
 
 export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, years = [], series = [], legend = [] }) => {
+  const { open } = useSidebar();
   const container = useRef<HTMLDivElement>(null);
   const chart = useRef<echarts.ECharts>(null);
   const [option, setOption] = useState<echarts.EChartsOption>({});
@@ -56,10 +58,20 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
     });
   }, [JSON.stringify(years), JSON.stringify(series), JSON.stringify(legend)]);
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     logger.debug('Resizing chart');
     chart.current?.resize();
-  };
+  }, []);
+
+  const lazyResize = useCallback(() => {
+    setTimeout(() => {
+      handleResize();
+    }, 300);
+  }, [handleResize]);
+
+  useEffect(() => {
+    lazyResize();
+  }, [open]);
 
   useEffect(() => {
     chart.current = echarts.init(container.current, null, {
@@ -67,10 +79,10 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
       useDirtyRect: true,
     });
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', lazyResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', lazyResize);
       chart.current?.dispose();
     };
   }, []);
