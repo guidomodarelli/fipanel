@@ -1,4 +1,4 @@
-import { formatCurrency } from '@/lib/number';
+import { NumberUtils } from '@/lib/number';
 import { cn } from '@/lib/utils';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 import type React from 'react';
@@ -41,15 +41,15 @@ const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [] }) => {
       case 'year':
         return data.year;
       case 'price':
-        return formatCurrency(data.price);
+        return NumberUtils.formatCurrency(data.price);
       case 'variation':
         return `${data.varPercent}%`;
       case 'saved':
-        return formatCurrency(data.saved);
+        return NumberUtils.formatCurrency(data.saved);
       case 'invested':
-        return formatCurrency(data.invested);
+        return NumberUtils.formatCurrency(data.invested);
       case 'i+s':
-        return formatCurrency(data.total);
+        return NumberUtils.formatCurrency(data.total);
       default:
         return cellValue;
     }
