@@ -10,8 +10,6 @@ import { getSymbolPriceDailyUseCase } from '@/core/contexts/Symbol/application/g
 import { getSymbolPriceMonthlyUseCase } from '@/core/contexts/Symbol/application/getSymbolPriceMonthlyUseCase';
 import type { SymbolProvider } from '@/core/contexts/Symbol/domain/SymbolProvider';
 import { MockSymbolProvider } from '@/core/contexts/Symbol/infrastructure/MockSymbolProvider';
-import type { Calendar } from '@/core/contexts/shared/date/domain/Calendar';
-import { DayjsCalendar } from '@/core/contexts/shared/date/infrastructure/DayjsCalendar';
 import type { HttpService } from '@/core/contexts/shared/http/domain/HttpService';
 import { FetchHttpService } from '@/core/contexts/shared/http/infrastructure/FetchHttpService';
 import { LoggerFactory } from '@/core/contexts/shared/logger/domain/LoggerFactory';
@@ -21,7 +19,6 @@ import type { XmlParser } from '@/core/contexts/shared/xml-parser/domain/XmlPars
 import { FastXmlParser } from '@/core/contexts/shared/xml-parser/infrastructure/FastXmlParser';
 import { isDev } from '@/utils/node-env';
 
-export const caljs: (date?: Date) => Calendar = (date?: Date) => new DayjsCalendar(date);
 export const createLogger = LoggerFactory(isDev ? new ConsoleLogger() : new NoopLogger());
 const httpService: HttpService = new FetchHttpService();
 const bcraService: FinancialDataProvider = new BCRAFinancialDataProvider(httpService);

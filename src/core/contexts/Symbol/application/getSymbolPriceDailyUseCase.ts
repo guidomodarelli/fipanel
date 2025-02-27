@@ -1,4 +1,4 @@
-import { caljs } from '@/app/setup';
+import dayjs from 'dayjs';
 import { DateRangeError } from '../../shared/date/domain/DateRangeError';
 import { DateRangeLimitError } from '../../shared/date/domain/DateRangeLimitError';
 import type { UnitTypes } from '../../shared/date/domain/types';
@@ -12,7 +12,7 @@ export const getSymbolPriceDailyUseCase =
     if (from >= to) {
       throw new DateRangeError();
     }
-    if (caljs(to).diff(caljs(from), UNIT_TYPE) > MONTHS_LIMIT) {
+    if (dayjs(to).diff(dayjs(from), UNIT_TYPE) > MONTHS_LIMIT) {
       throw new DateRangeLimitError(MONTHS_LIMIT, UNIT_TYPE);
     }
     return symbolProvider.getSymbolPriceDaily(symbol, from, to);

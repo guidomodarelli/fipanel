@@ -1,8 +1,9 @@
 import { MONTH } from '@/core/contexts/shared/date/domain/types';
+import dayjs from 'dayjs';
 
 export const DateUtils = {
   isDecember(date: Date) {
-    return date.getMonth() === MONTH.DECEMBER;
+    return dayjs(date).month() === MONTH.DECEMBER;
   },
 
   format(date: Date, { withTime = false } = {}) {
