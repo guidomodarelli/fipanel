@@ -1,11 +1,10 @@
 import dayjs from 'dayjs';
 import { DateRangeError } from '../../shared/date/domain/DateRangeError';
 import { DateRangeLimitError } from '../../shared/date/domain/DateRangeLimitError';
-import type { UnitTypes } from '../../shared/date/domain/types';
 import type { SymbolProvider } from '../domain/SymbolProvider';
 
 const MONTHS_LIMIT = 1;
-const UNIT_TYPE: UnitTypes = 'months';
+const UNIT_TYPE: dayjs.UnitTypeLongPlural = 'months';
 
 export const getSymbolPriceDailyUseCase =
   (symbolProvider: SymbolProvider) => (symbol: string, from: Date, to: Date) => {

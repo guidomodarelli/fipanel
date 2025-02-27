@@ -1,5 +1,3 @@
-export type UnitTypes = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years' | 'dates';
-
 export enum MONTH {
   JANUARY = 0,
   FEBRUARY = 1,
