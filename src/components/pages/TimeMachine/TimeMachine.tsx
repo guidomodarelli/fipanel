@@ -1,10 +1,10 @@
 'use client';
 import { createLogger } from '@/app/setup';
-import type { TimeMachineData } from '@/components/TimeMachine/TimeMachineData';
-import TimeMachineForm from '@/components/TimeMachine/TimeMachineForm';
-import type { TimeMachineScheme } from '@/components/TimeMachine/TimeMachineScheme';
-import TimeMachineTable from '@/components/TimeMachine/TimeMachineTable';
-import { analyzePriceVariations } from '@/components/TimeMachine/analyzePriceVariations';
+import type { TimeMachineData } from '@/components/pages/TimeMachine/TimeMachineData';
+import TimeMachineForm from '@/components/pages/TimeMachine/TimeMachineForm';
+import type { TimeMachineScheme } from '@/components/pages/TimeMachine/TimeMachineScheme';
+import TimeMachineTable from '@/components/pages/TimeMachine/TimeMachineTable';
+import { analyzePriceVariations } from '@/components/pages/TimeMachine/analyzePriceVariations';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
