@@ -1,9 +1,6 @@
 import { z } from 'zod';
+import { ANNUAL_INJECTION_LABEL, INITIAL_INVESTMENT_LABEL, SYMBOL_LABEL, YEARS_OF_INVESTMENT_LABEL } from './constants';
 
-export const YEARS_OF_INVESTMENT_LABEL = 'Años de inversión';
-export const INITIAL_INVESTMENT_LABEL = 'Inversión inicial';
-export const ANNUAL_INJECTION_LABEL = 'Inyección Anual';
-export const SYMBOL_LABEL = 'Símbolo';
 const SYMBOL_MIN_LENGTH = 2;
 const YEARS_OF_INVESTMENT_MIN = 1;
 const YEARS_OF_INVESTMENT_MAX = 20;

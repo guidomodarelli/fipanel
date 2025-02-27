@@ -6,13 +6,8 @@ import { isDev } from '@/utils/node-env';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import {
-  ANNUAL_INJECTION_LABEL,
-  INITIAL_INVESTMENT_LABEL,
-  type TimeMachineScheme,
-  YEARS_OF_INVESTMENT_LABEL,
-  scheme,
-} from './TimeMachineScheme';
+import { type TimeMachineScheme, scheme } from './TimeMachineScheme';
+import { ANNUAL_INJECTION_LABEL, INITIAL_INVESTMENT_LABEL, YEARS_OF_INVESTMENT_LABEL } from './constants';
 import { symbols } from './symbols';
 
 const DEBUG_VALUES = {
