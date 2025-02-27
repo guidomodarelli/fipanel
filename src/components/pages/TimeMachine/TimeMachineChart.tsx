@@ -11,20 +11,7 @@ interface TimeMachineChartProps {
 export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, years = [], series = [] }) => {
   const container = useRef<HTMLDivElement>(null);
   const chart = useRef<echarts.ECharts>(null);
-  const [option, setOption] = useState<echarts.EChartsOption>({
-    xAxis: {
-      type: 'category',
-      data: years,
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: series.map((data) => ({
-      data,
-      type: 'line',
-      smooth: true,
-    })),
-  });
+  const [option, setOption] = useState<echarts.EChartsOption>({});
 
   useEffect(() => {
     setOption({
@@ -54,7 +41,6 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
       useDirtyRect: true,
     });
 
-    chart.current?.setOption(option);
     window.addEventListener('resize', handleResize);
 
     return () => {
