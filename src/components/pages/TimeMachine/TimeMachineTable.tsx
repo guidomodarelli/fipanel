@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from 
 import type React from 'react';
 import { useCallback } from 'react';
 import type { TimeMachineData } from './TimeMachineData';
+import { INVESTED, I_S, PRICE, SAVED, VARIATION, YEAR } from './constants';
 
 interface TimeMachineTableColumn {
   name: string;
@@ -11,12 +12,12 @@ interface TimeMachineTableColumn {
 }
 
 export const columns: TimeMachineTableColumn[] = [
-  { name: 'AÑO', uid: 'year' },
-  { name: 'PRECIO', uid: 'price' },
-  { name: 'VARIACIÓN %', uid: 'variation' },
-  { name: 'AHORRADO', uid: 'saved' },
-  { name: 'INVERTIDO', uid: 'invested' },
-  { name: 'AHORRADO + INVERTIDO', uid: 'i+s' },
+  { name: YEAR.toLocaleUpperCase(), uid: 'year' },
+  { name: PRICE.toLocaleUpperCase(), uid: 'price' },
+  { name: VARIATION.toLocaleUpperCase(), uid: 'variation' },
+  { name: SAVED.toLocaleUpperCase(), uid: 'saved' },
+  { name: INVESTED.toLocaleUpperCase(), uid: 'invested' },
+  { name: I_S.toLocaleUpperCase(), uid: 'i+s' },
 ];
 
 interface TimeMachineTableProps {
