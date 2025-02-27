@@ -11,7 +11,7 @@ interface TimeMachineChartProps {
 export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, years = [], series = [] }) => {
   const container = useRef<HTMLDivElement>(null);
   const chart = useRef<echarts.ECharts>(null);
-  const [option, setOption] = useState({
+  const [option, setOption] = useState<echarts.EChartsOption>({
     xAxis: {
       type: 'category',
       data: years,
