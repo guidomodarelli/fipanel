@@ -17,7 +17,7 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
   const container = useRef<HTMLDivElement>(null);
   const chart = useRef<echarts.ECharts>(null);
   const [option, setOption] = useState<echarts.EChartsOption>({});
-  const lazyResize$ = new Subject<void>();
+  const resizeNotifier$ = new Subject<void>();
 
   useEffect(() => {
     setOption({
@@ -67,11 +67,11 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
   }, []);
 
   const lazyResize = () => {
-    lazyResize$.next();
+    resizeNotifier$.next();
   };
 
   useEffect(() => {
-    lazyResize$.next();
+    resizeNotifier$.next();
   }, [open]);
 
   useEffect(() => {
@@ -81,11 +81,11 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
     });
 
     window.addEventListener('resize', lazyResize);
-    lazyResize$.pipe(debounceTime(100)).subscribe(handleResize);
+    resizeNotifier$.pipe(debounceTime(100)).subscribe(handleResize);
 
     return () => {
       window.removeEventListener('resize', lazyResize);
-      lazyResize$.complete();
+      resizeNotifier$.complete();
       chart.current?.dispose();
     };
   }, []);
