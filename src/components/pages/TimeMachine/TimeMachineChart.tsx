@@ -57,5 +57,5 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
     chart.current?.setOption(option);
   }, [option]);
 
-  return <div className='h-[30vh] w-full relative overflow-hidden' ref={container} />;
+  return <div className='h-[33vh] w-full relative overflow-hidden' ref={container} />;
 };
