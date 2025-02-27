@@ -43,10 +43,6 @@ export const TimeMachine = () => {
     return Array.from({ length: to.getFullYear() - from.getFullYear() + 1 }, (_, i) => from.getFullYear() + i);
   }, []);
 
-  const getPriceSeries = useCallback((data: TimeMachineData[]) => {
-    return data.map((item) => item.price);
-  }, []);
-
   const getInvestedSeries = useCallback((data: TimeMachineData[]) => {
     return data.map((item) => item.invested);
   }, []);
@@ -86,7 +82,7 @@ export const TimeMachine = () => {
       </div>
       <TimeMachineChart
         logger={logger.getLogger([TimeMachineChart.name])}
-        series={[getPriceSeries(data), getInvestedSeries(data), getSavedSeries(data), getTotalSeries(data)]}
+        series={[getInvestedSeries(data), getSavedSeries(data), getTotalSeries(data)]}
         years={getYears(from, to)}
       />
     </>
