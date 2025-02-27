@@ -9,9 +9,10 @@ import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { TimeMachineChart } from './TimeMachineChart';
+import { INVESTED, I_S, SAVED } from './constants';
 
 export const TimeMachine = () => {
-  const logger = createLogger('Projection', 'disabled');
+  const logger = createLogger(TimeMachine.name, 'disabled');
   const [symbol, setSymbol] = useState('');
   const [initialInvestment, setInitialInvestment] = useState(0);
   const [annualInjection, setAnnualInjection] = useState(0);
@@ -81,7 +82,8 @@ export const TimeMachine = () => {
         <TimeMachineTable data={data} />
       </div>
       <TimeMachineChart
-        logger={logger.getLogger([TimeMachineChart.name])}
+        legend={[INVESTED, SAVED, I_S]}
+        logger={logger.getLogger([TimeMachineChart.name], 'disabled')}
         series={[getInvestedSeries(data), getSavedSeries(data), getTotalSeries(data)]}
         years={getYears(from, to)}
       />
