@@ -1,7 +1,7 @@
 import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
-import { formatNumber } from '@/lib/number';
+import { NumberUtils } from '@/lib/number';
 import { isDev } from '@/utils/node-env';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -83,7 +83,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
                   onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
-                  value={field.value ? formatNumber(field.value) : ''}
+                  value={field.value ? NumberUtils.formatNumber(field.value) : ''}
                 />
               </FormControl>
             </FormItem>
@@ -105,7 +105,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
                   onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
-                  value={field.value ? formatNumber(field.value) : ''}
+                  value={field.value ? NumberUtils.formatNumber(field.value) : ''}
                 />
               </FormControl>
             </FormItem>
@@ -127,7 +127,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
                   onChange={(event) => field.onChange(changeNumberHandler(event.target.value))}
-                  value={field.value ? formatNumber(field.value) : ''}
+                  value={field.value ? NumberUtils.formatNumber(field.value) : ''}
                 />
               </FormControl>
             </FormItem>
