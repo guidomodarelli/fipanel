@@ -34,7 +34,7 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
       },
       grid: {
         left: '1%',
-        right: '21%',
+        right: 135,
         bottom: '1%',
         containLabel: true,
       },
@@ -76,7 +76,7 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
 
   useEffect(() => {
     chart.current = echarts.init(container.current, null, {
-      renderer: 'canvas',
+      renderer: 'svg',
       useDirtyRect: true,
     });
 
