@@ -7,4 +7,4 @@ export const PRICE = 'Precio';
 export const VARIATION = 'Variación %';
 export const SAVED = 'Ahorrado';
 export const INVESTED = 'Inversión Inicial';
-export const I_S = `${SAVED} + ${INVESTED}`;
+export const I_S = 'Total';
