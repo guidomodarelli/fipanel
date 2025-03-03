@@ -10,6 +10,13 @@ import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { TimeMachineChart } from './TimeMachineChart';
 import { INVESTED, I_S, SAVED } from './constants';
+import type { Legend } from './types';
+
+const legends: Legend[] = [
+  { name: INVESTED, color: 'hsl(0,70%,40%)' },
+  { name: SAVED, color: 'hsl(120,70%,40%)' },
+  { name: I_S, color: 'hsl(240,70%,40%)' },
+];
 
 export const TimeMachine = () => {
   const logger = createLogger(TimeMachine.name, 'disabled');
@@ -79,10 +86,10 @@ export const TimeMachine = () => {
     <>
       <div className='flex gap-8 m-8'>
         <TimeMachineForm logger={logger.getLogger([TimeMachineForm.name])} onSubmit={handleSubmit} />
-        <TimeMachineTable data={data} />
+        <TimeMachineTable data={data} legends={legends} />
       </div>
       <TimeMachineChart
-        legend={[INVESTED, SAVED, I_S]}
+        legend={legends}
         logger={logger.getLogger([TimeMachineChart.name], 'disabled')}
         series={[getInvestedSeries(data), getSavedSeries(data), getTotalSeries(data)]}
         years={getYears(from, to)}

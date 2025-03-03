@@ -4,12 +4,13 @@ import * as echarts from 'echarts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Subject } from 'rxjs/internal/Subject';
 import { debounceTime } from 'rxjs/operators';
+import type { Legend } from './types';
 
 interface TimeMachineChartProps {
   logger: Logger;
   years: number[];
   series: number[][];
-  legend?: string[];
+  legend?: Legend[];
 }
 
 export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, years = [], series = [], legend = [] }) => {
@@ -54,7 +55,8 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
       },
       series: series.map((data, index) => ({
         data,
-        name: legend[index],
+        name: legend[index].name,
+        color: legend[index].color,
         type: 'line',
         smooth: true,
       })),

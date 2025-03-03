@@ -5,6 +5,7 @@ import type React from 'react';
 import { useCallback } from 'react';
 import type { TimeMachineData } from './TimeMachineData';
 import { INVESTED, I_S, PRICE, SAVED, VARIATION, YEAR } from './constants';
+import type { Legend } from './types';
 
 interface TimeMachineTableColumn {
   name: string;
@@ -15,13 +16,14 @@ export const columns: TimeMachineTableColumn[] = [
   { name: YEAR.toLocaleUpperCase(), uid: 'year' },
   { name: PRICE.toLocaleUpperCase(), uid: 'price' },
   { name: VARIATION.toLocaleUpperCase(), uid: 'variation' },
-  { name: SAVED.toLocaleUpperCase(), uid: 'saved' },
   { name: INVESTED.toLocaleUpperCase(), uid: 'invested' },
+  { name: SAVED.toLocaleUpperCase(), uid: 'saved' },
   { name: I_S.toLocaleUpperCase(), uid: 'i+s' },
 ];
 
 interface TimeMachineTableProps {
   data: TimeMachineData[];
+  legends: Legend[];
 }
 
 const resolveCssClassByRange = (value: number, ranges: [string, number, number][]) => {
@@ -34,7 +36,7 @@ const resolveCssClassByRange = (value: number, ranges: [string, number, number][
   return rangeMatch ? rangeMatch[0] : '';
 };
 
-const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [] }) => {
+const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [], legends = [] }) => {
   const renderCell = useCallback((data: TimeMachineData, columnKey: React.Key) => {
     const cellValue = data[columnKey as keyof TimeMachineData];
 
@@ -60,7 +62,13 @@ const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [] }) => {
     <Table aria-label='Máquina del tiempo' className='max-h-[25.3rem] overflow-y-auto' isHeaderSticky removeWrapper>
       <TableHeader columns={columns}>
         {(column) => (
-          <TableColumn className='text-center' key={column.uid}>
+          <TableColumn
+            className='text-center'
+            key={column.uid}
+            style={{
+              color: legends.find((legend) => column.name.toLowerCase() === legend.name.toLowerCase())?.color,
+            }}
+          >
             {column.name}
           </TableColumn>
         )}
