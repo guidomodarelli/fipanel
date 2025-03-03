@@ -36,13 +36,10 @@ export const EChart: React.FC<EChartProps> = (props) => {
         const animate = () => {
           logger.debug('Animating resize');
           chart.current?.resize();
-          if (Date.now() - startTime < SIDEBAR_ANIMATION_DURATION) {
+          if (Date.now() - startTime < SIDEBAR_ANIMATION_DURATION + 50) {
             animationFrame = requestAnimationFrame(animate);
           } else {
-            setTimeout(() => {
-              chart.current?.resize(); // Final resize to ensure correct dimensions
-              cancelAnimationFrame(animationFrame);
-            }, 10);
+            cancelAnimationFrame(animationFrame);
           }
         };
 
