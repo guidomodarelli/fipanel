@@ -3,7 +3,6 @@ import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
 import { Subject } from 'rxjs/internal/Subject';
-import { debounceTime } from 'rxjs/operators';
 
 interface EChartProps {
   logger: Logger;
@@ -24,10 +23,30 @@ export const EChart: React.FC<EChartProps> = (props) => {
     });
 
     window.addEventListener('resize', emitResizeEvent);
-    resizeNotifier$.current.pipe(debounceTime(SIDEBAR_ANIMATION_DURATION)).subscribe({
+    // resizeNotifier$.current.pipe(debounceTime(SIDEBAR_ANIMATION_DURATION + 10)).subscribe({
+    //   next: () => {
+    //     chart.current?.resize(); // Final resize to ensure correct dimensions
+    //   },
+    // });
+    resizeNotifier$.current.subscribe({
       next: () => {
-        logger.debug('Resizing chart');
-        chart.current?.resize();
+        const startTime = Date.now();
+        let animationFrame: number;
+
+        const animate = () => {
+          logger.debug('Animating resize');
+          chart.current?.resize();
+          if (Date.now() - startTime < SIDEBAR_ANIMATION_DURATION) {
+            animationFrame = requestAnimationFrame(animate);
+          } else {
+            setTimeout(() => {
+              chart.current?.resize(); // Final resize to ensure correct dimensions
+              cancelAnimationFrame(animationFrame);
+            }, 10);
+          }
+        };
+
+        animationFrame = requestAnimationFrame(animate);
       },
     });
 
