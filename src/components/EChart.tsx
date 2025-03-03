@@ -23,11 +23,6 @@ export const EChart: React.FC<EChartProps> = (props) => {
     });
 
     window.addEventListener('resize', emitResizeEvent);
-    // resizeNotifier$.current.pipe(debounceTime(SIDEBAR_ANIMATION_DURATION + 10)).subscribe({
-    //   next: () => {
-    //     chart.current?.resize(); // Final resize to ensure correct dimensions
-    //   },
-    // });
     resizeNotifier$.current.subscribe({
       next: () => {
         const startTime = Date.now();
