@@ -29,33 +29,6 @@ export const EChart: React.FC<EChartProps> = (props) => {
         chart.current?.resize();
       },
     });
-    // resizeNotifier$.current.subscribe({
-    //   next: () => {
-    //     const startTime = Date.now();
-    //     let animationFrame: number;
-    //     let timeoutId: NodeJS.Timeout;
-
-    //     const animate = () => {
-    //       logger.debug('Animating resize');
-    //       chart.current?.resize();
-    //       if (Date.now() - startTime < SIDEBAR_ANIMATION_DURATION) {
-    //         animationFrame = requestAnimationFrame(animate);
-    //       } else {
-    //         cancelAnimationFrame(animationFrame);
-    //         timeoutId = setTimeout(() => {
-    //           chart.current?.resize(); // Resize again to fix some rendering issues
-    //         }, 50);
-    //       }
-    //     };
-
-    //     animationFrame = requestAnimationFrame(animate);
-
-    //     return () => {
-    //       cancelAnimationFrame(animationFrame);
-    //       clearTimeout(timeoutId);
-    //     };
-    //   },
-    // });
 
     return () => {
       window.removeEventListener('resize', emitResizeEvent);
