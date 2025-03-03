@@ -64,5 +64,5 @@ export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, year
     });
   }, [JSON.stringify(years), JSON.stringify(series), JSON.stringify(legend)]);
 
-  return <EChart logger={logger.getLogger([EChart.name])} option={option} />;
+  return <EChart logger={logger.getLogger([EChart.name], 'disabled')} option={option} />;
 };
