@@ -3,6 +3,7 @@ import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
 import { Subject } from 'rxjs/internal/Subject';
+import { debounceTime } from 'rxjs/operators';
 
 interface EChartProps {
   logger: Logger;
@@ -23,33 +24,38 @@ export const EChart: React.FC<EChartProps> = (props) => {
     });
 
     window.addEventListener('resize', emitResizeEvent);
-    resizeNotifier$.current.subscribe({
+    resizeNotifier$.current.pipe(debounceTime(SIDEBAR_ANIMATION_DURATION + 50)).subscribe({
       next: () => {
-        const startTime = Date.now();
-        let animationFrame: number;
-        let timeoutId: NodeJS.Timeout;
-
-        const animate = () => {
-          logger.debug('Animating resize');
-          chart.current?.resize();
-          if (Date.now() - startTime < SIDEBAR_ANIMATION_DURATION) {
-            animationFrame = requestAnimationFrame(animate);
-          } else {
-            cancelAnimationFrame(animationFrame);
-            timeoutId = setTimeout(() => {
-              chart.current?.resize(); // Resize again to fix some rendering issues
-            }, 50);
-          }
-        };
-
-        animationFrame = requestAnimationFrame(animate);
-
-        return () => {
-          cancelAnimationFrame(animationFrame);
-          clearTimeout(timeoutId);
-        };
+        chart.current?.resize();
       },
     });
+    // resizeNotifier$.current.subscribe({
+    //   next: () => {
+    //     const startTime = Date.now();
+    //     let animationFrame: number;
+    //     let timeoutId: NodeJS.Timeout;
+
+    //     const animate = () => {
+    //       logger.debug('Animating resize');
+    //       chart.current?.resize();
+    //       if (Date.now() - startTime < SIDEBAR_ANIMATION_DURATION) {
+    //         animationFrame = requestAnimationFrame(animate);
+    //       } else {
+    //         cancelAnimationFrame(animationFrame);
+    //         timeoutId = setTimeout(() => {
+    //           chart.current?.resize(); // Resize again to fix some rendering issues
+    //         }, 50);
+    //       }
+    //     };
+
+    //     animationFrame = requestAnimationFrame(animate);
+
+    //     return () => {
+    //       cancelAnimationFrame(animationFrame);
+    //       clearTimeout(timeoutId);
+    //     };
+    //   },
+    // });
 
     return () => {
       window.removeEventListener('resize', emitResizeEvent);
