@@ -3,11 +3,11 @@ import type { SymbolPriceInfo } from '../domain/SymbolPriceInfo';
 import type { SymbolProvider } from '../domain/SymbolProvider';
 
 export class MockSymbolProvider implements SymbolProvider {
-  public async getSymbolPriceMonthly(symbol: string, from: Date, to: Date): Promise<SymbolPriceInfo[]> {
+  public async getSymbolPriceMonthly(_symbol: string, from: Date, to: Date): Promise<SymbolPriceInfo[]> {
     return Promise.resolve(this.generateMonthlyMockData(from, to));
   }
 
-  public async getSymbolPriceDaily(symbol: string, from: Date, to: Date): Promise<SymbolPriceInfo[]> {
+  public async getSymbolPriceDaily(_symbol: string, from: Date, to: Date): Promise<SymbolPriceInfo[]> {
     return Promise.resolve(this.generateDailyMockData(from, to));
   }
 

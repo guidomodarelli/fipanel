@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
       status: 200,
       headers: { 'Content-Type': 'application/xml' },
     });
-  } catch (error) {
+  } catch (_error) {
     return new Response('Error fetching RSS feed', { status: 500 });
   }
 }
