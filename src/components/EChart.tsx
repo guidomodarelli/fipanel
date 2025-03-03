@@ -15,7 +15,7 @@ export const EChart: React.FC<EChartProps> = (props) => {
   const { open } = useSidebar();
   const container = useRef<HTMLDivElement>(null);
   const chart = useRef<echarts.ECharts>(null);
-  const resizeNotifier$ = useRef(new Subject<boolean>());
+  const resizeNotifier$ = useRef(new Subject<void>());
 
   useEffect(() => {
     logger.debug('Initializing chart');
@@ -26,7 +26,7 @@ export const EChart: React.FC<EChartProps> = (props) => {
     window.addEventListener('resize', emitResizeEvent);
     resizeNotifier$.current.pipe(debounceTime(SIDEBAR_ANIMATION_DURATION)).subscribe({
       next: () => {
-        console.debug('Resizing chart');
+        logger.debug('Resizing chart');
         chart.current?.resize();
       },
     });
@@ -43,11 +43,11 @@ export const EChart: React.FC<EChartProps> = (props) => {
   }, [props.option]);
 
   const emitResizeEvent = () => {
-    resizeNotifier$.current.next(true);
+    resizeNotifier$.current.next();
   };
 
   useEffect(() => {
-    resizeNotifier$.current.next(true);
+    emitResizeEvent();
   }, [open]);
 
   return <div className='h-[33vh] w-full relative overflow-hidden' ref={container} />;
