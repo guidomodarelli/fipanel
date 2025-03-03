@@ -6,5 +6,5 @@ export interface Logger {
   info(...args: unknown[]): void;
   warn(...args: unknown[]): void;
   error(...args: unknown[]): void;
-  getLogger(context: unknown[], status?: Status): Logger;
+  getLogger(context: string[], status?: Status): Logger;
 }
