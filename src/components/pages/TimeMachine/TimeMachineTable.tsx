@@ -73,18 +73,18 @@ const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [] }) => {
                 className={cn(
                   'text-center',
                   {
-                    'text-white font-bold': columnKey === 'variation',
+                    'text-gray-800 font-bold': columnKey === 'variation',
                   },
                   columnKey === 'variation' &&
                     resolveCssClassByRange(item.varPercent, [
-                      ['bg-red-500 ', Number.NEGATIVE_INFINITY, -30],
-                      ['bg-red-400', -30, -20],
+                      ['bg-red-500 text-white', Number.NEGATIVE_INFINITY, -30],
+                      ['bg-red-400 text-white', -30, -20],
                       ['bg-red-300', -20, -10],
-                      ['bg-red-200 text-gray-800', -10, -5],
-                      ['bg-red-100 text-gray-800', -5, 0],
-                      ['bg-white text-gray-800', 0, 0],
-                      ['bg-green-100 text-gray-800', 0, 5],
-                      ['bg-green-200 text-gray-800', 5, 10],
+                      ['bg-red-200', -10, -5],
+                      ['bg-red-100', -5, 0],
+                      ['bg-white', 0, 0],
+                      ['bg-green-100', 0, 5],
+                      ['bg-green-200', 5, 10],
                       ['bg-green-300', 10, 20],
                       ['bg-green-400', 20, 30],
                       ['bg-green-500', 30, Number.POSITIVE_INFINITY],
