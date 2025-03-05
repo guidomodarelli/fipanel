@@ -8,7 +8,7 @@ interface TradingViewSymbolInfoProps {
   colorTheme?: ColorTheme;
 }
 
-// Symbol Info Widget: https://www.tradingview.com/widget-docs/widgets/symbol-details/symbol-info/
+// Symbol Info Widget: https://www.tradingview.com/widget-docs/widgets/symbol-details/company-profile/
 const TradingViewSymbolInfo: React.FC<TradingViewSymbolInfoProps> = ({
   symbol,
   locale = 'es',
@@ -27,6 +27,7 @@ const TradingViewSymbolInfo: React.FC<TradingViewSymbolInfoProps> = ({
       locale,
       symbol,
       width: '100%',
+      height: '100%',
       autosize: true,
     });
 
