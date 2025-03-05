@@ -6,16 +6,18 @@ import type { BusinessAnalyzerScheme } from './BusinessAnalyzerScheme';
 
 export default function BusinessAnalyzer() {
   const [symbol, setSymbol] = useState<string>(DEBUG_VALUES.symbol);
+  const [market, setMarket] = useState<string>(DEBUG_VALUES.market);
 
   const onSubmit = (data: BusinessAnalyzerScheme) => {
     console.log('Submitted data:', data);
     setSymbol(data.symbol);
+    setMarket(data.market);
   };
 
   return (
     <>
       <BusinessAnalyzerForm onSubmit={onSubmit} />
-      <TradingViewFinancials symbol={symbol} />
+      <TradingViewFinancials symbol={`${market}:${symbol}`} />
     </>
   );
 }
