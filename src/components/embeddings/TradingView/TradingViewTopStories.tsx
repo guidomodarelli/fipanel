@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const TradingViewTimeline = () => {
+export const TradingViewTopStories = () => {
   const tradingviewTimelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
