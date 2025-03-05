@@ -2,6 +2,7 @@
 import { createLogger } from '@/app/setup';
 import TradingViewFinancials from '@/components/embeddings/TradingView/TradingViewFinancials';
 import TradingViewSymbolInfo from '@/components/embeddings/TradingView/TradingViewSymbolInfo';
+import TradingViewSymbolProfile from '@/components/embeddings/TradingView/TradingViewSymbolProfile';
 import { useState } from 'react';
 import BusinessAnalyzerForm, { DEBUG_VALUES } from './BusinessAnalyzerForm';
 import type { BusinessAnalyzerScheme } from './BusinessAnalyzerScheme';
@@ -22,6 +23,7 @@ export default function BusinessAnalyzer() {
       <BusinessAnalyzerForm onSubmit={onSubmit} />
       <div className='mt-8'>
         <TradingViewSymbolInfo symbol={`${market}:${symbol}`} />
+        <TradingViewSymbolProfile symbol={`${market}:${symbol}`} />
         <TradingViewFinancials symbol={`${market}:${symbol}`} />
       </div>
     </>
