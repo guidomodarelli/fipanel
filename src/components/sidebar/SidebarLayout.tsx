@@ -1,4 +1,5 @@
 'use client';
+import { symbols } from '../embeddings/TradingView/Symbols';
 import { TradingViewTickerTape } from '../embeddings/TradingView/TradingViewTickerTape';
 import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 import { Sidebar } from './Sidebar';
@@ -16,7 +17,7 @@ export const SidebarLayout = ({ children }: SidebarProps) => {
       <Sidebar />
       {/* https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter */}
       <div className='flex flex-col min-h-screen grow [scrollbar-gutter:stable;]'>
-        <TradingViewTickerTape />
+        <TradingViewTickerTape symbols={symbols} />
         <main className='px-8 grow'>
           <div
             style={{

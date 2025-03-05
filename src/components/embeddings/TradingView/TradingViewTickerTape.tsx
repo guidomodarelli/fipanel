@@ -1,10 +1,26 @@
 'use client';
+import type { ColorTheme } from '@/typings/ColorTheme';
 import React, { useEffect } from 'react';
 
 export const TICKER_TAPE_HEIGHT = 44;
 
+export interface Symbol {
+  description: string;
+  proName: string;
+}
+
+interface TradingViewTickerTapeProps {
+  symbols: Symbol[];
+  locale?: string;
+  colorTheme?: ColorTheme;
+}
+
 // Ticker Widget Editor: https://www.tradingview.com/widget-docs/widgets/tickers/ticker/
-export const TradingViewTickerTape = () => {
+export const TradingViewTickerTape: React.FC<TradingViewTickerTapeProps> = ({
+  symbols = [],
+  locale = 'es',
+  colorTheme = 'light',
+}) => {
   const tradingviewTickerTapeRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -13,85 +29,12 @@ export const TradingViewTickerTape = () => {
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
-      symbols: [
-        {
-          description: 'Oro',
-          proName: 'OANDA:XAUUSD',
-        },
-        {
-          description: 'S&P 500',
-          proName: 'CAPITALCOM:US500',
-        },
-        {
-          description: 'Nasdaq',
-          proName: 'CAPITALCOM:US100',
-        },
-        {
-          description: 'Visa',
-          proName: 'NYSE:V',
-        },
-        {
-          description: 'Mastercard',
-          proName: 'NYSE:MA',
-        },
-        {
-          description: 'Amazon',
-          proName: 'NASDAQ:AMZN',
-        },
-        {
-          description: 'Alphabet',
-          proName: 'NASDAQ:GOOGL',
-        },
-        {
-          description: 'Meta',
-          proName: 'NASDAQ:META',
-        },
-        {
-          description: 'Microsoft',
-          proName: 'NASDAQ:MSFT',
-        },
-        {
-          description: 'Tesla',
-          proName: 'NASDAQ:TSLA',
-        },
-        {
-          description: 'Ferrari',
-          proName: 'NYSE:RACE',
-        },
-        {
-          description: 'ASML',
-          proName: 'NASDAQ:ASML',
-        },
-        {
-          description: 'Semiconductores de Taiwán',
-          proName: 'NYSE:TSM',
-        },
-        {
-          description: 'Mercado Libre',
-          proName: 'NASDAQ:MELI',
-        },
-        {
-          description: 'Merval',
-          proName: 'INDEX:IAR',
-        },
-        {
-          description: 'ETF Argentina',
-          proName: 'AMEX:ARGT',
-        },
-        {
-          description: 'YPF',
-          proName: 'NYSE:YPF',
-        },
-        {
-          description: 'Mercado Brasil',
-          proName: 'AMEX:EWZ',
-        },
-      ],
-      showSymbolLogo: true,
-      isTransparent: true,
+      colorTheme,
       displayMode: 'regular',
-      colorTheme: 'light',
-      locale: 'es',
+      isTransparent: true,
+      locale,
+      showSymbolLogo: true,
+      symbols,
     });
 
     if (tradingviewTickerTapeRef.current) {
