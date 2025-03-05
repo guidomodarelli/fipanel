@@ -1,16 +1,13 @@
-import H1 from '@/lib/@fipanel/components/H1';
-import P from '@/lib/@fipanel/components/P';
+import { Layout } from '@/layouts/Layout';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function layout({ children }: LayoutProps) {
   return (
-    <>
-      <H1>Analizador Empresarial</H1>
-      <P>¡Explore los insights y análisis para su empresa!</P>
-      <main className='mt-8'>{children}</main>
-    </>
+    <Layout description='¡Explore los insights y análisis para su empresa!' title='Analizador Empresarial'>
+      {children}
+    </Layout>
   );
 }
