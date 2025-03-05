@@ -33,7 +33,8 @@ const TradingViewFinancials: React.FC<TradingViewFinancialsProps> = ({
     });
 
     if (tradingviewFinancialsRef.current) {
-      tradingviewFinancialsRef.current.replaceWith(script);
+      tradingviewFinancialsRef.current.innerHTML = '';
+      tradingviewFinancialsRef.current.appendChild(script);
     }
 
     return () => {
@@ -41,13 +42,9 @@ const TradingViewFinancials: React.FC<TradingViewFinancialsProps> = ({
         tradingviewFinancialsRef.current.innerHTML = '';
       }
     };
-  }, []);
+  }, [symbol, locale, colorTheme]);
 
-  return (
-    <div className='h-[50rem]'>
-      <div ref={tradingviewFinancialsRef} />
-    </div>
-  );
+  return <div className='h-[50rem]' ref={tradingviewFinancialsRef} />;
 };
 
 export default TradingViewFinancials;
