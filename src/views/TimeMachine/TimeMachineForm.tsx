@@ -62,7 +62,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
 
   return (
     <Form {...form}>
-      <form className='space-y-8 shrink-0 grow-0' onSubmit={form.handleSubmit(onSubmit)}>
+      <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name='yearsOfInvestment'
@@ -70,7 +70,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
             <FormItem>
               <FormControl>
                 <Input
-                  className='max-w-sm'
+                  className='sm:max-w-sm'
                   label={YEARS_OF_INVESTMENT_LABEL}
                   labelPlacement='inside'
                   type='text'
@@ -91,7 +91,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
             <FormItem>
               <FormControl>
                 <Input
-                  className='max-w-sm'
+                  className='sm:max-w-sm'
                   label={INITIAL_INVESTMENT_LABEL}
                   labelPlacement='inside'
                   startContent={<DolarSignIcon />}
@@ -113,7 +113,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
             <FormItem>
               <FormControl>
                 <Input
-                  className='max-w-sm'
+                  className='sm:max-w-sm'
                   label={ANNUAL_INJECTION_LABEL}
                   labelPlacement='inside'
                   startContent={<DolarSignIcon />}
@@ -136,7 +136,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
               <FormControl>
                 <Autocomplete
                   allowsCustomValue
-                  className='max-w-sm'
+                  className='sm:max-w-sm'
                   defaultFilter={prefixFilter}
                   defaultItems={symbols}
                   defaultSelectedKey={isDev ? DEBUG_VALUES.symbol : undefined}
