@@ -44,7 +44,7 @@ const TradingViewFinancials: React.FC<TradingViewFinancialsProps> = ({
     };
   }, [symbol, locale, colorTheme]);
 
-  return <div className='h-[50rem]' ref={tradingviewFinancialsRef} />;
+  return <div className='h-[25rem]' ref={tradingviewFinancialsRef} />;
 };
 
 export default TradingViewFinancials;
