@@ -1,5 +1,5 @@
 'use client';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { FormField } from '@/components/ui/form';
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
 import { isDev } from '@/utils/node-env';
 import { Button, Input } from '@heroui/react';
@@ -33,56 +33,45 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
   }
 
   return (
-    <Form {...form}>
-      <form className='flex gap-4 shrink-0 grow-0' onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name='market'
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  className='w-40'
-                  label={MARKET_LABEL}
-                  labelPlacement='inside'
-                  type='text'
-                  {...field}
-                  errorMessage={fieldState.error?.message}
-                  isInvalid={!!fieldState.error}
-                  onChange={(event) => field.onChange(event.target.value)}
-                  placeholder='Ej: NASDAQ'
-                  value={field.value || ''}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='symbol'
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  label={SYMBOL_LABEL}
-                  labelPlacement='inside'
-                  type='text'
-                  {...field}
-                  errorMessage={fieldState.error?.message}
-                  isInvalid={!!fieldState.error}
-                  onChange={(event) => field.onChange(event.target.value)}
-                  placeholder='Ej: AAPL'
-                  value={field.value || ''}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <Button className='mt-4' color='primary' type='submit' variant='shadow'>
-          Buscar
-        </Button>
-      </form>
-    </Form>
+    <form {...form} className='flex flex-col sm:flex-row gap-4 sm:max-w-[30rem]' onSubmit={form.handleSubmit(onSubmit)}>
+      <FormField
+        control={form.control}
+        name='market'
+        render={({ field, fieldState }) => (
+          <Input
+            label={MARKET_LABEL}
+            labelPlacement='inside'
+            type='text'
+            {...field}
+            errorMessage={fieldState.error?.message}
+            isInvalid={!!fieldState.error}
+            onChange={(event) => field.onChange(event.target.value)}
+            placeholder='Ej: NASDAQ'
+            value={field.value || ''}
+          />
+        )}
+      />
+      <FormField
+        control={form.control}
+        name='symbol'
+        render={({ field, fieldState }) => (
+          <Input
+            label={SYMBOL_LABEL}
+            labelPlacement='inside'
+            type='text'
+            {...field}
+            errorMessage={fieldState.error?.message}
+            isInvalid={!!fieldState.error}
+            onChange={(event) => field.onChange(event.target.value)}
+            placeholder='Ej: AAPL'
+            value={field.value || ''}
+          />
+        )}
+      />
+      <Button className='mt-4' color='primary' type='submit' variant='shadow'>
+        Buscar
+      </Button>
+    </form>
   );
 };
 
