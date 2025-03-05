@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <H1>Analizador Empresarial</H1>
       <P>¡Explore los insights y análisis para su empresa!</P>
-      {children}
+      <main className='mt-8'>{children}</main>
     </>
   );
 }
