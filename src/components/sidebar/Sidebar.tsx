@@ -59,7 +59,7 @@ const items: AppSidebarGroup[] = [
       {
         key: 'time-machine',
         label: 'Máquina del tiempo financiera',
-        link: '/time-machine',
+        link: '/maquina-del-tiempo',
         icon: () => <ChartBarIncreasingIcon />,
       },
     ],
