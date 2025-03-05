@@ -1,9 +1,9 @@
 'use client';
+import { createLogger } from '@/app/setup';
 import TradingViewFinancials from '@/components/embeddings/TradingView/TradingViewFinancials';
 import { useState } from 'react';
 import BusinessAnalyzerForm, { DEBUG_VALUES } from './BusinessAnalyzerForm';
 import type { BusinessAnalyzerScheme } from './BusinessAnalyzerScheme';
-import { createLogger } from '@/app/setup';
 
 export default function BusinessAnalyzer() {
   const logger = createLogger('BusinessAnalyzer', 'enabled');
