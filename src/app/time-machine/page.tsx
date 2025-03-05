@@ -1,4 +1,4 @@
-import { TimeMachine } from '@/components/pages/TimeMachine/TimeMachine';
+import { TimeMachine } from '@/views/TimeMachine/TimeMachine';
 
 export default function page() {
   return <TimeMachine />;
