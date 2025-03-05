@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+// Top Stories Widget: https://www.tradingview.com/widget-docs/widgets/news/top-stories/
 export const TradingViewTopStories = () => {
   const tradingviewTimelineRef = useRef<HTMLDivElement>(null);
 
