@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ChartBarIncreasingIcon, HomeIcon } from 'lucide-react';
+import { ChartBarIncreasingIcon, FileChartColumnIncreasingIcon, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Logo } from '../logo/Logo';
@@ -50,12 +50,12 @@ const items: AppSidebarGroup[] = [
       //   label: 'Capitalización de Mercados',
       //   link: '/capital-markets',
       // },
-      // {
-      //   key: 'analysis',
-      //   label: 'Analizador Empresarial',
-      //   link: '/analysis',
-      //   icon: () => <FileChartColumnIncreasingIcon />,
-      // },
+      {
+        key: 'business-analyzer',
+        label: 'Analizador Empresarial',
+        link: '/analizador-empresarial',
+        icon: () => <FileChartColumnIncreasingIcon />,
+      },
       {
         key: 'time-machine',
         label: 'Máquina del tiempo financiera',
