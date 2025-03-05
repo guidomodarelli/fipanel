@@ -4,6 +4,7 @@ import TradingViewFinancials from '@/components/embeddings/TradingView/TradingVi
 import TradingViewSymbolInfo from '@/components/embeddings/TradingView/TradingViewSymbolInfo';
 import TradingViewSymbolProfile from '@/components/embeddings/TradingView/TradingViewSymbolProfile';
 import TradingViewTechnicalAnalysis from '@/components/embeddings/TradingView/TradingViewTechnicalAnalysis';
+import TradingViewTopStories from '@/components/embeddings/TradingView/TradingViewTopStories';
 import { useState } from 'react';
 import BusinessAnalyzerForm, { DEBUG_VALUES } from './BusinessAnalyzerForm';
 import type { BusinessAnalyzerScheme } from './BusinessAnalyzerScheme';
@@ -27,6 +28,7 @@ export default function BusinessAnalyzer() {
         <TradingViewSymbolProfile symbol={`${market}:${symbol}`} />
         <TradingViewFinancials symbol={`${market}:${symbol}`} />
         <TradingViewTechnicalAnalysis symbol={`${market}:${symbol}`} />
+        <TradingViewTopStories feedMode='symbol' symbol={`${market}:${symbol}`} />
       </div>
     </>
   );
