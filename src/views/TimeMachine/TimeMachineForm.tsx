@@ -62,7 +62,7 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
 
   return (
     <Form {...form}>
-      <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
+      <form className='space-y-8 shrink-0' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name='yearsOfInvestment'
