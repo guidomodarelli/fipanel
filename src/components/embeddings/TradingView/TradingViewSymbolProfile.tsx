@@ -8,7 +8,7 @@ interface TradingViewSymbolProfileProps {
   colorTheme?: ColorTheme;
 }
 
-// Symbol Profile Widget: https://www.tradingview.com/widget-docs/widgets/symbol-details/symbol-profile/
+// Symbol Profile Widget: https://www.tradingview.com/widget-docs/widgets/symbol-details/company-profile/
 const TradingViewSymbolProfile: React.FC<TradingViewSymbolProfileProps> = ({
   symbol,
   locale = 'es',
