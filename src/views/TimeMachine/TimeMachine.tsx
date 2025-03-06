@@ -86,7 +86,7 @@ export const TimeMachine = () => {
   }, [symbol, getAnnualPrices, initialInvestment, annualInjection]);
 
   return (
-    <>
+    <div className='flex flex-col gap-8'>
       <div className={cn('flex flex-col gap-8', openSidebar ? 'lg:flex-row' : 'md:flex-row')}>
         <TimeMachineForm logger={logger.getLogger([TimeMachineForm.name])} onSubmit={handleSubmit} />
         <TimeMachineTable data={data} legends={legends} />
@@ -97,6 +97,6 @@ export const TimeMachine = () => {
         series={[getInvestedSeries(data), getSavedSeries(data), getTotalSeries(data)]}
         years={getYears(from, to)}
       />
-    </>
+    </div>
   );
 };
