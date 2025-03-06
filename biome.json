@@ -51,9 +51,7 @@
   "assists": {
     "enabled": true,
     "actions": {
-      "source": {
-        "sortJsxProps": "on"
-      }
+      "source": {}
     }
   }
 }

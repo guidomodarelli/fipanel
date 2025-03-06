@@ -47,6 +47,7 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
                   allowsCustomValue
                   label={MARKET_LABEL}
                   labelPlacement='inside'
+                  placeholder='Escribe aquí...'
                   type='text'
                   {...field}
                   defaultFilter={matchesPrefix}
