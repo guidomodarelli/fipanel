@@ -1,6 +1,7 @@
 import { DolarSignIcon } from '@/components/icons/DolarSignIcon';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
+import useAutocomplete from '@/hooks/useAutocomplete';
 import { NumberUtils } from '@/lib/number';
 import { isDev } from '@/utils/node-env';
 import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
@@ -23,6 +24,7 @@ interface TimeMachineFormProps {
 }
 
 const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onSubmitHandler }) => {
+  const { matchesPrefix } = useAutocomplete();
   const form = useForm<TimeMachineScheme>({
     resolver: zodResolver(scheme),
     defaultValues: {
@@ -32,19 +34,6 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
       symbol: isDev ? DEBUG_VALUES.symbol : '',
     },
   });
-
-  const prefixFilter = (text: string, inputValue: string) => {
-    if (inputValue.length === 0) {
-      return true;
-    }
-
-    // Normalize both strings so we can slice safely
-    // take into account the ignorePunctuation option as well...
-    const normalizedText = text.normalize('NFC').toLocaleLowerCase();
-    const normalizaedInputValue = inputValue.normalize('NFC').toLocaleLowerCase();
-
-    return normalizedText.slice(0, normalizaedInputValue.length) === normalizaedInputValue;
-  };
 
   function onSubmit(values: TimeMachineScheme) {
     logger?.debug('Submitting form with values:', values);
@@ -137,9 +126,9 @@ const TimeMachineForm: React.FC<TimeMachineFormProps> = ({ logger, onSubmit: onS
                 <Autocomplete
                   allowsCustomValue
                   className='sm:max-w-sm'
-                  defaultFilter={prefixFilter}
+                  defaultFilter={matchesPrefix}
                   defaultItems={symbols}
-                  defaultSelectedKey={isDev ? DEBUG_VALUES.symbol : undefined}
+                  defaultSelectedKey={field.value}
                   label='Escoge un símbolo'
                   {...field}
                   errorMessage={fieldState.error?.message}

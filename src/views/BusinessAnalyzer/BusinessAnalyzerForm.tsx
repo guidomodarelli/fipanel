@@ -1,12 +1,13 @@
 'use client';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import type { Logger } from '@/core/contexts/shared/logger/domain/Logger';
+import useAutocomplete from '@/hooks/useAutocomplete';
 import { isDev } from '@/utils/node-env';
-import { Button, Input } from '@heroui/react';
+import { Autocomplete, AutocompleteItem, Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { type BusinessAnalyzerScheme, scheme } from './BusinessAnalyzerScheme';
-import { MARKET_LABEL, SYMBOL_LABEL } from './constants';
+import { MARKETS, MARKET_LABEL, SYMBOL_LABEL } from './constants';
 
 export const DEBUG_VALUES = {
   market: 'NASDAQ',
@@ -19,6 +20,7 @@ interface BusinessAnalyzerFormProps {
 }
 
 const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onSubmit: onSubmitHandler }) => {
+  const { matchesPrefix } = useAutocomplete();
   const form = useForm<BusinessAnalyzerScheme>({
     resolver: zodResolver(scheme),
     defaultValues: {
@@ -34,24 +36,29 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
 
   return (
     <Form {...form}>
-      <form className='flex flex-col sm:flex-row gap-4 sm:max-w-[30rem]' onSubmit={form.handleSubmit(onSubmit)}>
+      <form className='flex flex-col md:flex-row gap-4 md:max-w-[30rem]' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name='market'
           render={({ field, fieldState }) => (
             <FormItem>
               <FormControl>
-                <Input
+                <Autocomplete
+                  allowsCustomValue
                   label={MARKET_LABEL}
                   labelPlacement='inside'
                   type='text'
                   {...field}
+                  defaultFilter={matchesPrefix}
+                  defaultItems={MARKETS}
+                  defaultSelectedKey={field.value}
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
-                  onChange={(event) => field.onChange(event.target.value)}
-                  placeholder='Ej: NASDAQ'
-                  value={field.value || ''}
-                />
+                  onInputChange={(value) => field.onChange(value.length !== 0 ? value : undefined)}
+                  value={field.value}
+                >
+                  {(item) => <AutocompleteItem key={item.key}>{item.key}</AutocompleteItem>}
+                </Autocomplete>
               </FormControl>
             </FormItem>
           )}
