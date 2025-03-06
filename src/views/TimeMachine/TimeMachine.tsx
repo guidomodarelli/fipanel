@@ -84,7 +84,7 @@ export const TimeMachine = () => {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row gap-8 m-8'>
+      <div className='flex flex-col md:flex-row gap-8'>
         <TimeMachineForm logger={logger.getLogger([TimeMachineForm.name])} onSubmit={handleSubmit} />
         <TimeMachineTable data={data} legends={legends} />
       </div>
