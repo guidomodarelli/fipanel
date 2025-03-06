@@ -37,52 +37,56 @@ const resolveCssClassByRange = (value: number, ranges: [string, number, number][
 
 const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [], legends = [] }) => {
   return (
-    <Table aria-label='Máquina del tiempo' className='max-h-[25.3rem] overflow-y-auto'>
-      <TableHeader>
-        <TableRow>
-          {columns.map((column) => (
-            <TableCell
-              className='text-center text-nowrap'
-              key={column.uid}
-              style={{
-                color: legends.find((legend) => column.name.toLowerCase() === legend.name.toLowerCase())?.color,
-              }}
-            >
-              {column.name}
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((item) => (
-          <TableRow className='text-center' key={item.key}>
-            <TableCell>{item.year}</TableCell>
-            <TableCell>{NumberUtils.formatCurrency(item.price)}</TableCell>
-            <TableCell
-              className={cn(
-                'text-gray-800',
-                resolveCssClassByRange(item.varPercent, [
-                  ['bg-red-500 text-white', Number.NEGATIVE_INFINITY, -30],
-                  ['bg-red-400 text-white', -30, -20],
-                  ['bg-red-300', -20, -10],
-                  ['bg-red-200', -10, -5],
-                  ['bg-red-100', -5, 0],
-                  ['bg-white', 0, 0],
-                  ['bg-green-100', 0, 5],
-                  ['bg-green-200', 5, 10],
-                  ['bg-green-300', 10, 20],
-                  ['bg-green-400', 20, 30],
-                  ['bg-green-500', 30, Number.POSITIVE_INFINITY],
-                ]),
-              )}
-            >{`${item.varPercent}%`}</TableCell>
-            <TableCell>{NumberUtils.formatCurrency(item.invested)}</TableCell>
-            <TableCell>{NumberUtils.formatCurrency(item.saved)}</TableCell>
-            <TableCell>{NumberUtils.formatCurrency(item.total)}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className='overflow-x-auto w-full'>
+      <div className='min-w-[600px]'>
+        <Table aria-label='Máquina del tiempo' className='max-h-[25.3rem] overflow-y-auto'>
+          <TableHeader>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  className='text-center text-nowrap'
+                  key={column.uid}
+                  style={{
+                    color: legends.find((legend) => column.name.toLowerCase() === legend.name.toLowerCase())?.color,
+                  }}
+                >
+                  {column.name}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((item) => (
+              <TableRow className='text-center' key={item.key}>
+                <TableCell>{item.year}</TableCell>
+                <TableCell>{NumberUtils.formatCurrency(item.price)}</TableCell>
+                <TableCell
+                  className={cn(
+                    'text-gray-800',
+                    resolveCssClassByRange(item.varPercent, [
+                      ['bg-red-500 text-white', Number.NEGATIVE_INFINITY, -30],
+                      ['bg-red-400 text-white', -30, -20],
+                      ['bg-red-300', -20, -10],
+                      ['bg-red-200', -10, -5],
+                      ['bg-red-100', -5, 0],
+                      ['bg-white', 0, 0],
+                      ['bg-green-100', 0, 5],
+                      ['bg-green-200', 5, 10],
+                      ['bg-green-300', 10, 20],
+                      ['bg-green-400', 20, 30],
+                      ['bg-green-500', 30, Number.POSITIVE_INFINITY],
+                    ]),
+                  )}
+                >{`${item.varPercent}%`}</TableCell>
+                <TableCell>{NumberUtils.formatCurrency(item.invested)}</TableCell>
+                <TableCell>{NumberUtils.formatCurrency(item.saved)}</TableCell>
+                <TableCell>{NumberUtils.formatCurrency(item.total)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );
 };
 
