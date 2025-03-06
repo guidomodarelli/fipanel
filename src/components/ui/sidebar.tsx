@@ -151,16 +151,11 @@ const SidebarProvider = React.forwardRef<
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
         <div
-          className={cn(
-            'group/sidebar-wrapper min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
-            isAnimating ? 'flex' : 'md:grid',
-            className,
-          )}
+          className={cn('group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar', className)}
           data-animating={isAnimating}
           ref={ref}
           style={
             {
-              gridTemplateColumns: `${open && !isAnimating ? SIDEBAR_WIDTH : SIDEBAR_WIDTH_ICON} 1fr`,
               '--sidebar-width': SIDEBAR_WIDTH,
               '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
               ...style,
