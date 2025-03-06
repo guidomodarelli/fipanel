@@ -31,6 +31,7 @@ type SidebarContext = {
   isMobile: boolean;
   toggleSidebar: () => void;
   isReady: boolean;
+  isAnimating: boolean;
 };
 
 const SidebarContext = React.createContext<SidebarContext | null>(null);
@@ -64,11 +65,22 @@ const SidebarProvider = React.forwardRef<
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
   const [isReady, setIsReady] = React.useState(false);
+  const [isAnimating, setIsAnimating] = React.useState(false);
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
   const [_open, _setOpen] = React.useState(defaultOpen);
   const open = openProp ?? _open;
+
+  const handleAnimationStart = React.useCallback(() => {
+    setIsAnimating(true);
+    // Reset the animation state after the animation duration
+    const timeout = setTimeout(() => {
+      setIsAnimating(false);
+    }, SIDEBAR_ANIMATION_DURATION);
+    return () => clearTimeout(timeout);
+  }, []);
+
   const setOpen = React.useCallback(
     (value: boolean | ((value: boolean) => boolean)) => {
       const openState = typeof value === 'function' ? value(open) : value;
@@ -78,10 +90,13 @@ const SidebarProvider = React.forwardRef<
         _setOpen(openState);
       }
 
+      // Trigger animation state
+      handleAnimationStart();
+
       // This sets the cookie to keep the sidebar state.
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
-    [setOpenProp, open],
+    [setOpenProp, open, handleAnimationStart],
   );
 
   React.useEffect(() => {
@@ -92,8 +107,9 @@ const SidebarProvider = React.forwardRef<
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
+    handleAnimationStart();
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
-  }, [isMobile, setOpen, setOpenMobile]);
+  }, [isMobile, setOpen, setOpenMobile, handleAnimationStart]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
@@ -122,8 +138,9 @@ const SidebarProvider = React.forwardRef<
       setOpenMobile,
       toggleSidebar,
       isReady,
+      isAnimating,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar, isReady],
+    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar, isReady, isAnimating],
   );
 
   if (!isReady) {
@@ -134,10 +151,16 @@ const SidebarProvider = React.forwardRef<
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
         <div
-          className={cn('group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar', className)}
+          className={cn(
+            'group/sidebar-wrapper min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
+            isAnimating ? 'flex' : 'md:grid',
+            className,
+          )}
+          data-animating={isAnimating}
           ref={ref}
           style={
             {
+              gridTemplateColumns: `${open && !isAnimating ? SIDEBAR_WIDTH : SIDEBAR_WIDTH_ICON} 1fr`,
               '--sidebar-width': SIDEBAR_WIDTH,
               '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
               ...style,
