@@ -16,9 +16,9 @@ export const SidebarLayout = ({ children }: SidebarProps) => {
     <SidebarProvider defaultOpen={true}>
       <Sidebar />
       {/* https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter */}
-      <div className='flex flex-col min-h-screen grow [scrollbar-gutter:stable;]'>
+      <div className='flex flex-col flex-1 min-h-screen [scrollbar-gutter:stable;]'>
         <TradingViewTickerTape symbols={symbols} />
-        <main className='mx-8 grow'>
+        <main className='mx-8 flex-1'>
           <div
             style={{
               paddingTop: SIDEBAR_TRIGGER_PADDING_TOP,
