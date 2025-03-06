@@ -1,6 +1,8 @@
 'use client';
 import { createLogger } from '@/app/setup';
+import { useSidebar } from '@/components/ui/sidebar';
 import { useSymbolPriceMonthly } from '@/hooks/useSymbolPriceMonthly';
+import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { TimeMachineChart } from './TimeMachineChart';
@@ -20,6 +22,7 @@ const legends: Legend[] = [
 
 export const TimeMachine = () => {
   const logger = createLogger(TimeMachine.name, 'disabled');
+  const { open: openSidebar } = useSidebar();
   const [symbol, setSymbol] = useState('');
   const [initialInvestment, setInitialInvestment] = useState(0);
   const [annualInjection, setAnnualInjection] = useState(0);
@@ -84,7 +87,7 @@ export const TimeMachine = () => {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row gap-8'>
+      <div className={cn('flex flex-col gap-8', openSidebar ? 'lg:flex-row' : 'md:flex-row')}>
         <TimeMachineForm logger={logger.getLogger([TimeMachineForm.name])} onSubmit={handleSubmit} />
         <TimeMachineTable data={data} legends={legends} />
       </div>
