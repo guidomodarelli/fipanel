@@ -37,8 +37,8 @@ const resolveCssClassByRange = (value: number, ranges: [string, number, number][
 
 const TimeMachineTable: React.FC<TimeMachineTableProps> = ({ data = [], legends = [] }) => {
   return (
-    <Table aria-label='Máquina del tiempo' className='max-h-[25.3rem] overflow-y-auto'>
-      <TableHeader>
+    <Table aria-label='Máquina del tiempo' wrapperClassName='max-h-[25.3rem] overflow-y-auto'>
+      <TableHeader className='sticky top-0 bg-background shadow-sm'>
         <TableRow>
           {columns.map((column) => (
             <TableCell
