@@ -11,6 +11,7 @@ interface TimeMachineChartProps {
   legend?: Legend[];
 }
 
+// FIXME: performance issue
 export const TimeMachineChart: React.FC<TimeMachineChartProps> = ({ logger, years = [], series = [], legend = [] }) => {
   const [option, setOption] = useState<echarts.EChartsOption>({});
 
