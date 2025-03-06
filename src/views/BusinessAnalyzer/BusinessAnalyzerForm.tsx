@@ -55,7 +55,7 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
                   defaultSelectedKey={field.value}
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
-                  onInputChange={(value) => field.onChange(value.length !== 0 ? value : undefined)}
+                  onInputChange={(value) => field.onChange(value.length !== 0 ? value.trim() : undefined)}
                   value={field.value}
                 >
                   {(item) => <AutocompleteItem key={item.key}>{item.key}</AutocompleteItem>}
@@ -77,7 +77,7 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
                   {...field}
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
-                  onChange={(event) => field.onChange(event.target.value)}
+                  onChange={(event) => field.onChange(event.target.value.trim())}
                   placeholder='Ej: AAPL'
                   value={field.value || ''}
                 />
