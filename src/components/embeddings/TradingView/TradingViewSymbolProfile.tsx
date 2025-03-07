@@ -42,7 +42,7 @@ const TradingViewSymbolProfile: React.FC<TradingViewSymbolProfileProps> = ({
     };
   }, [symbol, locale, colorTheme]);
 
-  return <div className='h-[12rem]' ref={tradingviewSymbolProfileRef} />;
+  return <div className='h-[20rem]' ref={tradingviewSymbolProfileRef} />;
 };
 
 export default TradingViewSymbolProfile;
