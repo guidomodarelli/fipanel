@@ -43,7 +43,7 @@ function up() {
 # Función para detener y eliminar los servicios
 function down() {
     echo "Deteniendo los servicios con Docker Compose..."
-    docker_compose_dev down --volumes --remove-orphans
+    docker_compose_dev down --volumes
 }
 
 # Función para iniciar los servicios detenidos
