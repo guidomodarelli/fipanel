@@ -89,36 +89,36 @@ function main() {
 
     # Verifica el primer parámetro y ejecuta el comando adecuado
     case "$1" in
-        build)
-            build
-            ;;
-        up)
-            up
-            ;;
-        down)
-            down
-            ;;
-        start)
-            start
-            ;;
-        stop)
-            stop
-            ;;
-        restart)
-            restart
-            ;;
-        lint)
-            lint
-            ;;
-        format)
-            format
-            ;;
-        check)
-            check
-            ;;
-        *)
-            usage
-            ;;
+    build)
+        build
+        ;;
+    up)
+        up
+        ;;
+    down)
+        down
+        ;;
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    lint)
+        lint
+        ;;
+    format)
+        format
+        ;;
+    check)
+        check
+        ;;
+    *)
+        usage
+        ;;
     esac
 }
 
