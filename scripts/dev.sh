@@ -37,6 +37,7 @@ function build() {
 # Función para iniciar los servicios
 function up() {
     echo "Iniciando los servicios con Docker Compose..."
+    bun install
     docker_compose_dev up
 }
 
