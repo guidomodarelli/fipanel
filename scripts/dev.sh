@@ -8,22 +8,54 @@ source "$PROJECT_ROOT/scripts/styleText.zsh"
 # Archivo de Docker Compose para el entorno de desarrollo
 DOCKER_COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.dev.yml"
 
-if ! command -v buns >/dev/null; then
-    bun="$(printCyan -b bun)"
-    printError
-    printError "No se encontró el comando '$bun'."
-    printError "Para instalar '$bun', ejecuta el siguiente comando:"
-    printError
-    printError "$(styleText -u -- "Linux"):"
-    printError
-    printError "  $(printCommand "curl -fsSL https://bun.sh/install | bash")"
-    printError
-    printError "$(styleText -u -- Windows):"
-    printError
-    printError "  $(printCommand "powershell -c \"irm bun.sh/install.ps1 | iex\"")"
-    printError
-    exit 1
-fi
+is_linux() {
+    if uname -a | grep -iq "Linux"; then
+        return 0 # true
+    else
+        return 1 # false
+    fi
+}
+
+install_bun() {
+    if is_linux; then
+        curl -fsSL https://bun.sh/install | bash
+    else
+        powershell -c "irm bun.sh/install.ps1 | iex"
+    fi
+}
+
+check_bun() {
+    if ! command -v bun >/dev/null; then
+        bun="$(printCyan -b bun)"
+        printError "No se encontró el comando '$bun'."
+        echo
+
+        # Pregunta al usuario si desea instalar bun
+        read -rp "¿Deseas instalar '$bun'? (s/n): " response
+        if [[ "$response" =~ ^[SsYy]$ ]]; then
+            install_bun
+            return 0
+        fi
+
+        echo
+        printInfo
+        printInfo "Para instalar '$bun', ejecuta el siguiente comando:"
+        printInfo
+        printInfo "$(styleText -u -- "Linux"):"
+        printInfo
+        printInfo "  $(printCommand "curl -fsSL https://bun.sh/install | bash")"
+        printInfo
+        printInfo "$(styleText -u -- Windows):"
+        printInfo
+        printInfo "  $(printCommand "powershell -c \"irm bun.sh/install.ps1 | iex\"")"
+        printInfo
+        printInfo "Después de instalar '$bun', vuelve a ejecutar este script."
+        printInfo
+        exit 1
+    fi
+}
+
+check_bun
 
 # Función para mostrar cómo usar el script
 function usage() {
