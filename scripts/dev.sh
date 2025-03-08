@@ -3,8 +3,27 @@
 # Obtiene la raíz del repositorio con git
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
+source "$PROJECT_ROOT/scripts/styleText.zsh"
+
 # Archivo de Docker Compose para el entorno de desarrollo
 DOCKER_COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.dev.yml"
+
+if ! command -v buns >/dev/null; then
+    bun="$(printCyan -b bun)"
+    printError
+    printError "No se encontró el comando '$bun'."
+    printError "Para instalar '$bun', ejecuta el siguiente comando:"
+    printError
+    printError "$(styleText -u -- "Linux"):"
+    printError
+    printError "  $(printCommand "curl -fsSL https://bun.sh/install | bash")"
+    printError
+    printError "$(styleText -u -- Windows):"
+    printError
+    printError "  $(printCommand "powershell -c \"irm bun.sh/install.ps1 | iex\"")"
+    printError
+    exit 1
+fi
 
 # Función para mostrar cómo usar el script
 function usage() {
