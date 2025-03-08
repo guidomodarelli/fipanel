@@ -6,8 +6,34 @@ Fipanel es una aplicación diseñada para la gestión inteligente y eficiente de
 
 Este proyecto se puede ejecutar de dos formas:
 
-1. **Ejecución con Docker** (Recomendado): Usar Docker y Docker Compose para gestionar el entorno de desarrollo.
+1. **Ejecución con Docker** (Recomendado): Usar Docker para gestionar el entorno de desarrollo.
 2. **Ejecución en el host**: Instalar y ejecutar el proyecto directamente en tu máquina local.
+
+### Requisitos previos
+
+Antes de comenzar, asegúrate de tener instalados los siguientes programas:
+
+- [nvm](https://github.com/nvm-sh/nvm) (Recomendado para gestionar la versión de Node.js)
+
+  Puedes instalar `nvm` siguiendo las instrucciones en su [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+- [bun](https://bun.sh) (Para gestión de dependencias y ejecución de scripts)
+
+  Para instalar `bun`, ejecuta el siguiente comando:
+
+  **Linux:**
+
+  ```bash
+  curl -fsSL https://bun.sh/install | bash
+  ```
+
+  **Windows:**
+
+  ```powershell
+  powershell -c "irm bun.sh/install.ps1 | iex"
+  ```
+
+Una vez instalado `nvm`, ejecuta `nvm use` en la raíz del proyecto para usar la versión de Node.js especificada en el archivo `.nvmrc`. Si no está instalada, usa `nvm install` para instalarla.
 
 ---
 
@@ -23,7 +49,7 @@ Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 
 ### Uso de Docker
 
-Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker y Docker Compose. Puedes utilizar los siguientes comandos para gestionar los contenedores de Docker:
+Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker. Puedes utilizar los siguientes comandos para gestionar los contenedores de Docker:
 
 1. **Iniciar los servicios en modo desarrollo**
 
@@ -117,32 +143,6 @@ También puedes ejecutar el linter y el formateo de código desde Docker usando 
 ## Ejecución en el Host (Obviar si se utiliza Docker)
 
 Si prefieres ejecutar el proyecto directamente en tu máquina sin Docker, sigue los pasos a continuación.
-
-### Requisitos previos
-
-Antes de comenzar, asegúrate de tener instalados los siguientes programas:
-
-- [nvm](https://github.com/nvm-sh/nvm) (Recomendado para gestionar la versión de Node.js)
-
-  Puedes instalar `nvm` siguiendo las instrucciones en su [repositorio oficial](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-- [bun](https://bun.sh) (Para gestión de dependencias y ejecución de scripts)
-
-  Para instalar `bun`, ejecuta el siguiente comando:
-
-  **Linux:**
-
-  ```bash
-  curl -fsSL https://bun.sh/install | bash
-  ```
-
-  **Windows:**
-
-  ```powershell
-  powershell -c "irm bun.sh/install.ps1 | iex"
-  ```
-
-Una vez instalado `nvm`, ejecuta `nvm use` en la raíz del proyecto para usar la versión de Node.js especificada en el archivo `.nvmrc`. Si no está instalada, usa `nvm install` para instalarla.
 
 ### Instalación
 
