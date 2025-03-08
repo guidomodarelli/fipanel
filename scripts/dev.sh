@@ -59,7 +59,21 @@ check_bun
 
 # Función para mostrar cómo usar el script
 function usage() {
-    echo "Uso: $0 {build|up|down|start|stop|restart|lint|format|check}"
+    printInfo "$(styleText -u "Uso"): $0 COMANDO"
+    printInfo
+    printInfo "$(styleText -u "Comandos disponibles"):"
+    printInfo
+    {
+        printInfo "  $(printCyan "build")   @ Construye la imagen de desarrollo"
+        printInfo "  $(printCyan "up")      @ Inicia todos los servicios"
+        printInfo "  $(printCyan "down")    @ Detiene y elimina los servicios y volúmenes"
+        printInfo "  $(printCyan "start")   @ Inicia servicios detenidos"
+        printInfo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
+        printInfo "  $(printCyan "restart") @ Reinicia todos los servicios"
+        printInfo "  $(printCyan "lint")    @ Ejecuta el linter"
+        printInfo "  $(printCyan "format")  @ Ejecuta el formateador de código"
+        printInfo "  $(printCyan "check")   @ Ejecuta linter y formateador"
+    } | column -t -s "@"
     exit 1
 }
 
