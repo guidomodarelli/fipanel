@@ -1,11 +1,11 @@
 x-volumes: &volumes
   volumes:
-    - ..:/app
+    - ../..:/app
 
 x-build: &build
   build:
-    context: ..
-    dockerfile: ./docker/Dockerfile.dev
+    context: ../..
+    dockerfile: docker/dev/Dockerfile
 
 services:
   dev:
