@@ -24,7 +24,7 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
   const form = useForm<BusinessAnalyzerScheme>({
     resolver: zodResolver(scheme),
     defaultValues: {
-      market: isDev ? DEBUG_VALUES.market : '',
+      market: MARKETS[0].key,
       symbol: isDev ? DEBUG_VALUES.symbol : '',
     },
   });
