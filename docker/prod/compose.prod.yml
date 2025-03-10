@@ -2,8 +2,8 @@ services:
   prod:
     tty: true
     build:
-      context: ..
-      dockerfile: ./docker/Dockerfile.prod
+      context: ../..
+      dockerfile: docker/prod/Dockerfile
     ports:
       - "3000:3000"
     environment:
