@@ -6,7 +6,9 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 source "$PROJECT_ROOT/scripts/styleText.zsh"
 
 # Archivo de Docker Compose para el entorno de desarrollo
-DOCKER_COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.dev.yml"
+DOCKER_COMPOSE_FILE="compose.dev.yml"
+DOCKER_COMPOSE_PATH="./$(realpath --relative-to $PROJECT_ROOT $(dirname $0))/$DOCKER_COMPOSE_FILE"
+export COMPOSE_BAKE=true
 
 is_linux() {
     if uname -a | grep -iq "Linux"; then
@@ -79,14 +81,14 @@ function usage() {
 
 # Verifica si el archivo de Docker Compose existe
 function check_docker_compose_file() {
-    if [ ! -f "$DOCKER_COMPOSE_FILE" ]; then
-        echo "No se encontró el archivo docker-compose.dev.yml en la ruta $DOCKER_COMPOSE_FILE"
+    if [ ! -f "$DOCKER_COMPOSE_PATH" ]; then
+        printError "No se encontró el archivo $(printCyan -u $DOCKER_COMPOSE_FILE) en la ruta $(printCyan -u "$(dirname $DOCKER_COMPOSE_PATH)")"
         exit 1
     fi
 }
 
 function docker_compose() {
-    docker compose -f $DOCKER_COMPOSE_FILE "$@"
+    docker compose -f $DOCKER_COMPOSE_PATH "$@"
 }
 
 function docker_compose_dev() {
@@ -95,56 +97,56 @@ function docker_compose_dev() {
 
 # Función para buildear la imagen de desarrollo
 function build() {
-    echo "Construyendo la imagen de desarrollo..."
+    printInfo "Construyendo la imagen de desarrollo..."
     docker_compose_dev build
 }
 
 # Función para iniciar los servicios
 function up() {
-    echo "Iniciando los servicios con Docker Compose..."
+    printInfo "Iniciando los servicios con Docker Compose..."
     bun install
     docker_compose_dev up
 }
 
 # Función para detener y eliminar los servicios
 function down() {
-    echo "Deteniendo los servicios con Docker Compose..."
+    printInfo "Deteniendo los servicios con Docker Compose..."
     docker_compose_dev down --volumes
 }
 
 # Función para iniciar los servicios detenidos
 function start() {
-    echo "Iniciando los servicios detenidos con Docker Compose..."
+    printInfo "Iniciando los servicios detenidos con Docker Compose..."
     docker_compose_dev start
 }
 
 # Función para detener los servicios sin eliminarlos
 function stop() {
-    echo "Deteniendo los servicios con Docker Compose..."
+    printInfo "Deteniendo los servicios con Docker Compose..."
     docker_compose_dev stop
 }
 
 # Función para reiniciar los servicios
 function restart() {
-    echo "Reiniciando los servicios con Docker Compose..."
+    printInfo "Reiniciando los servicios con Docker Compose..."
     docker_compose_dev restart
 }
 
 # Función para ejecutar el linter
 function lint() {
-    echo "Ejecutando linter con Docker Compose..."
+    printInfo "Ejecutando linter con Docker Compose..."
     docker_compose up linter
 }
 
 # Función para ejecutar el formateo de código
 function format() {
-    echo "Ejecutando formateo de código con Docker Compose..."
+    printInfo "Ejecutando formateo de código con Docker Compose..."
     docker_compose up format
 }
 
 # Función para ejecutar ambos, lint y format
 function check() {
-    echo "Ejecutando linter y formateo de código con Docker Compose..."
+    printInfo "Ejecutando linter y formateo de código con Docker Compose..."
     docker_compose --profile check up
 }
 
