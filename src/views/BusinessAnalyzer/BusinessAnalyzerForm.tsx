@@ -55,8 +55,8 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
                   defaultSelectedKey={field.value}
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
-                  onInputChange={(value) => field.onChange(value.length !== 0 ? value.trim() : undefined)}
-                  value={field.value}
+                  onInputChange={(value) => field.onChange(value.length !== 0 ? value.trim().toUpperCase() : undefined)}
+                  value={field.value.trim().toUpperCase()}
                 >
                   {(item) => <AutocompleteItem key={item.key}>{item.key}</AutocompleteItem>}
                 </Autocomplete>
@@ -77,9 +77,9 @@ const BusinessAnalyzerForm: React.FC<BusinessAnalyzerFormProps> = ({ logger, onS
                   {...field}
                   errorMessage={fieldState.error?.message}
                   isInvalid={!!fieldState.error}
-                  onChange={(event) => field.onChange(event.target.value.trim())}
+                  onChange={(event) => field.onChange(event.target.value.trim().toUpperCase())}
                   placeholder='Ej: AAPL'
-                  value={field.value || ''}
+                  value={field.value.trim().toUpperCase()}
                 />
               </FormControl>
             </FormItem>
