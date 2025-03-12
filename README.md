@@ -56,7 +56,7 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker. Puedes 
    Si no tienes Docker ejecutándose, inicia los contenedores con:
 
    ```bash
-   ./scripts/dev.sh up
+   ./docker/dev/dev.sh up
    ```
 
    Si estás ejecutando el proyecto en **Docker**, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado. Sin embargo, si el puerto o contenedor ha sido configurado de manera diferente, asegúrate de revisar la sección de **puertos** en el archivo `docker-compose.dev.yml` (ubicado en la carpeta `docker/`).
@@ -75,7 +75,7 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker. Puedes 
    Para detener los contenedores sin eliminarlos:
 
    ```bash
-   ./scripts/dev.sh stop
+   ./docker/dev/dev.sh stop
    ```
 
 3. **Eliminar y detener los servicios**
@@ -83,7 +83,7 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker. Puedes 
    Si deseas detener y eliminar los contenedores, redes y volúmenes asociados:
 
    ```bash
-   ./scripts/dev.sh down
+   ./docker/dev/dev.sh down
    ```
 
 4. **Reiniciar los servicios**
@@ -91,7 +91,7 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker. Puedes 
    Para reiniciar los contenedores:
 
    ```bash
-   ./scripts/dev.sh restart
+   ./docker/dev/dev.sh restart
    ```
 
 5. **Construir las imágenes**
@@ -99,7 +99,7 @@ Para facilitar el desarrollo y despliegue, este proyecto utiliza Docker. Puedes 
    Para reconstruir las imágenes de Docker, ejecuta:
 
    ```bash
-   ./scripts/dev.sh build
+   ./docker/dev/dev.sh build
    ```
 
    Este comando es útil cuando:
@@ -119,7 +119,7 @@ También puedes ejecutar el linter y el formateo de código desde Docker usando 
    Para ejecutar el linter (`bun lint:fix`) dentro del contenedor, ejecuta:
 
    ```bash
-   ./scripts/dev.sh lint
+   ./docker/dev/dev.sh lint
    ```
 
 2. **Ejecutar el formateo de código**:
@@ -127,7 +127,7 @@ También puedes ejecutar el linter y el formateo de código desde Docker usando 
    Para ejecutar el formateo de código (`bun format:fix`) dentro del contenedor, ejecuta:
 
    ```bash
-   ./scripts/dev.sh format
+   ./docker/dev/dev.sh format
    ```
 
 3. **Ejecutar ambos juntos (lint + format)**:
@@ -135,7 +135,7 @@ También puedes ejecutar el linter y el formateo de código desde Docker usando 
    Si deseas ejecutar ambos, el linter y el formateo, de manera secuencial, usa el siguiente comando:
 
    ```bash
-   ./scripts/dev.sh check
+   ./docker/dev/dev.sh check
    ```
 
 ---
