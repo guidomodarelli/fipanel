@@ -7,7 +7,7 @@ source "$PROJECT_ROOT/scripts/styleText.zsh"
 
 # Archivo de Docker Compose para el entorno de producción
 DOCKER_COMPOSE_FILE="compose.prod.yml"
-DOCKER_COMPOSE_PATH="$PROJECT_ROOT/$DOCKER_COMPOSE_FILE"
+DOCKER_COMPOSE_PATH="$(realpath $(dirname $0))/$DOCKER_COMPOSE_FILE"
 export COMPOSE_BAKE=true
 
 # Función para mostrar cómo usar el script
