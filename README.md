@@ -217,7 +217,7 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    Para iniciar los servicios en modo producción, ejecuta:
 
    ```bash
-   ./scripts/prod.sh up
+   ./docker/prod/prod.sh up
    ```
 
    Esto iniciará los servicios definidos en `docker-compose.prod.yml` y los ejecutará en segundo plano.
@@ -227,7 +227,7 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    Para detener y eliminar los contenedores, redes y volúmenes asociados:
 
    ```bash
-   ./scripts/prod.sh down
+   ./docker/prod/prod.sh down
    ```
 
 3. **Iniciar los servicios detenidos**
@@ -235,7 +235,7 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    Si los servicios fueron detenidos previamente, puedes reiniciarlos con:
 
    ```bash
-   ./scripts/prod.sh start
+   ./docker/prod/prod.sh start
    ```
 
 4. **Detener los servicios sin eliminarlos**
@@ -243,7 +243,7 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    Para detener los servicios sin eliminar los contenedores y volúmenes:
 
    ```bash
-   ./scripts/prod.sh stop
+   ./docker/prod/prod.sh stop
    ```
 
 5. **Reiniciar los servicios**
@@ -251,7 +251,7 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    Si necesitas reiniciar los servicios, puedes usar:
 
    ```bash
-   ./scripts/prod.sh restart
+   ./docker/prod/prod.sh restart
    ```
 
 6. **Construir las imágenes**
@@ -259,7 +259,7 @@ Si prefieres ejecutar los servicios en un entorno de producción con Docker, pue
    Para reconstruir las imágenes de Docker, ejecuta:
 
    ```bash
-   ./scripts/prod.sh build
+   ./docker/prod/prod.sh build
    ```
 
    Este comando es útil cuando:
