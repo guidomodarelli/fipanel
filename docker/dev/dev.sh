@@ -2,8 +2,10 @@
 
 # Obtiene la raíz del repositorio con git
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
+FZF_DEFAULT_OPTS='--color=bg+:#293739,bg:#1B1D1E,border:#808080,spinner:#E6DB74,hl:#7E8E91,fg:#F8F8F2,header:#7E8E91,info:#A6E22E,pointer:#A6E22E,marker:#F92672,fg+:#F8F8F2,prompt:#F92672,hl+:#F92672 --ansi --cycle --border="rounded" --min-height=10 --height=30% --reverse --pointer="→"'
 
 source "$PROJECT_ROOT/scripts/styleText.zsh"
+source "$PROJECT_ROOT/scripts/fzf.zsh"
 
 # Archivo de Docker Compose para el entorno de desarrollo
 DOCKER_COMPOSE_FILE="compose.dev.yml"
@@ -59,23 +61,27 @@ check_bun() {
 
 check_bun
 
+commands() {
+    {
+        echo "  $(printCyan "build")   @ Construye la imagen de desarrollo"
+        echo "  $(printCyan "up")      @ Inicia todos los servicios"
+        echo "  $(printCyan "down")    @ Detiene y elimina los servicios y volúmenes"
+        echo "  $(printCyan "start")   @ Inicia servicios detenidos"
+        echo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
+        echo "  $(printCyan "restart") @ Reinicia todos los servicios"
+        echo "  $(printCyan "lint")    @ Ejecuta el linter"
+        echo "  $(printCyan "format")  @ Ejecuta el formateador de código"
+        echo "  $(printCyan "check")   @ Ejecuta linter y formateador"
+    } | column -t -s "@"
+}
+
 # Función para mostrar cómo usar el script
 function usage() {
-    printInfo "$(styleText -u "Uso"): $0 COMANDO"
-    printInfo
-    printInfo "$(styleText -u "Comandos disponibles"):"
-    printInfo
-    {
-        printInfo "  $(printCyan "build")   @ Construye la imagen de desarrollo"
-        printInfo "  $(printCyan "up")      @ Inicia todos los servicios"
-        printInfo "  $(printCyan "down")    @ Detiene y elimina los servicios y volúmenes"
-        printInfo "  $(printCyan "start")   @ Inicia servicios detenidos"
-        printInfo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
-        printInfo "  $(printCyan "restart") @ Reinicia todos los servicios"
-        printInfo "  $(printCyan "lint")    @ Ejecuta el linter"
-        printInfo "  $(printCyan "format")  @ Ejecuta el formateador de código"
-        printInfo "  $(printCyan "check")   @ Ejecuta linter y formateador"
-    } | column -t -s "@"
+    echo
+    echo "$(styleText -u "Uso"): $0 COMANDO"
+    echo
+    echo "$(styleText -u "Comandos disponibles"):"
+    commands
     exit 1
 }
 
@@ -185,6 +191,17 @@ function main() {
         check
         ;;
     *)
+        printError "Comando no encontrado: '$(printCyan -b $1)'"
+        printInfo "Ejecutando el script interactivo..."
+        if command -v fzf >/dev/null; then
+            cmd=$(commands | fzf --header="Selecciona un comando con ENTER para confirmar" --prompt="Selecciona un comando > ")
+            if [ -n "$cmd" ]; then
+                main "$(echo "$cmd" | awk '{print $1}')"
+            else
+                usage
+            fi
+            exit 0
+        fi
         usage
         ;;
     esac
