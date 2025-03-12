@@ -19,6 +19,7 @@ commands() {
         echo "  $(printCyan "start")   @ Inicia servicios detenidos"
         echo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
         echo "  $(printCyan "restart") @ Reinicia todos los servicios"
+        echo "  $(printCyan "help")    @ Muestra esta ayuda"
     } | column -t -s "@"
 }
 
@@ -105,8 +106,11 @@ function main() {
     restart)
         restart
         ;;
+    help)
+        usage
+        ;;
     *)
-        printError "Comando no encontrado: '$(printCyan -b $1)'"
+        printError "Comando no encontrado: '$(printCyan -b "$1")'"
         printInfo "Ejecutando el script interactivo..."
         if command -v fzf >/dev/null; then
             cmd=$(commands | fzf --header="Selecciona un comando con ENTER para confirmar" --prompt="Selecciona un comando > ")
