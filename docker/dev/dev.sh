@@ -71,6 +71,7 @@ commands() {
         echo "  $(printCyan "lint")    @ Ejecuta el linter"
         echo "  $(printCyan "format")  @ Ejecuta el formateador de código"
         echo "  $(printCyan "check")   @ Ejecuta linter y formateador"
+        echo "  $(printCyan "help")    @ Muestra esta ayuda"
     } | column -t -s "@"
 }
 
@@ -189,8 +190,11 @@ function main() {
     check)
         check
         ;;
+    help)
+        usage
+        ;;
     *)
-        printError "Comando no encontrado: '$(printCyan -b $1)'"
+        printError "Comando no encontrado: '$(printCyan -b "$1")'"
         printInfo "Ejecutando el script interactivo..."
         if command -v fzf >/dev/null; then
             cmd=$(commands | fzf --header="Selecciona un comando con ENTER para confirmar" --prompt="Selecciona un comando > ")
