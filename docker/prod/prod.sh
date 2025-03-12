@@ -4,26 +4,31 @@
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 source "$PROJECT_ROOT/scripts/styleText.zsh"
+source "$PROJECT_ROOT/scripts/fzf.zsh"
 
 # Archivo de Docker Compose para el entorno de producción
 DOCKER_COMPOSE_FILE="compose.prod.yml"
 DOCKER_COMPOSE_PATH="$(realpath $(dirname $0))/$DOCKER_COMPOSE_FILE"
 export COMPOSE_BAKE=true
 
+commands() {
+    {
+        echo "  $(printCyan "build")   @ Construye la imagen de desarrollo"
+        echo "  $(printCyan "up")      @ Inicia todos los servicios"
+        echo "  $(printCyan "down")    @ Detiene y elimina los servicios y volúmenes"
+        echo "  $(printCyan "start")   @ Inicia servicios detenidos"
+        echo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
+        echo "  $(printCyan "restart") @ Reinicia todos los servicios"
+    } | column -t -s "@"
+}
+
 # Función para mostrar cómo usar el script
 function usage() {
-    printInfo "$(styleText -u "Uso"): $0 COMANDO"
-    printInfo
-    printInfo "$(styleText -u "Comandos disponibles"):"
-    printInfo
-    {
-        printInfo "  $(printCyan "build")   @ Construye la imagen de desarrollo"
-        printInfo "  $(printCyan "up")      @ Inicia todos los servicios"
-        printInfo "  $(printCyan "down")    @ Detiene y elimina los servicios y volúmenes"
-        printInfo "  $(printCyan "start")   @ Inicia servicios detenidos"
-        printInfo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
-        printInfo "  $(printCyan "restart") @ Reinicia todos los servicios"
-    } | column -t -s "@"
+    echo "$(styleText -u "Uso"): $0 COMANDO"
+    echo
+    echo "$(styleText -u "Comandos disponibles"):"
+    echo
+    commands
     exit 1
 }
 
@@ -101,6 +106,17 @@ function main() {
         restart
         ;;
     *)
+        printError "Comando no encontrado: '$(printCyan -b $1)'"
+        printInfo "Ejecutando el script interactivo..."
+        if command -v fzf >/dev/null; then
+            cmd=$(commands | fzf --header="Selecciona un comando con ENTER para confirmar" --prompt="Selecciona un comando > ")
+            if [ -n "$cmd" ]; then
+                main "$(echo "$cmd" | awk '{print $1}')"
+            else
+                usage
+            fi
+            exit 0
+        fi
         usage
         ;;
     esac
