@@ -194,7 +194,7 @@ function main() {
         usage
         ;;
     *)
-        printError "Comando no encontrado: '$(printCyan -b "$1")'"
+        printError "Comando no encontrado: '$(printCyan -b -- "$1")'"
         printInfo "Ejecutando el script interactivo..."
         if command -v fzf >/dev/null; then
             cmd=$(commands | fzf --header="Selecciona un comando con ENTER para confirmar" --prompt="Selecciona un comando > ")
