@@ -52,7 +52,7 @@ check_bun() {
         printInfo
         printInfo "  $(printCommand "powershell -c \"irm bun.sh/install.ps1 | iex\"")"
         printInfo
-        printInfo "Después de instalar '$bun', vuelve a ejecutar este script."
+        printInfo "Después de instalar '$bun', vuelve a ejecutar este script ($(printGreen -- $0))."
         printInfo
         exit 1
     fi
