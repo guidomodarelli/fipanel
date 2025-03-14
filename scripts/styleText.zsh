@@ -141,7 +141,22 @@ printError() {
 }
 
 printCommand() {
-  printf "$(printGreen -b "$") $@\n"
+  local command
+  local rest
+  if [[ "$1" == *" "* ]]; then
+    # If $1 contains spaces, split it and capture the first part
+    command="${1%% *}"
+    # The rest becomes part of the arguments
+    rest="${1#* }"
+    shift
+    rest="$rest $@"
+  else
+    # If $1 doesn't have spaces, capture it normally
+    command=$1
+    shift
+    rest="$@"
+  fi
+  printf "$(printGreen -b "$") $(printGreen -- $command) $rest\n"
 }
 
 printCommandOutput() {
