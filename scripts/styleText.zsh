@@ -140,6 +140,12 @@ printError() {
   printf "[ $(printRed "ERROR") ] $@\n"
 }
 
+# Function that formats command output with a colored prompt
+# Usage examples:
+#   printCommand "git status"   => $ git status   # git is green, status is normal
+#   printCommand ls -la         => $ ls -la       # ls is green, -la is normal
+# The command name is displayed in green, the rest in normal text,
+# with a bold green "$" prompt at the beginning
 printCommand() {
   local command
   local rest
