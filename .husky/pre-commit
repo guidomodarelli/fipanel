@@ -1,50 +1,50 @@
 #!/usr/bin/env sh
 
-printBlue() {
+logBlue() {
   printf "\033[34;1m%s\033[m" "$@"
 }
 
-printGreen() {
+logGreen() {
   printf "\033[32;1m%s\033[m" "$@"
 }
 
-printFormat() {
+logFormat() {
   local text="$1"
   shift
   printf "[ $text ] %s\n" "$@"
 }
 
-printInfo() {
-  printFormat "$(printBlue "INFO")" "$@"
+logInfo() {
+  logFormat "$(logBlue "INFO")" "$@"
 }
 
-printSuccess() {
-  printFormat "$(printGreen "SUCCESS")" "✅ $@"
+logSuccess() {
+  logFormat "$(logGreen "SUCCESS")" "✅ $@"
 }
 
 files=$(git diff-index --cached --name-only --diff-filter=ACMR HEAD | grep -vE "bun.lock")
 eslint_files=$(echo "$files" | grep -E ".*\.([jt]sx?|json|css)$" || true)
 
-printInfo "⏳ Checking for linting errors..."
+logInfo "⏳ Checking for linting errors..."
 if [ -n "$eslint_files" ]; then
   bun lint $eslint_files
-  printSuccess "Linter check passed!"
+  logSuccess "Linter check passed!"
 else
-  printInfo "No files to check for linting."
+  logInfo "No files to check for linting."
 fi
 
-printInfo "⏳ Checking for formatting errors..."
+logInfo "⏳ Checking for formatting errors..."
 if [ -n "$files" ]; then
   bun format $files
-  printSuccess "Formatter check passed!"
+  logSuccess "Formatter check passed!"
 else
-  printInfo "No files to check for formatting."
+  logInfo "No files to check for formatting."
 fi
 
-printInfo "⏳ Checking for checking errors..."
+logInfo "⏳ Checking for checking errors..."
 if [ -n "$files" ]; then
   bun check $files
-  printSuccess "Check passed!"
+  logSuccess "Check passed!"
 else
-  printInfo "No files to check."
+  logInfo "No files to check."
 fi
