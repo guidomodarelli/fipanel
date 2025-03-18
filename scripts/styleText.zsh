@@ -72,18 +72,18 @@ styleText() {
     *)
       echo
       echo
-      printError "Unknown option: $0 '$(printCyan -i -- "$1")'"
+      logError "Unknown option: $0 '$(logCyan -i -- "$1")'"
       local help=""
       help+="Usage: styleText [OPTIONS] TEXT\n"
       help+="Options:\n"
       printf "$help"
       {
-        echo "  $(printYellow -- -b), $(printYellow -- --bold)|$(printGray "Bold text")"
-        echo "  $(printYellow -- -i), $(printYellow -- --italic)|$(printGray "Italic text")"
-        echo "  $(printYellow -- -u), $(printYellow -- --underline)|$(printGray "Underline text")"
-        echo "  $(printYellow -- -s), $(printYellow -- --strikethrough)|$(printGray "Strikethrough text")"
-        echo "  $(printYellow -- -r), $(printYellow -- --reverse)|$(printGray "Reverse colors")"
-        echo "  $(printYellow -- -c), $(printYellow -- --color)|$(printGray "Text color name ($(available_colors))")"
+        echo "  $(logYellow -- -b), $(logYellow -- --bold)|$(logGray "Bold text")"
+        echo "  $(logYellow -- -i), $(logYellow -- --italic)|$(logGray "Italic text")"
+        echo "  $(logYellow -- -u), $(logYellow -- --underline)|$(logGray "Underline text")"
+        echo "  $(logYellow -- -s), $(logYellow -- --strikethrough)|$(logGray "Strikethrough text")"
+        echo "  $(logYellow -- -r), $(logYellow -- --reverse)|$(logGray "Reverse colors")"
+        echo "  $(logYellow -- -c), $(logYellow -- --color)|$(logGray "Text color name ($(available_colors))")"
       } | column -t -s '|'
       echo $FORCE_NEW_LINE
       echo $FORCE_NEW_LINE
@@ -96,57 +96,57 @@ styleText() {
   printf "$ANSI_ESCAPE%s$ANSI_END" "$@"
 }
 
-printWhite() {
+logWhite() {
   styleText -c white "$@"
 }
 
-printCyan() {
+logCyan() {
   styleText -c cyan "$@"
 }
 
-printMagenta() {
+logMagenta() {
   styleText -c magenta "$@"
 }
 
-printBlue() {
+logBlue() {
   styleText -c blue "$@"
 }
 
-printYellow() {
+logYellow() {
   styleText -c yellow "$@"
 }
 
-printGreen() {
+logGreen() {
   styleText -c green "$@"
 }
 
-printRed() {
+logRed() {
   styleText -c red "$@"
 }
 
-printGray() {
+logGray() {
   styleText -c gray "$@"
 }
 
-printInfo() {
-  printf "[ $(printBlue "INFO") ] $@\n"
+logInfo() {
+  printf "[ $(logBlue "INFO") ] $@\n"
 }
 
-printWarn() {
-  printf "[ $(printYellow "WARN") ] $@\n"
+logWarn() {
+  printf "[ $(logYellow "WARN") ] $@\n"
 }
 
-printError() {
-  printf "[ $(printRed "ERROR") ] $@\n"
+logError() {
+  printf "[ $(logRed "ERROR") ] $@\n"
 }
 
 # Function that formats command output with a colored prompt
 # Usage examples:
-#   printCommand "git status"   => $ git status   # git is green, status is normal
-#   printCommand ls -la         => $ ls -la       # ls is green, -la is normal
+#   logCommand "git status"   => $ git status   # git is green, status is normal
+#   logCommand ls -la         => $ ls -la       # ls is green, -la is normal
 # The command name is displayed in green, the rest in normal text,
 # with a bold green "$" prompt at the beginning
-printCommand() {
+logCommand() {
   local command
   local rest
   if [[ "$1" == *" "* ]]; then
@@ -162,11 +162,11 @@ printCommand() {
     shift
     rest="$@"
   fi
-  printf "$(printGreen -b "$") $(printGreen -- $command) $rest\n"
+  printf "$(logGreen -b "$") $(logGreen -- $command) $rest\n"
 }
 
-printCommandOutput() {
-  printf "$(printGreen -b "$") $@\n"
+logCommandOutput() {
+  printf "$(logGreen -b "$") $@\n"
   eval "$@" | while read -r line; do
     printf "  $line\n"
   done
