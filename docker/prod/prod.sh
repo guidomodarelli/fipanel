@@ -13,13 +13,13 @@ export COMPOSE_BAKE=true
 
 commands() {
     {
-        echo "  $(printCyan "build")   @ Construye la imagen de desarrollo"
-        echo "  $(printCyan "up")      @ Inicia todos los servicios"
-        echo "  $(printCyan "down")    @ Detiene y elimina los servicios y volúmenes"
-        echo "  $(printCyan "start")   @ Inicia servicios detenidos"
-        echo "  $(printCyan "stop")    @ Detiene los servicios sin eliminarlos"
-        echo "  $(printCyan "restart") @ Reinicia todos los servicios"
-        echo "  $(printCyan "help")    @ Muestra esta ayuda"
+        echo "  $(logCyan "build")   @ Construye la imagen de desarrollo"
+        echo "  $(logCyan "up")      @ Inicia todos los servicios"
+        echo "  $(logCyan "down")    @ Detiene y elimina los servicios y volúmenes"
+        echo "  $(logCyan "start")   @ Inicia servicios detenidos"
+        echo "  $(logCyan "stop")    @ Detiene los servicios sin eliminarlos"
+        echo "  $(logCyan "restart") @ Reinicia todos los servicios"
+        echo "  $(logCyan "help")    @ Muestra esta ayuda"
     } | column -t -s "@"
 }
 
@@ -36,7 +36,7 @@ function usage() {
 # Verifica si el archivo de Docker Compose existe
 function check_docker_compose_file() {
     if [ ! -f "$DOCKER_COMPOSE_PATH" ]; then
-        printError "No se encontró el archivo $(printCyan -u $DOCKER_COMPOSE_FILE) en la ruta $(printCyan -u "$(dirname $DOCKER_COMPOSE_PATH)")"
+        logError "No se encontró el archivo $(logCyan -u $DOCKER_COMPOSE_FILE) en la ruta $(logCyan -u "$(dirname $DOCKER_COMPOSE_PATH)")"
         exit 1
     fi
 }
@@ -47,37 +47,37 @@ function docker_compose() {
 
 # Función para buildear la imagen de producción
 function build() {
-    printInfo "Construyendo la imagen de producción..."
+    logInfo "Construyendo la imagen de producción..."
     docker_compose build
 }
 
 # Función para iniciar los servicios
 function up() {
-    printInfo "Iniciando los servicios con Docker Compose..."
+    logInfo "Iniciando los servicios con Docker Compose..."
     docker_compose up -d
 }
 
 # Función para detener y eliminar los servicios
 function down() {
-    printInfo "Deteniendo los servicios con Docker Compose..."
+    logInfo "Deteniendo los servicios con Docker Compose..."
     docker_compose down --volumes --remove-orphans
 }
 
 # Función para iniciar los servicios detenidos
 function start() {
-    printInfo "Iniciando los servicios detenidos con Docker Compose..."
+    logInfo "Iniciando los servicios detenidos con Docker Compose..."
     docker_compose start
 }
 
 # Función para detener los servicios sin eliminarlos
 function stop() {
-    printInfo "Deteniendo los servicios con Docker Compose..."
+    logInfo "Deteniendo los servicios con Docker Compose..."
     docker_compose stop
 }
 
 # Función para reiniciar los servicios
 function restart() {
-    printInfo "Reiniciando los servicios con Docker Compose..."
+    logInfo "Reiniciando los servicios con Docker Compose..."
     docker_compose restart
 }
 
@@ -110,8 +110,8 @@ function main() {
         usage
         ;;
     *)
-        printError "Comando no encontrado: '$(printCyan -b -- "$1")'"
-        printInfo "Ejecutando el script interactivo..."
+        logError "Comando no encontrado: '$(logCyan -b -- "$1")'"
+        logInfo "Ejecutando el script interactivo..."
         if command -v fzf >/dev/null; then
             cmd=$(commands | fzf --header="Selecciona un comando con ENTER para confirmar" --prompt="Selecciona un comando > ")
             if [ -n "$cmd" ]; then
