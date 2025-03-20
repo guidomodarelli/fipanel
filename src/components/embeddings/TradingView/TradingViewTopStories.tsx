@@ -32,11 +32,10 @@ type TradingViewTopStoriesProps = {
 } & (TradingViewTopStoriesPropsAllSymbols | TradingViewTopStoriesPropsSymbol | TradingViewTopStoriesPropsMarket);
 
 // Top Stories Widget: https://www.tradingview.com/widget-docs/widgets/news/top-stories/
-const TradingViewTopStories: FC<TradingViewTopStoriesProps> = (_props) => {
-  const props = { ..._props };
-  props.colorTheme = props.colorTheme || 'light';
-  props.locale = props.locale || 'es';
-  props.displayMode = props.displayMode || 'regular';
+const TradingViewTopStories: FC<TradingViewTopStoriesProps> = (props) => {
+  props.colorTheme ||= 'light';
+  props.locale ||= 'es';
+  props.displayMode ||= 'regular';
   const tradingviewTimelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
