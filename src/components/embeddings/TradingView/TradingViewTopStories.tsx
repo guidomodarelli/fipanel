@@ -32,7 +32,7 @@ type TradingViewTopStoriesProps = {
 } & (TradingViewTopStoriesPropsAllSymbols | TradingViewTopStoriesPropsSymbol | TradingViewTopStoriesPropsMarket);
 
 // Top Stories Widget: https://www.tradingview.com/widget-docs/widgets/news/top-stories/
-const TradingViewTopStories: FC<TradingViewTopStoriesProps> = (props) => {
+const TradingViewTopStories: FC<TradingViewTopStoriesProps> = ({ ...props }) => {
   props.colorTheme ||= 'light';
   props.locale ||= 'es';
   props.displayMode ||= 'regular';
